@@ -112,7 +112,7 @@ const reset = createGlobalStyle`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    overflow: hidden;
+    /* overflow: hidden; */
     background-color: #fff;
     box-shadow: 10px 9px 44px 1px rgba(181,181,181,0.68);
     -webkit-box-shadow: 10px 9px 44px 1px rgba(181,181,181,0.68);
@@ -178,7 +178,8 @@ const reset = createGlobalStyle`
   }
   :root {
     --main-green-color: #4DBA6D;  
-    --sub-yellow-color: #FFF200;  
+    --sub-green-color: #007D37;  
+    --sub-yellow-color: #F6EFAD;  
   }
 
   @font-face {
