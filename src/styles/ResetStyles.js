@@ -139,6 +139,7 @@ const reset = createGlobalStyle`
   }
   html {
     font-family: "Pretendard", "sans-serif";
+    font-size: 62.5%;
     background-color: #e0e0e0;
   }
   ol,
@@ -174,6 +175,10 @@ const reset = createGlobalStyle`
   }
   input {
     outline: none;
+  }
+  :root {
+    --main-green-color: #4DBA6D;  
+    --sub-yellow-color: #FFF200;  
   }
 
   @font-face {
