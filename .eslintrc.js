@@ -3,11 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: [
-    "plugin:react/recommended",
-    "airbnb-base",
-    "plugin:prettier/recommended",
-  ],
+  extends: ["plugin:react/recommended", "airbnb-base", "plugin:prettier/recommended"],
   overrides: [],
   parserOptions: {
     ecmaVersion: "latest",
@@ -15,4 +11,11 @@ module.exports = {
   },
   plugins: ["react"],
   rules: {},
+  settings: {
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx"],
+      },
+    },
+  },
 };
