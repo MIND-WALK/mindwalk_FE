@@ -6,8 +6,8 @@ import Login from "./pages/Login/index";
 function App() {
   return (
     <div className="App">
+      <ResetStyles />
       <BrowserRouter>
-        <ResetStyles />
         <Routes>
           {/*    <Route path="/" element={<Home />} /> */}
           <Route path="/login" element={<Login />} />
