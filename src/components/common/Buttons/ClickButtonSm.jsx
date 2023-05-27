@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const ClickButtonSm = ({ onClick, className, text }) => {
+const ClickButtonSm = ({ onClick, buttonClassName, buttonText }) => {
   return (
-    <Button type="button" onClick={onClick} className={className}>
-      {text}
+    <Button type="button" onClick={onClick} className={buttonClassName}>
+      {buttonText}
     </Button>
   );
 };
