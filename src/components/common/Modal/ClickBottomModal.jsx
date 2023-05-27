@@ -3,15 +3,25 @@ import styled from "styled-components";
 
 import ClickButtonSm from "../Buttons/ClickButtonSm";
 
-const ClickBottomModal = ({ modalClassName, modalText, buttonLeftText, buttonRightText }) => {
+const ClickBottomModal = ({
+  modalText,
+  buttonLeftText,
+  buttonRightText,
+  buttonLeftOnClick,
+  buttonRightOnClick,
+  modalOpen,
+}) => {
   return (
-    <ModalContainer className={modalClassName}>
-      <Text>{modalText}</Text>
-      <ButtonContainer>
-        <ClickButtonSm buttonText={buttonLeftText} />
-        <ClickButtonSm buttonText={buttonRightText} />
-      </ButtonContainer>
-    </ModalContainer>
+    <>
+      <ModalContainer className={modalOpen && "modalView"}>
+        <Text>{modalText}</Text>
+        <ButtonContainer>
+          <ClickButtonSm buttonText={buttonLeftText} onClick={buttonLeftOnClick} />
+          <ClickButtonSm buttonText={buttonRightText} onClick={buttonRightOnClick} />
+        </ButtonContainer>
+      </ModalContainer>
+      <ModalBackground className={modalOpen && "modalBackgroundView"} />
+    </>
   );
 };
 
@@ -25,8 +35,12 @@ const ModalContainer = styled.div`
   border-radius: 2rem 2rem 0 0;
   text-align: center;
   position: fixed;
-  bottom: 0;
-  z-index: 999;
+  bottom: -17rem;
+  z-index: 99999;
+  transition: 0.2s;
+  &.modalView {
+    bottom: 0;
+  }
 `;
 
 const Text = styled.p`
@@ -40,4 +54,18 @@ const ButtonContainer = styled.div`
   justify-content: center;
   margin-top: 2.4rem;
   gap: 1.7rem;
+`;
+
+const ModalBackground = styled.div`
+  content: "";
+  display: none;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  top: 0;
+  left: 0;
+  &.modalBackgroundView {
+    display: block;
+  }
 `;
