@@ -178,6 +178,7 @@ const reset = createGlobalStyle`
   }
   :root {
     --main-green-color: #4DBA6D;  
+    --sub-green-color: #007D37;  
     --sub-yellow-color: #FFF200;  
   }
 
