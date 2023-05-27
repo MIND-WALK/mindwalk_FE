@@ -104,8 +104,19 @@ const reset = createGlobalStyle`
     display: block;
   }
   body {
-    line-height: 1;
-    min-width: 1200px;
+    line-height: 1.5;
+    width: 375px;
+    height: 667px;
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 10px 9px 44px 1px rgba(181,181,181,0.68);
+    -webkit-box-shadow: 10px 9px 44px 1px rgba(181,181,181,0.68);
+    -moz-box-shadow: 10px 9px 44px 1px rgba(181,181,181,0.68);
   }
   ol,
   ul {
@@ -128,6 +139,7 @@ const reset = createGlobalStyle`
   }
   html {
     font-family: "Pretendard", "sans-serif";
+    background-color: #e0e0e0;
   }
   ol,
   ul {
