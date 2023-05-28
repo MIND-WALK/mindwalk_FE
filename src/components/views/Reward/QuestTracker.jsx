@@ -6,7 +6,7 @@ export default function QuestTracker() {
   return (
     <Container>
       <CountBox>
-        <MdOutlineEmojiEvents size="24px" />
+        <MdOutlineEmojiEvents size="2.4rem" />
         <div>
           <p>완수한 여정</p>
           <Count>10개</Count>
@@ -14,7 +14,7 @@ export default function QuestTracker() {
       </CountBox>
       <Line></Line>
       <CountBox>
-        <MdWebAsset size="24px" />
+        <MdWebAsset size="2.4rem" />
         <div>
           <p>다음 레벨까지 남은 여정</p>
           <Count>10개</Count>
@@ -34,7 +34,7 @@ const Container = styled.section`
 `;
 
 const CountBox = styled.div`
-  font-size: 12px;
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
   gap: 14px;
@@ -42,11 +42,11 @@ const CountBox = styled.div`
 
 const Count = styled.p`
   font-weight: bold;
-  margin-top: 5px;
+  margin-top: 0.5rem;
 `;
 
 const Line = styled.div`
   width: 1px;
-  height: 40px;
+  height: 4rem;
   background-color: #d9d9d9;
 `;

@@ -9,7 +9,6 @@ function App() {
       <ResetStyles />
       <BrowserRouter>
         <Routes>
-          {/*    <Route path="/" element={<Home />} /> */}
           <Route path="/reward" element={<Reward />} />
         </Routes>
       </BrowserRouter>

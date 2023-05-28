@@ -5,13 +5,12 @@ export default function Level() {
   return (
     <Container>
       <LevelTop>
-        <h3>현재 레벨</h3>
-        <button>상품 교환하기</button>
+        <Title>현재 레벨</Title>
+        <button>완수 여정 목록</button>
       </LevelTop>
       <LevelBox>
         <LevelImage></LevelImage>
         <LevelText>Lv. 0</LevelText>
-        <Point>3,200 point</Point>
       </LevelBox>
     </Container>
   );
@@ -23,7 +22,7 @@ const Container = styled.section`
   align-items: center;
   width: 100%;
   height: 250px;
-  background-color: #4dba6d;
+  background-color: var(--main-green-color);
   padding: 15px 20px 20px;
 `;
 
@@ -33,13 +32,14 @@ const LevelTop = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  h3 {
-    font-size: 14px;
-  }
   button {
     font-size: 12px;
     color: #eee;
   }
+`;
+
+export const Title = styled.h3`
+  font-size: 14px;
 `;
 
 const LevelBox = styled.div`
@@ -60,12 +60,7 @@ const LevelImage = styled.div`
 `;
 
 const LevelText = styled.p`
-  margin-top: 15px;
-  font-size: 20px;
+  margin-top: 13px;
+  font-size: 2rem;
   font-weight: bold;
-`;
-
-const Point = styled.p`
-  margin-top: 8px;
-  font-size: 14px;
 `;
