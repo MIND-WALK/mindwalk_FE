@@ -32,7 +32,7 @@ const MyPage = () => {
         <ProfileContainer />
         <MyPageContentContainer>
           <ClickBigButtonContainer>
-            <ClickBigButton link="/reword" icon={<AiOutlineSmile />} text="나의 리워드 확인하기" />
+            <ClickBigButton link="/reword" icon={<AiOutlineSmile />} text="나의 여정 확인하기" />
             <ClickBigButton
               link="/my_page/ask"
               icon={<AiOutlineAliwangwang />}

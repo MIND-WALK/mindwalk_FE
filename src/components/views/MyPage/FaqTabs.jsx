@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 
+import { IoIosArrowDown } from "react-icons/io";
+
 const FaqTabs = ({ tabs }) => {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(false);
 
   const handleTabClick = index => {
     setActiveTab(index);
@@ -14,7 +16,9 @@ const FaqTabs = ({ tabs }) => {
         {tabs.map((tab, index) => (
           <TabItem key={index} active={index === activeTab} onClick={() => handleTabClick(index)}>
             <ul>
-              <TabTitle>{tab.title}</TabTitle>
+              <TabTitle>
+                {tab.title} <IoIosArrowDown />
+              </TabTitle>
               <TabAnswer active={index === activeTab}>{tab.description}</TabAnswer>
             </ul>
           </TabItem>
@@ -40,12 +44,16 @@ const TabTitle = styled.li`
   border-bottom: 1px solid #f0f0f0;
   padding: 0 2rem;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const TabAnswer = styled.div`
   height: 0;
   font-size: 0;
-  background: #f0f0f0;
+  background: var(--sub-green-color);
+  color: #fff;
   ${({ active }) =>
     active &&
     `height:auto;
