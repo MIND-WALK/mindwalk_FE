@@ -1,6 +1,7 @@
 import React from "react";
-import { BrowserRouter, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ResetStyles from "./styles/ResetStyles";
+import MyJourney from "./pages/MyJourney";
 import NavBar from "./components/common/NavBar";
 
 function App() {
@@ -9,7 +10,9 @@ function App() {
       <ResetStyles />
       <BrowserRouter>
         <NavBar />
-        <Routes></Routes>
+        <Routes>
+          <Route path="/my_journey" element={<MyJourney />} />
+        </Routes>
       </BrowserRouter>
     </div>
   );
