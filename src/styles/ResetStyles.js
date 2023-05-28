@@ -138,7 +138,7 @@ const reset = createGlobalStyle`
     border-spacing: 0;
   }
   html {
-    font-family: "Pretendard", "sans-serif";
+    font-family: "Pretendard-Regular", "sans-serif";
     font-size: 62.5%;
     background-color: #e0e0e0;
   }
