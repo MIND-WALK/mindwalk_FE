@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 import { Title } from "../MyJourney/Level";
-import { TextBox } from "../MyJourney/AchivementList";
+import { DateText, TextBox } from "../MyJourney/AchivementList";
 
 const CompletedJourneyList = () => {
   return (
@@ -11,10 +11,10 @@ const CompletedJourneyList = () => {
         <Journey>
           <PlaceImage></PlaceImage>
           <TextBox>
-            <JourneyTop>
+            <DateText>
               <p>2023. 01. 31</p>
-              <p>소요 시간 | 거리 km</p>
-            </JourneyTop>
+              <p>소요 시간 100시간 | 거리 100km</p>
+            </DateText>
             <p>도산공원</p>
           </TextBox>
         </Journey>
@@ -45,10 +45,4 @@ const PlaceImage = styled.img`
   height: 6rem;
   background-color: pink;
   border-radius: 50%;
-`;
-
-const JourneyTop = styled.div`
-  display: flex;
-  width: calc(315px - 6rem);
-  justify-content: space-between;
 `;

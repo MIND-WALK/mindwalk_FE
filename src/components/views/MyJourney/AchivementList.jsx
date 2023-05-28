@@ -53,8 +53,13 @@ const LevelImage = styled.div`
 export const TextBox = styled.div`
   margin-left: 20px;
   font-size: 1.4rem;
+  width: calc(315px - 6rem);
+  justify-content: space-between;
 `;
 
-const DateText = styled.p`
+export const DateText = styled.p`
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 0.3rem;
+  font-size: 1.2rem;
 `;
