@@ -3,7 +3,7 @@ import Level from "../../components/views/MyJourney/Level";
 import QuestTracker from "../../components/views/MyJourney/QuestTracker";
 import CompletedList from "../../components/views/MyJourney/CompletedList";
 
-export default function MyJourney() {
+const MyJourney = () => {
   return (
     <>
       <Level />
@@ -11,4 +11,6 @@ export default function MyJourney() {
       <CompletedList />
     </>
   );
-}
+};
+
+export default MyJourney;

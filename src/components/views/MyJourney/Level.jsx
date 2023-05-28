@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 
-export default function Level() {
+const Level = () => {
   return (
     <Container>
       <LevelTop>
@@ -14,7 +14,9 @@ export default function Level() {
       </LevelBox>
     </Container>
   );
-}
+};
+
+export default Level;
 
 const Container = styled.section`
   display: flex;

@@ -2,7 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import { MdOutlineEmojiEvents, MdWebAsset } from "react-icons/md";
 
-export default function QuestTracker() {
+const QuestTracker = () => {
   return (
     <Container>
       <CountBox>
@@ -22,7 +22,9 @@ export default function QuestTracker() {
       </CountBox>
     </Container>
   );
-}
+};
+
+export default QuestTracker;
 
 const Container = styled.section`
   display: flex;
