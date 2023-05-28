@@ -1,10 +1,13 @@
 import React from "react";
 import { styled } from "styled-components";
 import { IoIosArrowBack } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import PATHNAME_TITLE_MAP from "../../../constants/pathnameTitleMap";
 
-const NavBar = ({ navText, menuTitle }) => {
+const NavBar = () => {
+  const pathname = useLocation().pathname.slice(1);
   const navigate = useNavigate();
+
   const navLink = () => {
     navigate("/");
   };
@@ -15,10 +18,9 @@ const NavBar = ({ navText, menuTitle }) => {
         <ArrowIcon>
           <IoIosArrowBack />
         </ArrowIcon>
-        <NavText>{navText}</NavText>
+        <NavText>홈</NavText>
       </Nav>
-
-      <MenuTitle>{menuTitle}</MenuTitle>
+      <MenuTitle>{PATHNAME_TITLE_MAP[pathname]}</MenuTitle>
     </Navbarcontainer>
   );
 };
