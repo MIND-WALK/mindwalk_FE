@@ -16,15 +16,6 @@ const CompletedList = () => {
             <p>여정 50개 달성</p>
           </TextBox>
         </CompletedQuest>
-        <CompletedQuest>
-          <LevelImage>
-            <img src="#" alt="" />
-          </LevelImage>
-          <TextBox>
-            <DateText>2023. 01. 31</DateText>
-            <p>여정 50개 달성</p>
-          </TextBox>
-        </CompletedQuest>
       </CompletedListBox>
     </Container>
   );
@@ -37,7 +28,9 @@ const Container = styled.section`
 `;
 
 const CompletedListBox = styled.ul`
+  height: 200px;
   margin-top: 3rem;
+  overflow-y: auto;
 `;
 
 const CompletedQuest = styled.li`
