@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ResetStyles from "./styles/ResetStyles";
-import Reward from "./pages/Reward";
+import MyJourney from "./pages/MyJourney";
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <ResetStyles />
       <BrowserRouter>
         <Routes>
-          <Route path="/reward" element={<Reward />} />
+          <Route path="/myJourney" element={<MyJourney />} />
         </Routes>
       </BrowserRouter>
     </div>
