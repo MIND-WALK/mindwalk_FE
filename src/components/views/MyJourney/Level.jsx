@@ -41,7 +41,7 @@ const LevelTop = styled.div`
 `;
 
 export const Title = styled.h3`
-  font-size: 14px;
+  font-size: 1.4rem;
 `;
 
 const LevelBox = styled.div`
