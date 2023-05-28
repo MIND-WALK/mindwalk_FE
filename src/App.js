@@ -11,7 +11,7 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/myJourney" element={<MyJourney />} />
+          <Route path="/my_journey" element={<MyJourney />} />
         </Routes>
       </BrowserRouter>
     </div>
