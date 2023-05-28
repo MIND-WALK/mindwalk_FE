@@ -1,12 +1,21 @@
 import React from "react";
 import { styled } from "styled-components";
+import { BsChevronRight } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const Level = () => {
+  const navigate = useNavigate();
+
+  const goToCompletedJourneyPage = () => navigate("/my_journey/completed");
+
   return (
     <Container>
       <LevelTop>
         <Title>현재 레벨</Title>
-        <button>완수 여정 목록</button>
+        <button onClick={goToCompletedJourneyPage}>
+          완수 여정 목록
+          <BsChevronRight color="#7b7b7b" />
+        </button>
       </LevelTop>
       <LevelBox>
         <LevelImage></LevelImage>
