@@ -1,11 +1,20 @@
 import React from "react";
 import { styled } from "styled-components";
+import { useLocation, useParams } from "react-router-dom";
 import DiaryDate from "./DiaryDate";
 import RatedScore from "../../common/Rating/RatedScore";
 
-const DiaryDetail = ({ rating, date, content, color }) => {
+const DiaryDetail = () => {
   const handleEdit = () => {};
   const handleDelete = () => {};
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
+  const rating = searchParams.get("rating");
+  const date = searchParams.get("date");
+  const content = searchParams.get("content");
+  const color = searchParams.get("color");
+
   return (
     <Container>
       <DiaryDate date={date} />
