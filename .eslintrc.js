@@ -10,7 +10,13 @@ module.exports = {
     sourceType: "module",
   },
   plugins: ["react"],
-  rules: { "react/prop-types": "off" },
+  rules: {
+    "react/prop-types": "off",
+    "no-unused-vars": "off",
+    "no-restricted-syntax": "off",
+    "no-use-before-define": "off",
+    "no-plusplus": "off",
+  },
   settings: {
     "import/resolver": {
       node: {
