@@ -27,9 +27,10 @@ export default ClickBigButton;
 
 const Button = styled.button`
   width: 33.5rem;
-  height: 6.6rem;
+  height: 5.6rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 0 3rem;
   background: #fff;
   color: var(--sub-green-color);
