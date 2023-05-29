@@ -37,12 +37,8 @@ const MyPage = () => {
               icon={<AiOutlineSmile />}
               text="나의 여정 확인하기"
             />
-            <ClickBigButton
-              link="/my_page/ask"
-              icon={<AiOutlineAliwangwang />}
-              text="1:1 문의하기"
-            />
-            <ClickBigButton link="/my_page/faq" icon={<AiOutlineQuestionCircle />} text="FAQ" />
+            <ClickBigButton link="/ask" icon={<AiOutlineAliwangwang />} text="1:1 문의하기" />
+            <ClickBigButton link="/faq" icon={<AiOutlineQuestionCircle />} text="FAQ" />
           </ClickBigButtonContainer>
           <Logout>
             <P onClick={handleOpenModal}>| 로그아웃</P>
@@ -66,12 +62,10 @@ export default MyPage;
 
 const MyPageContainer = styled.div`
   width: 100%;
-  padding-bottom: 3.1rem;
 `;
 const MyPageContentContainer = styled.div`
-  padding: 0 2rem;
+  padding: 5rem 2rem 6.4rem 2rem;
   background: var(--sub-green-color);
-  padding-top: 5rem;
 `;
 const ClickBigButtonContainer = styled.div`
   display: flex;
