@@ -17,7 +17,7 @@ export default ProfileContainer;
 const ProfileBox = styled.div`
   position: relative;
   width: 100%;
-  height: 30.2rem;
+  height: 25rem;
   background: #fff;
 `;
 const ProfileContentConainer = styled.div`
