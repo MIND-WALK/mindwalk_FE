@@ -4,37 +4,39 @@ import { styled } from "styled-components";
 import { IoIosArrowDown } from "react-icons/io";
 
 const FaqTabs = ({ tabs }) => {
-  const [activeTab, setActiveTab] = useState(false);
+  const [activeTab, setActiveTab] = useState(-1);
 
   const handleTabClick = index => {
     setActiveTab(index);
   };
 
   return (
-    <TabMenuContainer>
-      <TabList>
+    <div className="tabMenuContainer">
+      <ul>
         {tabs.map((tab, index) => (
-          <TabItem key={index} active={index === activeTab} onClick={() => handleTabClick(index)}>
+          <TabItem
+            key={index}
+            active={`${index === activeTab}`}
+            onClick={() => handleTabClick(index)}
+          >
             <ul>
               <TabTitle>
                 {tab.title} <IoIosArrowDown />
               </TabTitle>
-              <TabAnswer active={index === activeTab}>{tab.description}</TabAnswer>
+              <TabAnswer active={`${index === activeTab}`}>{tab.description}</TabAnswer>
             </ul>
           </TabItem>
         ))}
-      </TabList>
-    </TabMenuContainer>
+      </ul>
+    </div>
   );
 };
 
 export default FaqTabs;
 
-const TabMenuContainer = styled.div``;
-
-const TabList = styled.ul``;
-
-const TabItem = styled.li``;
+const TabItem = styled.li`
+  color: var(--sub-green-color);
+`;
 
 const TabTitle = styled.li`
   font-size: 1.6rem;
@@ -55,7 +57,7 @@ const TabAnswer = styled.div`
   background: var(--sub-green-color);
   color: #fff;
   ${({ active }) =>
-    active &&
+    active === "true" &&
     `height:auto;
     font-size:1.4rem;
     line-height:1.6;
