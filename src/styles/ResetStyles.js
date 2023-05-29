@@ -85,7 +85,6 @@ const reset = createGlobalStyle`
     margin: 0;
     padding: 0;
     border: 0;
-    font-size: 100%;
     box-sizing: border-box;
   }
   /* HTML5 display-role reset for older browsers */
@@ -159,9 +158,6 @@ const reset = createGlobalStyle`
     }
   }
   button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     outline: none;
     border: none;
     background: none;
