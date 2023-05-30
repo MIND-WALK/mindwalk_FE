@@ -10,6 +10,7 @@ const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   // const [authenticated, setAuthenticated] = useRecoilState(userIdState);
+  // 아직 recoil state파일 없음
 
   const handleChangeId = e => {
     setId(e.target.value);
