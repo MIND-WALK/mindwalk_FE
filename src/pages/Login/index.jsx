@@ -32,13 +32,13 @@ const Login = () => {
     // console.log(body);
     try {
       const response = await axios.post(`${url}/auth`, body, {});
-      const user_id = response.data.data;
+      const userId = response.data.data;
 
       // console.log(response.data);
 
       if (loginData.data.code === 200) {
-        localStorage.setItem("id", user_id);
-        setAuthenticated(body.id);
+        localStorage.setItem("id", userId);
+        //setAuthenticated(body.id); //or name표시
         alert("로그인 되었습니다.");
         navigate("/");
       }
