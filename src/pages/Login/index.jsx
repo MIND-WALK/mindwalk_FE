@@ -1,10 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { AiOutlineSmile } from "react-icons/ai";
+import axios from "axios";
+import { useRecoilState } from "recoil";
 import loginLogo from "../../assets/img/loginLogo.png";
 import loginBg from "../../assets/img/loginBg.png";
 
 const Login = () => {
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  // const [authenticated, setAuthenticated] = useRecoilState(userIdState);
+
+  const handleChangeId = e => {
+    setId(e.target.value);
+  };
+  const handleChangePassword = e => {
+    setPassword(e.target.value);
+  };
+
+  const url = process.env.REACT_APP_API_URL;
+
+  // API연결전 세팅
+  /* const handleSubmit = async e => {
+    e.preventDefault();
+
+    const body = {
+      id,
+      password,
+    };
+    // console.log(body);
+    try {
+      const response = await axios.post(`${url}/auth`, body, {});
+      const user_id = response.data.data;
+
+      // console.log(response.data);
+
+      if (loginData.data.code === 200) {
+        localStorage.setItem("id", user_id);
+        setAuthenticated(body.id);
+        alert("로그인 되었습니다.");
+        navigate("/");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("오류로 인해 로그인이 실패되었습니다.");
+    }
+  }; */
+
   return (
     <LoginContainer>
       <LoginWrap>
@@ -12,12 +54,18 @@ const Login = () => {
           <img src={loginLogo} alt="마인드 워크 로고" />
         </Logo>
 
-        <LoginBox>
+        <LoginBox /* onSubmit={handleSubmit} */>
           <Text>
             마인드 워크 방문을 환영합니다 <AiOutlineSmile />
           </Text>
-          <Input type="text" name="id" placeholder="Id" required />
-          <Input type="text" name="password" placeholder="Password" required />
+          <Input type="text" name="id" placeholder="Id" required onChange={handleChangeId} />
+          <Input
+            type="text"
+            name="password"
+            placeholder="Password"
+            required
+            onChange={handleChangePassword}
+          />
           <SubmitButton type="submit">로그인</SubmitButton>
         </LoginBox>
       </LoginWrap>
@@ -48,11 +96,10 @@ const Logo = styled.h2`
 `;
 const Text = styled.p`
   font-size: 1.7rem;
-  padding-left: 1rem;
   color: var(--sub-green-color);
   display: flex;
   width: 100%;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 0.4rem;
   align-items: center;
 `;

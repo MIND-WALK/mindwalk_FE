@@ -2,11 +2,11 @@ import React from "react";
 import { styled } from "styled-components";
 import { Title } from "./Level";
 
-const CompletedList = () => {
+const AchivementList = () => {
   return (
     <Container>
       <Title>달성 업적</Title>
-      <CompletedListBox>
+      <AchivementListBox>
         <CompletedQuest>
           <LevelImage>
             <img src="#" alt="" />
@@ -16,18 +16,18 @@ const CompletedList = () => {
             <p>여정 50개 달성</p>
           </TextBox>
         </CompletedQuest>
-      </CompletedListBox>
+      </AchivementListBox>
     </Container>
   );
 };
 
-export default CompletedList;
+export default AchivementList;
 
 const Container = styled.section`
   padding: 2rem;
 `;
 
-const CompletedListBox = styled.ul`
+const AchivementListBox = styled.ul`
   height: 200px;
   margin-top: 3rem;
   overflow-y: auto;
@@ -50,11 +50,16 @@ const LevelImage = styled.div`
   border-radius: 50%;
 `;
 
-const TextBox = styled.div`
+export const TextBox = styled.div`
   margin-left: 20px;
   font-size: 1.4rem;
+  width: calc(315px - 6rem);
+  justify-content: space-between;
 `;
 
-const DateText = styled.p`
+export const DateText = styled.p`
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 0.3rem;
+  font-size: 1.2rem;
 `;
