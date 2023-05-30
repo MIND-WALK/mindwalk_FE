@@ -8,6 +8,7 @@ import MyPage from "./pages/MyPage";
 import Faq from "./pages/MyPage/Faq";
 import Ask from "./pages/MyPage/Ask";
 import Login from "./pages/Login";
+import SelfDiagnosis from "./pages/SelfDiagnosis";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <>
                 <NavBar />
                 <Routes>
+                  <Route path="/self_diagnosis" element={<SelfDiagnosis />} />
                   <Route path="/my_journey" element={<MyJourney />} />
                   <Route path="/my_journey/completed" element={<CompletedJourney />} />
                   <Route path="/my_page" element={<MyPage />} />
