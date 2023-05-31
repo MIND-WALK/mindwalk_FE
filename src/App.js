@@ -7,6 +7,7 @@ import CompletedJourney from "./pages/CompletedJourney";
 import MyPage from "./pages/MyPage";
 import Faq from "./pages/MyPage/Faq";
 import Ask from "./pages/MyPage/Ask";
+import Analysis from "./pages/Analysis";
 import TabBar from "./components/common/TabBar/index";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
+          <Route path="/analysis" element={<Analysis />} />
           <Route path="/my_journey" element={<MyJourney />} />
           <Route path="/my_journey/completed" element={<CompletedJourney />} />
           <Route path="/my_page" element={<MyPage />} />

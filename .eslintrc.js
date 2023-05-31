@@ -18,6 +18,11 @@ module.exports = {
     "no-plusplus": "off",
   },
   settings: {
+    "import/no-extraneous-dependencies": [
+      "error",
+      { devDependencies: false, optionalDependencies: false, peerDependencies: false },
+    ],
+
     "import/resolver": {
       node: {
         extensions: [".js", ".jsx"],
