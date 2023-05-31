@@ -29,7 +29,7 @@ const TabBar = () => {
         <FiSmile size={20} />
         <TabBarLabel>측정</TabBarLabel>
       </TabBarItem>
-      <TabBarItem onClick={() => handleTabClick("my_page")}>
+      <TabBarItem onClick={() => handleTabClick("challenge")}>
         {/* challenge */}
         <FiFlag size={20} />
         <TabBarLabel>도전</TabBarLabel>
