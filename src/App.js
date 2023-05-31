@@ -6,6 +6,7 @@ import NavBar from "./components/common/NavBar";
 import MyPage from "./pages/MyPage";
 import Faq from "./pages/MyPage/Faq";
 import Ask from "./pages/MyPage/Ask";
+import Analysis from "./pages/Analysis";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
+          <Route path="/analysis" element={<Analysis />} />
           <Route path="/my_journey" element={<MyJourney />} />
           <Route path="/my_page" element={<MyPage />} />
           <Route path="/ask" element={<Ask />} />
