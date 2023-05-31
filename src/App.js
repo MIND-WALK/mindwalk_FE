@@ -7,6 +7,7 @@ import CompletedJourney from "./pages/CompletedJourney";
 import MyPage from "./pages/MyPage";
 import Faq from "./pages/MyPage/Faq";
 import Ask from "./pages/MyPage/Ask";
+import TabBar from "./components/common/TabBar/index";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/ask" element={<Ask />} />
           <Route path="/faq" element={<Faq />} />
         </Routes>
+        <TabBar />
       </BrowserRouter>
     </div>
   );
