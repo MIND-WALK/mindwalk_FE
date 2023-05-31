@@ -9,6 +9,7 @@ import Faq from "./pages/MyPage/Faq";
 import Ask from "./pages/MyPage/Ask";
 import Analysis from "./pages/Analysis";
 import TabBar from "./components/common/TabBar/index";
+import ChallengeMap from "./pages/Challenge/ChallengeMap";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/my_page" element={<MyPage />} />
           <Route path="/ask" element={<Ask />} />
           <Route path="/faq" element={<Faq />} />
+          <Route path="/challenge_map" element={<ChallengeMap />} />
         </Routes>
         <TabBar />
       </BrowserRouter>
