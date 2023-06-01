@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const ChallengeInitTmap = () => {
-  const [resultdrawArr, setResultdrawArr] = useState([]); // 결과로 그려진 라인 배열 추가
+  const [resultdrawArr, setResultdrawArr] = useState([]);
 
   let map = [];
 
@@ -16,7 +16,7 @@ const ChallengeInitTmap = () => {
       scrollwheel: true,
     });
 
-    // 2. 시작, 도착 심볼찍기
+    // 심볼
     // 시작
     const markerS = new window.Tmapv2.Marker({
       position: new window.Tmapv2.LatLng(37.564991, 126.983937),
@@ -33,9 +33,8 @@ const ChallengeInitTmap = () => {
       map,
     });
 
-    // 3. 경로탐색 API 사용요청
     const headers = {
-      appKey: "AN8nPds6Xl09yqxSHEGu1rwx1WDaWAv10QdNmJP8",
+      appKey: `${process.env.REACT_APP_TMAP_API_KEY}`,
     };
 
     try {
@@ -68,26 +67,20 @@ const ChallengeInitTmap = () => {
 
       // 기존 그려진 라인 & 마커가 있다면 초기화
       if (resultdrawArr.length > 0) {
-        // eslint-disable-next-line guard-for-in
-        for (const i in resultdrawArr) {
-          resultdrawArr[i].setMap(null);
+        for (const polyline of resultdrawArr) {
+          polyline.setMap(null);
         }
-        setResultdrawArr([]); // resultdrawArr 초기화
+        setResultdrawArr([]);
       }
 
       const drawInfoArr = [];
-      // eslint-disable-next-line guard-for-in
-      for (const i in resultData) {
-        const { geometry } = resultData[i];
-        const { properties } = resultData[i];
+
+      for (const result of resultData) {
+        const { geometry, properties } = result;
 
         if (geometry.type === "LineString") {
-          // eslint-disable-next-line guard-for-in
-          for (const j in geometry.coordinates) {
-            const latlng = new window.Tmapv2.Point(
-              geometry.coordinates[j][0],
-              geometry.coordinates[j][1],
-            );
+          for (const coordinate of geometry.coordinates) {
+            const latlng = new window.Tmapv2.Point(coordinate[0], coordinate[1]);
 
             // eslint-disable-next-line new-cap
             const convertPoint = new window.Tmapv2.Projection.convertEPSG3857ToWGS84GEO(latlng);
@@ -135,15 +128,13 @@ const ChallengeInitTmap = () => {
         }
       }
       const drawLine = arrPoint => {
-        // eslint-disable-next-line no-underscore-dangle
-        const polyline_ = new window.Tmapv2.Polyline({
+        const polyline = new window.Tmapv2.Polyline({
           path: arrPoint,
           strokeColor: "#0b5cf1",
           strokeWeight: 6,
-          // eslint-disable-next-line no-undef
           map,
         });
-        setResultdrawArr([...resultdrawArr, polyline_]); // 결과로 그려진 라인 배열 업데이트
+        setResultdrawArr([...resultdrawArr, polyline]); // 결과로 그려진 라인 배열 업데이트
       };
 
       drawLine(drawInfoArr);
@@ -162,7 +153,7 @@ const ChallengeInitTmap = () => {
 
     return () => {
       if (map) {
-        map.destroy(); // 생성된 지도를 제거합니다.
+        map.destroy(); // 지도 중복 호출 막기
       }
     };
   }, []);
