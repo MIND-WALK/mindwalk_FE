@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 import ChallengeList from "../../components/views/Challenge/ChallengeList";
+import ChallengeSelected from "./ChallengeSelected";
 
 const Challenge = () => {
   return (

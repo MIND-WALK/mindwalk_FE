@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { FiArrowLeft } from "react-icons/fi";
-import { BiHomeAlt } from "react-icons/bi";
 import { MdLocationOn } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 const ChallengeList = () => {
   const [selectedChallenge, setSelectedChallenge] = useState(null);
+  const navigate = useNavigate();
 
   const handleChallengeSelect = challenge => {
     setSelectedChallenge(challenge);
+    navigate("/challenge/selected");
   };
 
   const handleCompleteChallenge = () => {
@@ -48,7 +48,7 @@ const ChallengeList = () => {
         <SubTitle>오늘 감정에 어울리는 곳을 가보는 건 어떨까요?</SubTitle>
         <LocationContainer>
           <LocationIcon />
-          <LocationText>현재 위치: 00구 00동</LocationText>
+          <LocationText>현재 위치 | 00구 00동</LocationText>
         </LocationContainer>
         <ChallengeLists>
           {challengeData.map(challenge => (
@@ -68,9 +68,8 @@ const ChallengeList = () => {
             </ChallengeCard>
           ))}
         </ChallengeLists>
-        <ChallengeButton onClick={handleCompleteChallenge} link="/challenge/selected">
-          챌린지 선택 완료
-        </ChallengeButton>
+
+        <ChallengeButton onClick={handleCompleteChallenge}>챌린지 선택 완료</ChallengeButton>
       </Container>
     </>
   );
