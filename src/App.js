@@ -10,6 +10,8 @@ import Ask from "./pages/MyPage/Ask";
 import Analysis from "./pages/Analysis";
 import TabBar from "./components/common/TabBar/index";
 import ChallengeMap from "./pages/Challenge/ChallengeMap";
+import Challenge from "./pages/Challenge";
+import ChallengeSelected from "./pages/Challenge/ChallengeSelected";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/analysis" element={<Analysis />} />
+          <Route path="/challenge" element={<Challenge />} />
+          <Route path="/challenge/selected" element={<ChallengeSelected />} />
           <Route path="/my_journey" element={<MyJourney />} />
           <Route path="/my_journey/completed" element={<CompletedJourney />} />
           <Route path="/my_page" element={<MyPage />} />

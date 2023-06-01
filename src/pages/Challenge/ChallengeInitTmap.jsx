@@ -4,16 +4,14 @@ import axios from "axios";
 const ChallengeInitTmap = () => {
   const [resultdrawArr, setResultdrawArr] = useState([]); // 결과로 그려진 라인 배열 추가
 
-  useEffect(() => {
-    initTmap();
-  }, []);
+  let map = [];
 
   const initTmap = async () => {
-    const map = new window.Tmapv2.Map("map_div", {
+    map = new window.Tmapv2.Map("map_div", {
       center: new window.Tmapv2.LatLng(37.5652045, 126.98702028),
       width: "100%",
       height: "400px",
-      zoom: 17,
+      zoom: 16,
       zoomControl: true,
       scrollwheel: true,
     });
@@ -134,30 +132,51 @@ const ChallengeInitTmap = () => {
             iconSize: size,
             map,
           });
-
-          drawLine(drawInfoArr);
         }
       }
+      const drawLine = arrPoint => {
+        // eslint-disable-next-line no-underscore-dangle
+        const polyline_ = new window.Tmapv2.Polyline({
+          path: arrPoint,
+          strokeColor: "#0b5cf1",
+          strokeWeight: 6,
+          // eslint-disable-next-line no-undef
+          map,
+        });
+        setResultdrawArr([...resultdrawArr, polyline_]); // 결과로 그려진 라인 배열 업데이트
+      };
+
+      drawLine(drawInfoArr);
+
+      const addComma = num => {
+        const regexp = /\B(?=(\d{3})+(?!\d))/g;
+        return num.toString().replace(regexp, ",");
+      };
     } catch (error) {
       console.log("Error:", error);
     }
   };
 
-  const drawLine = arrPoint => {
-    // eslint-disable-next-line no-underscore-dangle
-    const polyline_ = new window.Tmapv2.Polyline({
-      path: arrPoint,
-      strokeColor: "#DD0000",
-      strokeWeight: 6,
-      // eslint-disable-next-line no-undef
-      map,
-    });
-    setResultdrawArr([...resultdrawArr, polyline_]); // 결과로 그려진 라인 배열 업데이트
-  };
+  useEffect(() => {
+    initTmap();
+
+    return () => {
+      if (map) {
+        map.destroy(); // 생성된 지도를 제거합니다.
+      }
+    };
+  }, []);
 
   return (
-    <div>
+    /*  <div>
       <div id="map_div" style={{ width: "100%", height: "400px" }}></div>
+      <p id="result"></p>
+    </div> */
+    <div>
+      <div id="map_wrap" className="map_wrap3">
+        <div id="map_div"></div>
+      </div>
+      <div className="map_act_btn_wrap clear_box"></div>
       <p id="result"></p>
     </div>
   );
