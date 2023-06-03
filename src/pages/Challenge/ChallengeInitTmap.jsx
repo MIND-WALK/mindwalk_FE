@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { styled } from "styled-components";
 
-const ChallengeInitTmap = () => {
+const ChallengeInitTmap = ({ selectedPlace }) => {
   const [resultdrawArr, setResultdrawArr] = useState([]);
 
   let map = [];
@@ -10,7 +11,7 @@ const ChallengeInitTmap = () => {
     map = new window.Tmapv2.Map("map_div", {
       center: new window.Tmapv2.LatLng(37.5652045, 126.98702028),
       width: "100%",
-      height: "400px",
+      height: "320px",
       zoom: 16,
       zoomControl: true,
       scrollwheel: true,
@@ -58,10 +59,8 @@ const ChallengeInitTmap = () => {
       const resultData = response.data.features;
 
       // 결과 출력
-      const tDistance = `총 거리 : ${(resultData[0].properties.totalDistance / 1000).toFixed(
-        1,
-      )}km,`;
-      const tTime = ` 총 시간 : ${(resultData[0].properties.totalTime / 60).toFixed(0)}분`;
+      const tDistance = `거리 : ${(resultData[0].properties.totalDistance / 1000).toFixed(1)}km | `;
+      const tTime = `소요시간 : ${(resultData[0].properties.totalTime / 60).toFixed(0)}분`;
 
       document.getElementById("result").innerText = tDistance + tTime;
 
@@ -164,13 +163,46 @@ const ChallengeInitTmap = () => {
       <p id="result"></p>
     </div> */
     <div>
-      <div id="map_wrap" className="map_wrap3">
-        <div id="map_div"></div>
-      </div>
+      <MapWrap id="map_wrap" className="map_wrap3">
+        <MapDiv id="map_div"></MapDiv>
+      </MapWrap>
       <div className="map_act_btn_wrap clear_box"></div>
-      <p id="result"></p>
+
+      <SelectedInfo>
+        <PlaceName>{selectedPlace}</PlaceName>
+        <TimeDistance id="result"></TimeDistance>
+      </SelectedInfo>
     </div>
   );
 };
 
 export default ChallengeInitTmap;
+
+const MapWrap = styled.div`
+  margin-bottom: 1.25rem;
+`;
+const MapDiv = styled.div`
+  & > div {
+    border-radius: 2rem;
+    margin-top: 2rem;
+    cursor: grab;
+  }
+`;
+
+const SelectedInfo = styled.div`
+  margin: 1.2rem;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const PlaceName = styled.h2`
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  margin-right: 2rem;
+`;
+
+const TimeDistance = styled.p`
+  font-size: 1.3rem;
+  color: #555;
+`;

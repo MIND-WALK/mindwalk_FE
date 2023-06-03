@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { MdLocationOn } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import ClickBottomModal from "../../components/common/Modal/ClickBottomModal";
+import ChallengeInitTmap from "./ChallengeInitTmap";
 
 const ChallengeSelected = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -44,13 +45,15 @@ const ChallengeSelected = () => {
 
   return (
     <ChallengeBox>
-      <Title>{`${selectedPlace}으로 바람 쐬러 가요~!`}</Title>
+      <Title>{`${selectedPlace}로 바람 쐬러 가요~!`}</Title>
       <MapIcon className="icon-map" />
       <LocationContainer>
         <LocationIcon />
         <LocationText> 현재 위치 | 00구 00동</LocationText>
       </LocationContainer>
-      <MapBox>{/* 지도 API로 구현 */}</MapBox>
+      <MapBox>
+        <ChallengeInitTmap />
+      </MapBox>
       <SelectedInfo>
         <PlaceName>{selectedPlace}</PlaceName>
         <TimeDistance>{`${estimatedTime} | ${distance} km`}</TimeDistance>
@@ -116,7 +119,6 @@ const MapBox = styled.div`
   align-items: center;
   padding: 1.25rem;
   border-radius: 0.5rem;
-  background-image: url(${props => props.backgroundImage});
   background-size: cover;
   margin-bottom: 1.25rem;
   cursor: pointer;
