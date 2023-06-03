@@ -1,6 +1,6 @@
 import React from "react";
 
-import Happy from "../../../../assets/emotion/happy-icon.svg";
+import Happy from "../../../../assets/emotion/icon/happy-icon.svg";
 
 const HappyIcon = ({ size }) => {
   return (
