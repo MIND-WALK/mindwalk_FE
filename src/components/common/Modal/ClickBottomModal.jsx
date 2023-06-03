@@ -17,7 +17,9 @@ const ClickBottomModal = ({
         <Text>{modalText}</Text>
         <ButtonContainer>
           <ClickButtonSm buttonText={buttonLeftText} onClick={buttonLeftOnClick} />
-          <ClickButtonSm buttonText={buttonRightText} onClick={buttonRightOnClick} />
+          {buttonRightText && (
+            <ClickButtonSm buttonText={buttonRightText} onClick={buttonRightOnClick} />
+          )}
         </ButtonContainer>
       </ModalContainer>
       <ModalBackground className={modalOpen && "modalBackgroundView"} />
@@ -36,6 +38,7 @@ const ModalContainer = styled.div`
   text-align: center;
   position: fixed;
   bottom: -17rem;
+  left: 0;
   z-index: 99999;
   transition: 0.2s;
   &.modalView {
