@@ -7,12 +7,20 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
 
   let map = [];
 
+  const startLat = 37.6469;
+  const startLong = 127.009;
+  const endLat = 37.6373;
+  const endLong = 127.0247;
+
+  const centerLat = (startLat + endLat) / 2;
+  const centerLong = (startLong + endLong) / 2;
+
   const initTmap = async () => {
     map = new window.Tmapv2.Map("map_div", {
-      center: new window.Tmapv2.LatLng(37.5652045, 126.98702028),
+      center: new window.Tmapv2.LatLng(centerLat, centerLong),
       width: "100%",
       height: "320px",
-      zoom: 16,
+      zoom: 13,
       zoomControl: true,
       scrollwheel: true,
     });
@@ -20,7 +28,7 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
     // 심볼
     // 시작
     const markerS = new window.Tmapv2.Marker({
-      position: new window.Tmapv2.LatLng(37.564991, 126.983937),
+      position: new window.Tmapv2.LatLng(startLat, startLong),
       icon: "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png",
       iconSize: new window.Tmapv2.Size(24, 38),
       map,
@@ -28,7 +36,7 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
 
     // 도착
     const markerE = new window.Tmapv2.Marker({
-      position: new window.Tmapv2.LatLng(37.566158, 126.98894),
+      position: new window.Tmapv2.LatLng(endLat, endLong),
       icon: "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png",
       iconSize: new window.Tmapv2.Size(24, 38),
       map,
@@ -42,10 +50,10 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
       const response = await axios.post(
         "https://apis.openapi.sk.com/tmap/routes/pedestrian?version=1&format=json&callback=result",
         {
-          startX: "126.983937",
-          startY: "37.564991",
-          endX: "126.98894",
-          endY: "37.566158",
+          startX: `${startLong}`,
+          startY: `${startLat}`,
+          endX: `${endLong}`,
+          endY: `${endLat}`,
           reqCoordType: "WGS84GEO",
           resCoordType: "EPSG3857",
           startName: "출발지",
@@ -57,6 +65,8 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
       );
 
       const resultData = response.data.features;
+
+      console.log(resultData);
 
       // 결과 출력
       const tDistance = `거리 : ${(resultData[0].properties.totalDistance / 1000).toFixed(1)}km | `;
