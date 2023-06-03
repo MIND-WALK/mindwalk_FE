@@ -1,6 +1,6 @@
 import React from "react";
 
-import Natural from "../../../../assets/emotion/natural-icon.svg";
+import Natural from "../../../../assets/emotion/icon/natural-icon.svg";
 
 const NaturalIcon = ({ size }) => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 
-import Surprise from "../../../../assets/emotion/surprise-icon.svg";
+import Surprise from "../../../../assets/emotion/icon/surprise-icon.svg";
 
 const SurpriseIcon = ({ size }) => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 
-import Angry from "../../../../assets/emotion/angry-icon.svg";
+import Angry from "../../../../assets/emotion/icon/angry-icon.svg";
 
 const AngryIcon = ({ size }) => {
   return (
