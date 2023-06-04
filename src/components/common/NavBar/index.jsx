@@ -14,11 +14,11 @@ const NavBar = () => {
 
   return (
     <Navbarcontainer>
-      <Nav onClick={navLink}>
+      <Nav onClick={() => navigate(-1)}>
         <ArrowIcon>
           <IoIosArrowBack />
         </ArrowIcon>
-        <NavText>홈</NavText>
+        <NavText></NavText>
       </Nav>
       <MenuTitle>{PATHNAME_TITLE_MAP[pathname]}</MenuTitle>
     </Navbarcontainer>
