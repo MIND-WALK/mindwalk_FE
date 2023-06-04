@@ -1,12 +1,18 @@
 import React from "react";
 import { styled } from "styled-components";
+import { useRecoilState } from "recoil";
+
+import userIdState from "../../../recoil/userIdState";
+import levelImg from "../../../assets/img/Level/level1.png";
 
 const ProfileContainer = () => {
+  const [userAuthState, setUserAuthState] = useRecoilState(userIdState);
+
   return (
     <ProfileBox>
       <ProfileContentConainer>
-        <ProfileImg></ProfileImg>
-        <Text>박나나 님 환영합니다!</Text>
+        <ProfileImg style={{ background: `url(${levelImg}) no-repeat center/cover` }}></ProfileImg>
+        <Text>{userAuthState} 님 환영합니다!</Text>
       </ProfileContentConainer>
     </ProfileBox>
   );
@@ -28,11 +34,11 @@ const ProfileContentConainer = styled.div`
 `;
 
 const ProfileImg = styled.div`
-  background: #ece7e7;
   border-radius: 50%;
   width: 12.2rem;
   height: 12.2rem;
   margin: 0 auto 2rem auto;
+  border: 1px solid #787878;
 `;
 const Text = styled.p`
   font-size: 1.8rem;
