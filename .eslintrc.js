@@ -16,7 +16,7 @@ module.exports = {
     "no-restricted-syntax": "off",
     "no-use-before-define": "off",
     "no-plusplus": "off",
-    "import/prefer-default-export": off,
+    "import/prefer-default-export": "off",
   },
   settings: {
     "import/no-extraneous-dependencies": [
