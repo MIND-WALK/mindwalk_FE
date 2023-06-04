@@ -3,6 +3,11 @@ import { styled } from "styled-components";
 import { useLocation, useParams } from "react-router-dom";
 import DiaryDate from "./DiaryDate";
 import RatedScore from "../../common/Rating/RatedScore";
+import HappyIcon from "../../common/CustomIcon/EmotionIcon/HappyIcon";
+import SadIcon from "../../common/CustomIcon/EmotionIcon/SadIcon";
+import SurpriseIcon from "../../common/CustomIcon/EmotionIcon/SurpriseIcon";
+import AngryIcon from "../../common/CustomIcon/EmotionIcon/AngryIcon";
+import NaturalIcon from "../../common/CustomIcon/EmotionIcon/NaturalIcon";
 
 const DiaryDetail = () => {
   const handleEdit = () => {};
@@ -13,15 +18,32 @@ const DiaryDetail = () => {
   const rating = searchParams.get("rating");
   const date = searchParams.get("date");
   const content = searchParams.get("content");
-  const color = searchParams.get("color");
+  const emotion = searchParams.get("emotion");
 
+  const renderEmotionIcon = () => {
+    if (emotion === "happy") {
+      return <HappyIcon size="9rem" />;
+    }
+    if (emotion === "sad") {
+      return <SadIcon size="9rem" />;
+    }
+    if (emotion === "natural") {
+      return <NaturalIcon size="9rem" />;
+    }
+    if (emotion === "angry") {
+      return <AngryIcon size="9rem" />;
+    }
+    if (emotion === "surprise") {
+      return <SurpriseIcon size="9rem" />;
+    }
+    return null; // 다른 경우에는 아이콘을 렌더링하지 않음
+  };
   return (
     <Container>
+      <EmotionContainer>{renderEmotionIcon()} </EmotionContainer>
       <DiaryDate date={date} />
       <RatedScore rating={rating} />
-      <div className="content-box" style={{ backgroundColor: color }}>
-        {content}
-      </div>
+      <div className="content-box">{content}</div>
       <div className="button-box">
         <button type="button" onClick={handleEdit}>
           수정하기
@@ -42,9 +64,9 @@ const Container = styled.div`
 
   & .content-box {
     width: 100%;
-    padding: 1rem;
+    padding: 1.6rem;
     border: 1px solid #000;
-    background-color: ${props => props.color};
+    border-radius: 0.8rem;
   }
 
   & .button-box {
@@ -53,16 +75,22 @@ const Container = styled.div`
 
     & button {
       font-size: 1.4rem;
-      border: 1px solid #000;
+      color: #fff;
+      background-color: var(--sub-green-color);
       padding: 1rem 3.5rem;
       border-radius: 5rem;
       margin: 2rem 0.5rem;
 
       &:hover {
-        background-color: var(--sub-green-color);
+        background-color: var(--sub-yellow-color);
         border-color: transparent;
-        color: #fff;
+        color: var(--sub-green-color);
       }
     }
   }
+`;
+
+const EmotionContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `;

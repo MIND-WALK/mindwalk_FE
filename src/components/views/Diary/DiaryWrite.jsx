@@ -2,18 +2,20 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import Rating from "../../common/Rating/Rating";
-import ColorBox from "./ColorBox";
 import DiaryDate from "./DiaryDate";
+import EmotionBox from "./EmtionBox";
+import ClickButtonBig from "../../common/Buttons/ClickButtonBig";
 
 const DiaryWrite = () => {
-  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedEmotion, setSelectedEmotion] = useState(null);
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
   const { date } = useParams();
 
-  const handleColorSelection = color => {
-    setSelectedColor(color);
+  const handleEmotionSelection = emotion => {
+    setSelectedEmotion(emotion);
+    console.log(emotion);
   };
 
   const handleRatingChange = newRating => {
@@ -27,9 +29,10 @@ const DiaryWrite = () => {
   const handleSubmit = event => {
     event.preventDefault();
 
-    if (selectedColor && rating && comment) {
+    if (selectedEmotion && rating && comment) {
       const data = {
-        color: selectedColor,
+        date,
+        emotion: selectedEmotion,
         rating,
         comment,
       };
@@ -44,8 +47,11 @@ const DiaryWrite = () => {
     <Container>
       <DiaryDate date={date} />
       <DiaryContent>
-        <p className="diary-title">당신의 하루는 어떤 색깔인가요?</p>
-        <ColorBox selectedColor={selectedColor} handleColorSelection={handleColorSelection} />
+        <p className="diary-title">오늘의 당신을 선택해주세요.</p>
+        <EmotionBox
+          selectedEmotion={selectedEmotion}
+          handleEmotionSelection={handleEmotionSelection}
+        />
       </DiaryContent>
       <DiaryContent>
         <p className="diary-title">오늘 챌린지의 만족도는 어땠나요?</p>
@@ -61,9 +67,11 @@ const DiaryWrite = () => {
           rows="10"
         ></textarea>
       </DiaryContent>
-      <button type="button" onClick={handleSubmit} className="writing-button">
-        등록하기
-      </button>
+      <ClickButtonBig
+        onClick={handleSubmit}
+        buttonClassName="writing-button"
+        buttonText="등록하기"
+      />
     </Container>
   );
 };
@@ -77,25 +85,11 @@ const Container = styled.div`
   flex-direction: column;
 
   & textarea {
-    border-radius: 0;
+    border-radius: 8;
     resize: none;
     width: 100%;
     height: 13rem;
     margin-bottom: 1rem;
-  }
-
-  & .writing-button {
-    font-size: 1.4rem;
-    border: 1px solid #000;
-    padding: 1rem 3.5rem;
-    border-radius: 5rem;
-    margin: 0 auto;
-
-    &:hover {
-      background-color: var(--sub-green-color);
-      border-color: transparent;
-      color: #fff;
-    }
   }
 `;
 

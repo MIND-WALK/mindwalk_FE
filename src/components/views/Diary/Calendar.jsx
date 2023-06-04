@@ -28,9 +28,6 @@ const Calendar = () => {
 export default Calendar;
 
 const Container = styled.div`
-  margin: auto 2rem;
-  font-size: 1.6rem;
-
   & > .title {
     margin: 3rem 0 1rem;
   }
