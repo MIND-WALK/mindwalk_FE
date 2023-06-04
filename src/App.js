@@ -13,9 +13,8 @@ import Ask from "./pages/MyPage/Ask";
 import Login from "./pages/Login";
 import Analysis from "./pages/Analysis";
 import TabBar from "./components/common/TabBar/index";
-import ChallengeMap from "./pages/Challenge/ChallengeMap";
 import Challenge from "./pages/Challenge";
-import ChallengeSelected from "./pages/Challenge/ChallengeSelected";
+import ChallengeMap from "./pages/Challenge/ChallengeMap";
 
 function App() {
   return (
@@ -46,12 +45,12 @@ function App() {
           <Route path="/diary/write/:date" element={<DiaryWrite />} />
           <Route path="/analysis" element={<Analysis />} />
           <Route path="/challenge" element={<Challenge />} />
-          <Route path="/challenge/selected" element={<ChallengeSelected />} />
           <Route path="/my_journey" element={<MyJourney />} />
           <Route path="/my_journey/completed" element={<CompletedJourney />} />
           <Route path="/my_page" element={<MyPage />} />
           <Route path="/ask" element={<Ask />} />
           <Route path="/faq" element={<Faq />} />
+          <Route path="/challenge" element={<Challenge />} />
           <Route path="/challenge_map" element={<ChallengeMap />} />
         </Routes>
         <TabBar />
