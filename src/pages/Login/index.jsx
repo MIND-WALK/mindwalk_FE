@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { AiOutlineSmile } from "react-icons/ai";
 import axios from "axios";
 import { useRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
 import loginLogo from "../../assets/img/loginLogo.png";
 import loginBg from "../../assets/img/loginBg.png";
 import userIdState from "../../recoil/userIdState";
@@ -10,9 +11,10 @@ import userIdState from "../../recoil/userIdState";
 const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-
-  // 아직 recoil state파일 없음
   const [userAuthState, setUserAuthState] = useRecoilState(userIdState);
+
+  const navigate = useNavigate();
+  const url = process.env.REACT_APP_API_URL;
 
   const handleChangeId = e => {
     setId(e.target.value);
@@ -21,9 +23,6 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const url = process.env.REACT_APP_API_URL;
-
-  // API연결전 세팅
   const handleSubmit = async e => {
     e.preventDefault();
 
@@ -31,17 +30,15 @@ const Login = () => {
       id,
       password,
     };
-    // console.log(body);
-    try {
-      const response = await axios.post(`${url}/join`, body, { Accept: "*/*" });
-      /*   const userId = response.data.data; */
 
-      console.log(response);
-      /* if (loginData.data.code === 200) {
-        setUserIdState(userId);
-         alert("로그인 되었습니다.");
-         navigate("/");
-      } */
+    try {
+      const response = await axios.post(`${url}/join`, body);
+
+      if (response.status === 201) {
+        setUserAuthState(id);
+        alert("로그인 되었습니다.");
+        navigate("/");
+      }
     } catch (error) {
       console.error(error);
       alert("오류로 인해 로그인이 실패되었습니다.");
