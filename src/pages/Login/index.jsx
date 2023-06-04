@@ -5,12 +5,14 @@ import axios from "axios";
 import { useRecoilState } from "recoil";
 import loginLogo from "../../assets/img/loginLogo.png";
 import loginBg from "../../assets/img/loginBg.png";
+import userIdState from "../../recoil/userIdState";
 
 const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
-  // const [authenticated, setAuthenticated] = useRecoilState(userIdState);
+
   // 아직 recoil state파일 없음
+  const [userAuthState, setUserAuthState] = useRecoilState(userIdState);
 
   const handleChangeId = e => {
     setId(e.target.value);
@@ -22,7 +24,7 @@ const Login = () => {
   const url = process.env.REACT_APP_API_URL;
 
   // API연결전 세팅
-  /* const handleSubmit = async e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     const body = {
@@ -31,22 +33,20 @@ const Login = () => {
     };
     // console.log(body);
     try {
-      const response = await axios.post(`${url}/auth`, body, {});
-      const userId = response.data.data;
+      const response = await axios.post(`${url}/join`, body, { Accept: "*/*" });
+      /*   const userId = response.data.data; */
 
-      // console.log(response.data);
-
-      if (loginData.data.code === 200) {
-        localStorage.setItem("id", userId);
-        //setAuthenticated(body.id); //or name표시
-        alert("로그인 되었습니다.");
-        navigate("/");
-      }
+      console.log(response);
+      /* if (loginData.data.code === 200) {
+        setUserIdState(userId);
+         alert("로그인 되었습니다.");
+         navigate("/");
+      } */
     } catch (error) {
       console.error(error);
       alert("오류로 인해 로그인이 실패되었습니다.");
     }
-  }; */
+  };
 
   return (
     <LoginContainer>
@@ -55,7 +55,7 @@ const Login = () => {
           <img src={loginLogo} alt="마인드 워크 로고" />
         </Logo>
 
-        <LoginBox /* onSubmit={handleSubmit} */>
+        <LoginBox onSubmit={handleSubmit}>
           <Text>
             마인드 워크 방문을 환영합니다 <AiOutlineSmile />
           </Text>
