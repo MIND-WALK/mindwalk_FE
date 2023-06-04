@@ -46,12 +46,15 @@ const Button = styled.button`
 const LeftContent = styled.div`
   display: flex;
   gap: 2.3rem;
+  align-items: center;
 `;
 const Div = styled.div`
   align-items: center;
+  padding-top: 0.8rem;
 `;
 const Icon = styled.p`
   font-size: 2.4rem;
+  padding-top: 0.8rem;
 `;
 const Text = styled.p`
   padding-top: 0.3rem;
