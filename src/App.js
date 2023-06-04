@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import ResetStyles from "./styles/ResetStyles";
 import NavBar from "./components/common/NavBar";
 import MyJourney from "./pages/MyJourney";
@@ -15,47 +15,46 @@ import Analysis from "./pages/Analysis";
 import TabBar from "./components/common/TabBar/index";
 import Challenge from "./pages/Challenge";
 import ChallengeSelected from "./pages/Challenge/ChallengeSelected";
+import Main from "./pages/Main";
+import Slide from "./components/views/Splash/Slide";
 
 function App() {
   return (
     <div className="App">
-      <ResetStyles />
       <BrowserRouter>
-        <NavBar />
-        <Routes>
-          {/*   <Route path="/login" element={<Login />} />
-          <Route
-            path="/*"
-            element={
-              <>
-                <NavBar />
-                <Routes>
-                  <Route path="/my_journey" element={<MyJourney />} />
-                  <Route path="/my_journey/completed" element={<CompletedJourney />} />
-                  <Route path="/my_page" element={<MyPage />} />
-                  <Route path="/ask" element={<Ask />} />
-                  <Route path="/faq" element={<Faq />} />
-                </Routes>
-              </>
-            }
-          /> */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/diary" element={<Diary />} />
-          <Route path="/diary/:id" element={<DiaryDetail />} />
-          <Route path="/diary/write/:date" element={<DiaryWrite />} />
-          <Route path="/analysis" element={<Analysis />} />
-          <Route path="/challenge" element={<Challenge />} />
-          <Route path="/challenge/selected" element={<ChallengeSelected />} />
-          <Route path="/my_journey" element={<MyJourney />} />
-          <Route path="/my_journey/completed" element={<CompletedJourney />} />
-          <Route path="/my_page" element={<MyPage />} />
-          <Route path="/ask" element={<Ask />} />
-          <Route path="/faq" element={<Faq />} />
-        </Routes>
-        <TabBar />
+        <AppContent />
       </BrowserRouter>
     </div>
   );
 }
 
 export default App;
+
+function AppContent() {
+  const location = useLocation();
+  const isMainPage = location.pathname === "/" || "/home";
+  const isSplash = location.pathname === "/";
+
+  return (
+    <div className="App">
+      <ResetStyles />
+      {!isMainPage && <NavBar />}
+      <Routes>
+        <Route path="/" element={<Slide />} />
+        <Route path="/home" element={<Main />} />
+        <Route path="/diary" element={<Diary />} />
+        <Route path="/diary/:id" element={<DiaryDetail />} />
+        <Route path="/diary/write/:date" element={<DiaryWrite />} />
+        <Route path="/analysis" element={<Analysis />} />
+        <Route path="/challenge" element={<Challenge />} />
+        <Route path="/challenge/selected" element={<ChallengeSelected />} />
+        <Route path="/my_journey" element={<MyJourney />} />
+        <Route path="/my_journey/completed" element={<CompletedJourney />} />
+        <Route path="/my_page" element={<MyPage />} />
+        <Route path="/ask" element={<Ask />} />
+        <Route path="/faq" element={<Faq />} />
+      </Routes>
+      {!isSplash && <TabBar />}
+    </div>
+  );
+}

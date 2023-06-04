@@ -19,7 +19,7 @@ const TabBar = () => {
 
   return (
     <TabBarContainer>
-      <TabBarItem onClick={() => handleTabClick("my_journey")}>
+      <TabBarItem onClick={() => handleTabClick("home")}>
         {/* home */}
         <FiHome size={20} />
         <TabBarLabel>홈</TabBarLabel>
@@ -34,7 +34,7 @@ const TabBar = () => {
         <FiFlag size={20} />
         <TabBarLabel>도전</TabBarLabel>
       </TabBarItem>
-      <TabBarItem onClick={() => handleTabClick("my_page")}>
+      <TabBarItem onClick={() => handleTabClick("diary")}>
         {/* diary */}
         <FiBook size={20} />
         <TabBarLabel>다이어리</TabBarLabel>
