@@ -1,16 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { styled } from "styled-components";
+import { useRecoilState } from "recoil";
+
+import { locationLatState, locationLongState, locationNameState } from "../../recoil/challenge";
 
 const ChallengeInitTmap = ({ selectedPlace }) => {
   const [resultdrawArr, setResultdrawArr] = useState([]);
+  const [endLong, setEndLong] = useRecoilState(locationLongState);
+  const [endLat, setEndLat] = useRecoilState(locationLatState);
 
   let map = [];
 
-  const startLat = 37.6469;
-  const startLong = 127.009;
-  const endLat = 37.6373;
-  const endLong = 127.0247;
+  const startLat = 37.5668;
+  const startLong = 127.0092;
+  /* const endLat = 37.6373;
+  const endLong = 127.0247; */
+
+  console.log(endLat, endLong);
 
   const centerLat = (startLat + endLat) / 2;
   const centerLong = (startLong + endLong) / 2;

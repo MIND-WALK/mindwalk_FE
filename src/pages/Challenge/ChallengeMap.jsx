@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
-import { MdLocationOn } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+
+import { MdLocationOn } from "react-icons/md";
 import ChallengeInitTmap from "./ChallengeInitTmap";
 import ClickBottomModal from "../../components/common/Modal/ClickBottomModal";
+import { locationNameState } from "../../recoil/challenge";
 
 const ChallengeMap = () => {
-  const selectedPlace = "장소 이름";
+  const navigate = useNavigate();
 
   const [modalOpen, setModalOpen] = useState(false);
-  const navigate = useNavigate();
+
+  const [selectedPlace, setSelectedPlace] = useRecoilState(locationNameState);
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -42,7 +46,7 @@ const ChallengeMap = () => {
 
   return (
     <MapBox>
-      <Title>&quot;{selectedPlace}&quot; 로 바람 쐬러 가요~!</Title>
+      <Title>&quot;{selectedPlace}&quot; 🏃‍♂️ 바람 쐬러 가요~!</Title>
       <MapIcon className="icon-map" />
       <LocationContainer>
         <LocationIcon />
