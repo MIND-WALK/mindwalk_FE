@@ -31,7 +31,7 @@ export default App;
 
 function AppContent() {
   const location = useLocation();
-  const isMainPage = location.pathname === "/" && "/home";
+  const isMainPage = location.pathname === "/" || "/home";
   const isSplash = location.pathname === "/";
 
   return (
