@@ -2,12 +2,19 @@ import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 
 import { AiOutlineSmile, AiOutlineAliwangwang, AiOutlineQuestionCircle } from "react-icons/ai";
+import { useRecoilState } from "recoil";
+import { useNavigate } from "react-router-dom";
+
 import ClickBigButton from "../../components/views/MyPage/ClickBigButton";
 import ProfileContainer from "../../components/views/MyPage/ProfileContainer";
 import ClickBottomModal from "../../components/common/Modal/ClickBottomModal";
+import userIdState from "../../recoil/userIdState";
 
 const MyPage = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [userAuthState, setUserAuthState] = useRecoilState(userIdState);
+
+  const navigate = useNavigate();
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -20,6 +27,9 @@ const MyPage = () => {
   const handClickLogout = () => {
     setModalOpen(false);
     document.documentElement.style.overflow = "auto";
+    setUserAuthState("");
+    alert("로그아웃 되었습니다.");
+    navigate("/login");
   };
 
   useEffect(() => {
@@ -64,7 +74,7 @@ const MyPageContainer = styled.div`
   width: 100%;
 `;
 const MyPageContentContainer = styled.div`
-  padding: 5rem 2rem 6.4rem 2rem;
+  padding: 4rem 2rem 8.4rem 2rem;
   background: var(--sub-green-color);
 `;
 const ClickBigButtonContainer = styled.div`
@@ -79,6 +89,6 @@ const Logout = styled.div`
 `;
 const P = styled.p`
   font-size: 1.4rem;
-  padding-top: 3.3rem;
+  padding-top: 1.2rem;
   color: #fff;
 `;

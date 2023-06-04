@@ -10,6 +10,7 @@ import CompletedJourney from "./pages/CompletedJourney";
 import MyPage from "./pages/MyPage";
 import Faq from "./pages/MyPage/Faq";
 import Ask from "./pages/MyPage/Ask";
+import Login from "./pages/Login";
 import Analysis from "./pages/Analysis";
 import TabBar from "./components/common/TabBar/index";
 import Challenge from "./pages/Challenge";
