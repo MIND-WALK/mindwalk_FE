@@ -55,7 +55,7 @@ function AppContent() {
         <Route path="/my_page" element={<MyPage />} />
         <Route path="/ask" element={<Ask />} />
         <Route path="/faq" element={<Faq />} />
-        <Route path="/challenge" element={<Challenge />} />
+        <Route path="/challenge/:emotion" element={<Challenge />} />
         <Route path="/challenge_map" element={<ChallengeMap />} />
       </Routes>
       {!isSplash && <TabBar />}
