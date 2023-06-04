@@ -17,6 +17,8 @@ import Challenge from "./pages/Challenge";
 import ChallengeSelected from "./pages/Challenge/ChallengeSelected";
 import Main from "./pages/Main";
 import Slide from "./components/views/Splash/Slide";
+import MeasureCompleted from "./pages/Analysis/MeasureCompleted";
+import MeasureSelect from "./pages/Analysis/MeasureSelect";
 
 function App() {
   return (
@@ -46,6 +48,8 @@ function AppContent() {
         <Route path="/diary/:id" element={<DiaryDetail />} />
         <Route path="/diary/write/:date" element={<DiaryWrite />} />
         <Route path="/analysis" element={<Analysis />} />
+        <Route path="/measure" element={<MeasureSelect />} />
+        <Route path="/measure/completed" element={<MeasureCompleted />} />
         <Route path="/challenge" element={<Challenge />} />
         <Route path="/challenge/selected" element={<ChallengeSelected />} />
         <Route path="/my_journey" element={<MyJourney />} />
