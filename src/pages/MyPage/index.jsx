@@ -64,7 +64,7 @@ const MyPageContainer = styled.div`
   width: 100%;
 `;
 const MyPageContentContainer = styled.div`
-  padding: 5rem 2rem 6.4rem 2rem;
+  padding: 4rem 2rem 8.4rem 2rem;
   background: var(--sub-green-color);
 `;
 const ClickBigButtonContainer = styled.div`
@@ -79,6 +79,6 @@ const Logout = styled.div`
 `;
 const P = styled.p`
   font-size: 1.4rem;
-  padding-top: 3.3rem;
+  padding-top: 1.2rem;
   color: #fff;
 `;
