@@ -1,40 +1,69 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Rating from "../../common/Rating/Rating";
-import ColorBox from "./ColorBox";
 import DiaryDate from "./DiaryDate";
+import EmotionBox from "./EmtionBox";
+import ClickButtonBig from "../../common/Buttons/ClickButtonBig";
+import { createDiary, updateDiary } from "../../../apis/diary";
+import { useDiary } from "../../../hooks/queries/useDiary";
 
 const DiaryWrite = () => {
+  const [selectedEmotion, setSelectedEmotion] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
+  const [score, setScore] = useState(0);
+  const [diary, setDiary] = useState("");
 
+  const navigate = useNavigate();
   const { date } = useParams();
 
-  const handleColorSelection = color => {
+  const userId = "test";
+
+  const { data: diaryData, isLoading } = useDiary(userId, date);
+  const logId = diaryData ? diaryData._id : null;
+
+  useEffect(() => {
+    if (!isLoading && diaryData) {
+      const { color, img, score: prevScore, diary: prevDiary } = diaryData;
+      setSelectedEmotion(img);
+      setSelectedColor(color);
+      setScore(prevScore);
+      setDiary(prevDiary);
+    }
+  }, [isLoading, diaryData, logId]);
+
+  const handleEmotionSelection = (emotion, color) => {
+    setSelectedEmotion(emotion);
     setSelectedColor(color);
   };
 
-  const handleRatingChange = newRating => {
-    setRating(newRating);
+  const handleScoreChange = newScore => {
+    setScore(newScore);
   };
 
-  const handleCommentChange = event => {
-    setComment(event.target.value);
+  const handleDiaryChange = event => {
+    setDiary(event.target.value);
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
-    if (selectedColor && rating && comment) {
+    if (selectedEmotion && score && diary && selectedColor) {
       const data = {
+        date: Number(date),
         color: selectedColor,
-        rating,
-        comment,
+        img: selectedEmotion,
+        score,
+        diary,
       };
 
-      console.log(data);
+      if (logId) {
+        updateDiary("test", date, data);
+      } else {
+        createDiary("test", data);
+      }
+
+      navigate("/diary");
     } else {
       console.log("Please fill in all fields.");
     }
@@ -44,26 +73,32 @@ const DiaryWrite = () => {
     <Container>
       <DiaryDate date={date} />
       <DiaryContent>
-        <p className="diary-title">당신의 하루는 어떤 색깔인가요?</p>
-        <ColorBox selectedColor={selectedColor} handleColorSelection={handleColorSelection} />
+        <p className="diary-title">오늘의 당신을 선택해주세요.</p>
+        <EmotionBox
+          selectedColor={selectedColor}
+          selectedEmotion={selectedEmotion}
+          handleEmotionSelection={handleEmotionSelection}
+        />
       </DiaryContent>
       <DiaryContent>
         <p className="diary-title">오늘 챌린지의 만족도는 어땠나요?</p>
-        <Rating setRating={handleRatingChange} rating={rating} />
+        <Rating setScore={handleScoreChange} score={score} />
       </DiaryContent>
       <DiaryContent>
         <p className="diary-title">오늘 하루는 어땠나요?</p>
         <textarea
-          name="comment"
-          value={comment}
-          onChange={handleCommentChange}
+          name="diary"
+          value={diary}
+          onChange={handleDiaryChange}
           cols="30"
           rows="10"
         ></textarea>
       </DiaryContent>
-      <button type="button" onClick={handleSubmit} className="writing-button">
-        등록하기
-      </button>
+      <ClickButtonBig
+        onClick={handleSubmit}
+        buttonClassName="writing-button"
+        buttonText={logId ? "수정하기" : "등록하기"}
+      />
     </Container>
   );
 };
@@ -77,25 +112,13 @@ const Container = styled.div`
   flex-direction: column;
 
   & textarea {
-    border-radius: 0;
+    border-radius: 8;
     resize: none;
     width: 100%;
     height: 13rem;
     margin-bottom: 1rem;
-  }
-
-  & .writing-button {
-    font-size: 1.4rem;
-    border: 1px solid #000;
-    padding: 1rem 3.5rem;
-    border-radius: 5rem;
-    margin: 0 auto;
-
-    &:hover {
-      background-color: var(--sub-green-color);
-      border-color: transparent;
-      color: #fff;
-    }
+    font-size: 1.6rem;
+    font-family: "Pretendard-Regular", "sans-serif";
   }
 `;
 

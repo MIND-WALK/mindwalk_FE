@@ -25,6 +25,9 @@ module.exports = {
       },
     ],
     "import/prefer-default-export": "off",
+    "no-alert": "off",
+    "no-underscore-dangle": "off",
+
     "prettier/prettier": [
       "error",
       {
