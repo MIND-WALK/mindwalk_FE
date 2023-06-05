@@ -117,6 +117,8 @@ const Container = styled.div`
     width: 100%;
     height: 13rem;
     margin-bottom: 1rem;
+    font-size: 1.6rem;
+    font-family: "Pretendard-Regular", "sans-serif";
   }
 `;
 

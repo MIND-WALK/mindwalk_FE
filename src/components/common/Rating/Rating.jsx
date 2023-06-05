@@ -48,7 +48,6 @@ const Rating = ({ score, setScore }) => {
           return <EmptyLeaf key={index} size="3.9rem" />;
         })}
       </div>
-      <span>{score}</span>
     </div>
   );
 };
