@@ -17,7 +17,7 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
   /* const endLat = 37.6373;
   const endLong = 127.0247; */
 
-  console.log(endLat, endLong);
+  // console.log(endLat, endLong);
 
   const centerLat = (startLat + endLat) / 2;
   const centerLong = (startLong + endLong) / 2;
@@ -73,7 +73,7 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
 
       const resultData = response.data.features;
 
-      console.log(resultData);
+      // console.log(resultData);
 
       // 결과 출력
       const tDistance = `거리 : ${(resultData[0].properties.totalDistance / 1000).toFixed(1)}km | `;
