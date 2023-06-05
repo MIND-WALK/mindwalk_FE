@@ -16,14 +16,7 @@ module.exports = {
     "no-restricted-syntax": "off",
     "no-use-before-define": "off",
     "no-plusplus": "off",
-    "import/no-extraneous-dependencies": ["error", { devDependencies: true }],
-    "prettier/prettier": [
-      "error",
-      {
-        endOfLine: "auto",
-        parser: "flow",
-      },
-    ],
+    "import/prefer-default-export": "off",
   },
   settings: {
     "import/no-extraneous-dependencies": [
