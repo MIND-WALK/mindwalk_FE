@@ -222,7 +222,7 @@ const Analysis = () => {
       emotion,
     };
     try {
-      const response = await axios.post(`${url}/emotion/${userAuthState}`, body);
+      const response = await axios.post(`api/emotion/${userAuthState}`, body);
       if (response.status === 201) {
         setEmotionState(emotion);
         console.log(emotion);
