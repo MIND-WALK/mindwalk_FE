@@ -4,11 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { AiFillRobot } from "react-icons/ai";
 import { BsHandIndexThumbFill } from "react-icons/bs";
 import Slider from "../../components/common/Slider";
-import useMeasurementCheck from "../../hooks/useMeasurementCheck";
 
 const MeasureSelect = () => {
-  useMeasurementCheck();
-
   const navigate = useNavigate();
 
   const handleButtonClick = page => {
