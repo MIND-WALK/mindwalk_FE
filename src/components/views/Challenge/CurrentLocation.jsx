@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
+import axios from "axios";
 
 import { currentLocationLatState, currentLocationLongState } from "../../../recoil/challenge";
 
@@ -12,12 +13,11 @@ const CurrentLocation = () => {
 
   const fetchLocationInfo = async (latitude, longitude) => {
     try {
-      const response = await fetch(
+      const response = await axios.get(
         `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=ko`,
       );
-      if (response.ok) {
-        const data = await response.json();
-        const { city, locality, principalSubdivision } = data;
+      if (response.status === 200) {
+        const { city, locality, principalSubdivision } = response.data;
         const formattedLocation = `${city} ${principalSubdivision} ${locality}`;
 
         setLocation(formattedLocation);
@@ -37,7 +37,7 @@ const CurrentLocation = () => {
           fetchLocationInfo(latitude, longitude);
           setCurrentLocationLong(longitude);
           setCurrentLocationLat(latitude);
-          console.log(latitude, longitude);
+          // console.log(latitude, longitude);
         },
         error => {
           console.log(error);
@@ -46,9 +46,9 @@ const CurrentLocation = () => {
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
-  }, []);
+  }, [currentLocationLong, currentLocationLat]);
 
-  return <div>현재 위치: {location}</div>;
+  return <>{location && <div>현재 위치 | {location}</div>}</>;
 };
 
 export default CurrentLocation;

@@ -1,27 +1,46 @@
 import React from "react";
 import { styled } from "styled-components";
-import { useLocation, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DiaryDate from "./DiaryDate";
 import RatedScore from "../../common/Rating/RatedScore";
+import { useDiary } from "../../../hooks/queries/useDiary";
+import { useEmotion } from "../../../hooks/useEmotion";
+import { deleteDiary } from "../../../apis/diary";
 
 const DiaryDetail = () => {
-  const handleEdit = () => {};
-  const handleDelete = () => {};
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
+  const params = useParams();
+  const { id, date } = params;
 
-  const rating = searchParams.get("rating");
-  const date = searchParams.get("date");
-  const content = searchParams.get("content");
-  const color = searchParams.get("color");
+  const userId = "test";
+  const navigate = useNavigate();
+  const { data, isLoading } = useDiary(userId, date);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
+  if (!data || data.length === 0) {
+    return <p>데이터가 없습니다.</p>;
+  }
+
+  const { diary, color, score } = data;
+
+  const handleEdit = () => {
+    navigate(`/diary/write/${date}`);
+  };
+
+  const handleDelete = () => {
+    alert("일기를 삭제하시겠습니까?");
+    deleteDiary(userId, date);
+    navigate("/diary");
+  };
 
   return (
     <Container>
+      <EmotionContainer>{useEmotion(color)} </EmotionContainer>
       <DiaryDate date={date} />
-      <RatedScore rating={rating} />
-      <div className="content-box" style={{ backgroundColor: color }}>
-        {content}
-      </div>
+      <RatedScore rating={score} />
+      <div className="content-box">{diary}</div>
       <div className="button-box">
         <button type="button" onClick={handleEdit}>
           수정하기
@@ -42,9 +61,9 @@ const Container = styled.div`
 
   & .content-box {
     width: 100%;
-    padding: 1rem;
+    padding: 1.6rem;
     border: 1px solid #000;
-    background-color: ${props => props.color};
+    border-radius: 0.8rem;
   }
 
   & .button-box {
@@ -53,16 +72,22 @@ const Container = styled.div`
 
     & button {
       font-size: 1.4rem;
-      border: 1px solid #000;
+      color: #fff;
+      background-color: var(--sub-green-color);
       padding: 1rem 3.5rem;
       border-radius: 5rem;
       margin: 2rem 0.5rem;
 
       &:hover {
-        background-color: var(--sub-green-color);
+        background-color: var(--sub-yellow-color);
         border-color: transparent;
-        color: #fff;
+        color: var(--sub-green-color);
       }
     }
   }
+`;
+
+const EmotionContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `;

@@ -110,13 +110,13 @@ const ChallengeMap = () => {
       <LocationContainer>
         <LocationIcon />
         <LocationText>
-          {" "}
-          현재 위치 | 00구 00동
           <CurrentLocation />
         </LocationText>
       </LocationContainer>
 
-      <ChallengeInitTmap selectedPlace={selectedPlace} />
+      {currentLocationLat && currentLocationLong && (
+        <ChallengeInitTmap selectedPlace={selectedPlace} />
+      )}
 
       <CompleteButton onClick={handleChallengeComplete}>도착 완료</CompleteButton>
 

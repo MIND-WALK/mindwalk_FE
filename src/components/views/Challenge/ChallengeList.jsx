@@ -6,6 +6,8 @@ import { MdLocationOn } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { locationLatState, locationLongState, locationNameState } from "../../../recoil/challenge";
+import CurrentLocation from "./CurrentLocation";
+import ChallengeDistanceTmap from "./ChallengeDistanceTmap";
 
 const ChallengeList = ({ emotion }) => {
   const [selectedChallenge, setSelectedChallenge] = useState(null);
@@ -43,7 +45,9 @@ const ChallengeList = ({ emotion }) => {
         <SubTitle>오늘 감정에 어울리는 곳을 가보는 건 어떨까요?</SubTitle>
         <LocationContainer>
           <LocationIcon />
-          <LocationText>현재 위치 | 00구 00동</LocationText>
+          <LocationText>
+            <CurrentLocation />
+          </LocationText>
         </LocationContainer>
 
         <ChallengeLists>
@@ -60,8 +64,9 @@ const ChallengeList = ({ emotion }) => {
                   <ChallengeTitle>{challenge.location}</ChallengeTitle>
 
                   <ChallengeDetails>
-                    <ChallengeSubtitle>소요 시간: 50분</ChallengeSubtitle>
-                    <ChallengeSubtitle>| 거리: 1.2km</ChallengeSubtitle>
+                    {/*  <ChallengeSubtitle>소요 시간: 50분</ChallengeSubtitle>
+                    <ChallengeSubtitle>| 거리: 1.2km</ChallengeSubtitle> */}
+                    <ChallengeDistanceTmap endLat={challenge.lat} endLong={challenge.long} />
                   </ChallengeDetails>
                 </ChallengeInfo>
               </ChallengeCard>

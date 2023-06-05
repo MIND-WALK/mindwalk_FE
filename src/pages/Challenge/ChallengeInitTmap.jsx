@@ -3,17 +3,29 @@ import axios from "axios";
 import { styled } from "styled-components";
 import { useRecoilState } from "recoil";
 
-import { locationLatState, locationLongState, locationNameState } from "../../recoil/challenge";
+import {
+  currentLocationLatState,
+  currentLocationLongState,
+  locationLatState,
+  locationLongState,
+  locationNameState,
+} from "../../recoil/challenge";
 
 const ChallengeInitTmap = ({ selectedPlace }) => {
   const [resultdrawArr, setResultdrawArr] = useState([]);
   const [endLong, setEndLong] = useRecoilState(locationLongState);
   const [endLat, setEndLat] = useRecoilState(locationLatState);
 
+  const [currentLocationLong, setCurrentLocationLong] = useRecoilState(currentLocationLongState);
+  const [currentLocationLat, setCurrentLocationLat] = useRecoilState(currentLocationLatState);
+
   let map = [];
 
-  const startLat = 37.5668;
-  const startLong = 127.0092;
+  const startLat = currentLocationLat;
+  const startLong = currentLocationLong;
+  // DDP
+  /* const startLat = 37.5668; */
+  /* const startLong = 127.0092; */
   /* const endLat = 37.6373;
   const endLong = 127.0247; */
 
@@ -72,8 +84,6 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
       );
 
       const resultData = response.data.features;
-
-      // console.log(resultData);
 
       // 결과 출력
       const tDistance = `거리 : ${(resultData[0].properties.totalDistance / 1000).toFixed(1)}km | `;
@@ -175,10 +185,6 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
   }, []);
 
   return (
-    /*  <div>
-      <div id="map_div" style={{ width: "100%", height: "400px" }}></div>
-      <p id="result"></p>
-    </div> */
     <div>
       <MapWrap id="map_wrap" className="map_wrap3">
         <MapDiv id="map_div"></MapDiv>
