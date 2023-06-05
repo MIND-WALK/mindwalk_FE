@@ -95,7 +95,7 @@ export const NextButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px auto;
+  margin: 30px auto;
   border-radius: 40px;
 `;
 

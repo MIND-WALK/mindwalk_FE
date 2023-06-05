@@ -16,7 +16,7 @@ import TabBar from "./components/common/TabBar/index";
 import Challenge from "./pages/Challenge";
 import ChallengeSelected from "./pages/Challenge/ChallengeSelected";
 import Main from "./pages/Main";
-import Slide from "./components/views/Splash/Slide";
+// import Slide from "./components/views/Splash/Slide";
 
 function App() {
   return (
@@ -40,7 +40,7 @@ function AppContent() {
       <ResetStyles />
       {!isMainPage && <NavBar />}
       <Routes>
-        <Route path="/" element={<Slide />} />
+        {/* <Route path="/" element={<Slide />} /> */}
         <Route path="/home" element={<Main />} />
         <Route path="/diary" element={<Diary />} />
         <Route path="/diary/:id" element={<DiaryDetail />} />
