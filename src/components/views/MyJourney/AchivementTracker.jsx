@@ -3,15 +3,14 @@ import { styled } from "styled-components";
 import { MdOutlineEmojiEvents, MdWebAsset } from "react-icons/md";
 import LEVEL from "../../../constants/level";
 
-const AchivementTracker = ({ questNumInfo, nextLevel }) => {
-  console.log(questNumInfo);
+const AchivementTracker = ({ questInfo, nextLevel }) => {
   return (
     <Container>
       <CountBox>
         <MdOutlineEmojiEvents size="2.4rem" />
         <div>
           <p>완수한 여정</p>
-          <Count>{questNumInfo.check}개</Count>
+          <Count>{questInfo.check}개</Count>
         </div>
       </CountBox>
       <Line></Line>
@@ -19,7 +18,7 @@ const AchivementTracker = ({ questNumInfo, nextLevel }) => {
         <MdWebAsset size="2.4rem" />
         <div>
           <p>다음 레벨까지 남은 여정</p>
-          <Count>{LEVEL[nextLevel].condition - questNumInfo.check}개</Count>
+          <Count>{LEVEL[nextLevel].condition - questInfo.check}개</Count>
         </div>
       </CountBox>
     </Container>

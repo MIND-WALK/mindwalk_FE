@@ -2,20 +2,26 @@ import React from "react";
 import { styled } from "styled-components";
 import { Title } from "./Level";
 
-const AchivementList = () => {
+const AchivementList = ({ questInfo }) => {
   return (
     <Container>
       <Title>달성 업적</Title>
       <AchivementListBox>
-        <CompletedQuest>
-          <LevelImage>
-            <img src="#" alt="" />
-          </LevelImage>
-          <TextBox>
-            <DateText>2023. 01. 31</DateText>
-            <p>여정 50개 달성</p>
-          </TextBox>
-        </CompletedQuest>
+        {questInfo.date.map((date, index) => {
+          if (index !== 0 && index % 10 === 0)
+            return (
+              <CompletedQuest key={date}>
+                <LevelImage>
+                  <img src="#" alt="" />
+                </LevelImage>
+                <TextBox>
+                  <DateText>{date}</DateText>
+                  <p>여정 {index * 10}개 달성</p>
+                </TextBox>
+              </CompletedQuest>
+            );
+          return <></>;
+        })}
       </AchivementListBox>
     </Container>
   );

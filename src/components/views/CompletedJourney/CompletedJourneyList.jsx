@@ -11,7 +11,7 @@ const CompletedJourneyList = ({ completedJourney }) => {
       <Title>완수한 여정</Title>
       <JourneyList>
         {completedJourney.map(journey => (
-          <Journey key={journey._id}>
+          <Journey key={journey.date}>
             <PlaceImage></PlaceImage>
             <TextBox>
               <DateText>

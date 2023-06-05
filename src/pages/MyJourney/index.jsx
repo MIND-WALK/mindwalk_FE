@@ -8,7 +8,7 @@ import LEVEL from "../../constants/level";
 const MyJourney = () => {
   const url = process.env.REACT_APP_API_URL;
 
-  const [questNumInfo, setQuestNumInfo] = useState({ check: 0, all: 0 });
+  const [questInfo, setQuestInfo] = useState({ check: 0, all: 0 });
   const [levelNum, setLevelNum] = useState();
 
   useEffect(() => {
@@ -16,7 +16,9 @@ const MyJourney = () => {
       try {
         const { data } = await axios.get(`http://54.180.88.103:4000/api/user/trip/all/test`);
 
-        setQuestNumInfo(data);
+        console.log(data);
+
+        setQuestInfo(data);
       } catch (err) {
         console.log(err);
       }
@@ -26,15 +28,15 @@ const MyJourney = () => {
   }, []);
 
   useEffect(() => {
-    const { level } = LEVEL.find(ele => ele.condition > questNumInfo.check);
+    const { level } = LEVEL.find(ele => ele.condition > questInfo.check);
     setLevelNum(level - 1);
-  }, [questNumInfo]);
+  }, [questInfo]);
 
   return (
     <>
       {levelNum && <Level level={levelNum} />}
-      {levelNum && <QuestTracker questNumInfo={questNumInfo} nextLevel={levelNum} />}
-      <CompletedList />
+      {levelNum && <QuestTracker questInfo={questInfo} nextLevel={levelNum} />}
+      {questInfo && <CompletedList questInfo={questInfo} />}
     </>
   );
 };

@@ -79,4 +79,5 @@ const LevelText = styled.p`
 const Button = styled.button`
   display: flex;
   align-items: center;
+  gap: 5px;
 `;
