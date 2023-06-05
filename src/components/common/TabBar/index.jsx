@@ -2,13 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiHome, FiSmile, FiFlag, FiBook, FiUser } from "react-icons/fi";
 import { styled } from "styled-components";
-import useChallengeCheck from "../../../hooks/useChallengeCheck";
 
 const TabBar = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState("my_journey");
-
-  const [challengeStatus] = useChallengeCheck();
 
   const handleTabClick = page => {
     if (currentPage === page) {
@@ -32,7 +29,7 @@ const TabBar = () => {
         <FiSmile size={20} />
         <TabBarLabel>측정</TabBarLabel>
       </TabBarItem>
-      <TabBarItem onClick={() => handleTabClick(challengeStatus ? "" : "challenge")}>
+      <TabBarItem onClick={() => handleTabClick("challenge")}>
         {/* challenge */}
         <FiFlag size={20} />
         <TabBarLabel>도전</TabBarLabel>

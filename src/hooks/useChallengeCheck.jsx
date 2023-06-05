@@ -6,9 +6,8 @@ const useChallengeCheck = () => {
 
   useEffect(() => {
     const getChallengeStatus = async () => {
-      const { data } = await axios.get(`http://localhost:3100/api/user/trip/test`);
+      const { data } = await axios.get(`http://54.180.88.103:4000/api/user/trip/test`);
 
-      console.log(data);
       if (!data) {
         return;
       }
