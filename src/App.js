@@ -18,6 +18,8 @@ import ChallengeSelected from "./pages/Challenge/ChallengeSelected";
 import Main from "./pages/Main";
 import MeasureCompleted from "./pages/Analysis/MeasureCompleted";
 import MeasureSelect from "./pages/Analysis/MeasureSelect";
+import ChallengeCompleted from "./pages/Challenge/ChallengeCompleted";
+
 // import Slide from "./components/views/Splash/Slide";
 
 function App() {
