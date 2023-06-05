@@ -1,8 +1,9 @@
 /* eslint-disable no-restricted-globals */
 import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAllDiaries, getDiary } from "../apis/diary";
 
-const useCalendar = () => {
+const useCalendar = ({ colorData }) => {
   const today = {
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
@@ -18,11 +19,22 @@ const useCalendar = () => {
 
   const navigate = useNavigate();
 
-  const handleSelectDay = useCallback(
-    date => {
-      const newSelectedDate = new Date(selectedYear, selectedMonth - 1, date); // 날짜에 대한 Date 객체 생성
+  const checkDiaryExistence = async ms => {
+    const diaries = await getAllDiaries("test");
+    const matchingDiary = diaries.find(diary => diary.date === ms);
+    return matchingDiary || null;
+  };
 
-      navigate(`/diary/write/${newSelectedDate.getTime()}`); // 날짜 클릭 시 페이지 이동
+  const handleSelectDay = useCallback(
+    async date => {
+      const selectedDate = new Date(selectedYear, selectedMonth - 1, date);
+      const diaryDataExists = await checkDiaryExistence(selectedDate.getTime());
+
+      if (!diaryDataExists) {
+        navigate(`/diary/write/${selectedDate.getTime()}`);
+      } else {
+        navigate(`/diary/detail/${selectedDate.getTime()}`);
+      }
     },
     [selectedYear, selectedMonth, navigate],
   );
@@ -110,22 +122,40 @@ const useCalendar = () => {
       if (week[day] === nowDay) {
         for (let i = 0; i < dateTotalCount; i++) {
           const dayNumber = i + 1;
+          const currentDate = new Date(selectedYear, selectedMonth - 1, dayNumber);
+          const isToday =
+            today.year === selectedYear &&
+            today.month === selectedMonth &&
+            today.date === dayNumber;
+          const isSunday = currentDate.getDay() === 0;
+          const isSaturday = currentDate.getDay() === 6;
+          const dayStyle = {
+            backgroundColor: "transparent",
+          };
+
+          const matchingDates = colorData.filter(item => {
+            const itemDate = new Date(item.date);
+            return (
+              itemDate.getFullYear() === currentDate.getFullYear() &&
+              itemDate.getMonth() === currentDate.getMonth() &&
+              itemDate.getDate() === currentDate.getDate()
+            );
+          });
+
+          if (matchingDates.length > 0) {
+            // If there are matching dates in colorData, set the background color
+            dayStyle.backgroundColor = matchingDates[0].color; // Assuming you want to use the color of the first matching date
+          }
+
+          if (isToday) {
+            dayStyle.backgroundColor = colorData.color;
+          }
+
           dayArr.push(
             <div
               key={dayNumber}
-              className={`${
-                today.year === selectedYear &&
-                today.month === selectedMonth &&
-                today.date === dayNumber
-                  ? "today"
-                  : ""
-              } weekday ${
-                new Date(selectedYear, selectedMonth - 1, dayNumber).getDay() === 0 ? "sunday" : ""
-              } ${
-                new Date(selectedYear, selectedMonth - 1, dayNumber).getDay() === 6
-                  ? "saturday"
-                  : ""
-              }`}
+              className={`weekday ${isSunday ? "sunday" : ""} ${isSaturday ? "saturday" : ""}`}
+              style={dayStyle}
               onClick={() => handleSelectDay(dayNumber)}
             >
               {dayNumber}
@@ -138,7 +168,16 @@ const useCalendar = () => {
     }
 
     return dayArr;
-  }, [selectedYear, selectedMonth, dateTotalCount, handleSelectDay]);
+  }, [
+    selectedYear,
+    selectedMonth,
+    dateTotalCount,
+    handleSelectDay,
+    today,
+    week,
+    colorData,
+    colorData.color,
+  ]);
 
   return {
     today,
