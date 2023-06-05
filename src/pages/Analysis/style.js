@@ -57,13 +57,17 @@ export const ChartWrapper = styled.div`
 
 export const BarChart = styled.div``;
 
-export const NumText = styled.span``;
+export const NumText = styled.span`
+  width: 5.333vw;
+  max-width: 20px;
+`;
 
 export const Bar = styled.div`
   width: 5.333vw;
   max-width: 20px;
   height: 2px;
   max-height: 200px;
+  min-height: 2px;
   background: rgb(186, 240, 202);
   background: linear-gradient(to top, rgba(112, 195, 149, 1), rgba(186, 240, 202, 1));
   border-radius: 30px 30px 0 0;

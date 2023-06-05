@@ -102,31 +102,31 @@ const Analysis = () => {
         drawBox.draw(canvas);
 
         setExpressions({
-          neutral: (resizedDetections[0].expressions.neutral * 100).toFixed(2),
-          happy: (resizedDetections[0].expressions.happy * 100).toFixed(2),
+          neutral: (resizedDetections[0].expressions.neutral * 100).toFixed(0),
+          happy: (resizedDetections[0].expressions.happy * 100).toFixed(0),
           sad: (
             resizedDetections[0].expressions.sad * 100 +
             resizedDetections[0].expressions.fearful * 100
-          ).toFixed(2),
+          ).toFixed(0),
           angry: (
             resizedDetections[0].expressions.angry * 100 +
             resizedDetections[0].expressions.disgusted * 100
-          ).toFixed(2),
-          surprised: (resizedDetections[0].expressions.surprised * 100).toFixed(2),
+          ).toFixed(0),
+          surprised: (resizedDetections[0].expressions.surprised * 100).toFixed(0),
         });
 
         if (count === 50) {
-          neutral = (resizedDetections[0].expressions.neutral * 100).toFixed(2);
-          happy = (resizedDetections[0].expressions.happy * 100).toFixed(2);
+          neutral = (resizedDetections[0].expressions.neutral * 100).toFixed(0);
+          happy = (resizedDetections[0].expressions.happy * 100).toFixed(0);
           sad = (
             resizedDetections[0].expressions.sad * 100 +
             resizedDetections[0].expressions.fearful * 100
-          ).toFixed(2);
+          ).toFixed(0);
           angry = (
             resizedDetections[0].expressions.angry * 100 +
             resizedDetections[0].expressions.disgusted * 100
-          ).toFixed(2);
-          surprised = (resizedDetections[0].expressions.surprised * 100).toFixed(2);
+          ).toFixed(0);
+          surprised = (resizedDetections[0].expressions.surprised * 100).toFixed(0);
           ChartData = [
             Number(neutral),
             Number(happy),
