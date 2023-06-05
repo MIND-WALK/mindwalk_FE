@@ -39,7 +39,8 @@ function AppContent() {
   return (
     <div className="App">
       <ResetStyles />
-      {!isMainPage && <NavBar />}
+      {/* {!isMainPage && <NavBar />} */}
+      <NavBar />
       <Routes>
         {/* <Route path="/" element={<Slide />} /> */}
         <Route path="/login" element={<Login />} />
