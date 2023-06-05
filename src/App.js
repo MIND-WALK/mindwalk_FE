@@ -16,6 +16,10 @@ import TabBar from "./components/common/TabBar/index";
 import Challenge from "./pages/Challenge";
 import ChallengeSelected from "./pages/Challenge/ChallengeSelected";
 import Main from "./pages/Main";
+import MeasureCompleted from "./pages/Analysis/MeasureCompleted";
+import MeasureSelect from "./pages/Analysis/MeasureSelect";
+import ChallengeCompleted from "./pages/Challenge/ChallengeCompleted";
+
 
 function App() {
   return (
@@ -39,13 +43,17 @@ function AppContent() {
       <ResetStyles />
       {!isMainPage && <NavBar />}
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Main />} />
         <Route path="/diary" element={<Diary />} />
         <Route path="/diary/:id/:date" element={<DiaryDetail />} />
         <Route path="/diary/write/:date" element={<DiaryWrite />} />
         <Route path="/analysis" element={<Analysis />} />
+        <Route path="/measure" element={<MeasureSelect />} />
+        <Route path="/measure/completed" element={<MeasureCompleted />} />
         <Route path="/challenge" element={<Challenge />} />
         <Route path="/challenge/selected" element={<ChallengeSelected />} />
+        <Route path="/challenge/completed" element={<ChallengeCompleted />} />
         <Route path="/my_journey" element={<MyJourney />} />
         <Route path="/my_journey/completed" element={<CompletedJourney />} />
         <Route path="/my_page" element={<MyPage />} />
