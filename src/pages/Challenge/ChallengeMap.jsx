@@ -80,16 +80,19 @@ const ChallengeMap = () => {
     };
     // console.log(body);
 
+    // const rangeSuccess=selectedLocationLong ...//ing
+
     try {
       const response = await axios.post(url, body);
+
       if (response.status === 201) {
-        if (challengeCheck) {
+        /*   if () {
           alert("챌린지 성공");
           setChallengeCheck(true);
         } else {
           alert("챌린지 실패 위치아님");
           setChallengeCheck(false);
-        }
+        } */
       }
     } catch (error) {
       setChallengeCheck(false);
