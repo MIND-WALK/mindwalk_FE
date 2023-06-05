@@ -17,6 +17,12 @@ module.exports = {
     "no-use-before-define": "off",
     "no-plusplus": "off",
     "import/prefer-default-export": "off",
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto",
+      },
+    ],
   },
   settings: {
     "import/no-extraneous-dependencies": [
