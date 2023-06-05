@@ -18,6 +18,8 @@ import ChallengeSelected from "./pages/Challenge/ChallengeSelected";
 import Main from "./pages/Main";
 import MeasureCompleted from "./pages/Analysis/MeasureCompleted";
 import MeasureSelect from "./pages/Analysis/MeasureSelect";
+import ChallengeCompleted from "./pages/Challenge/ChallengeCompleted";
+
 // import Slide from "./components/views/Splash/Slide";
 
 function App() {
@@ -52,6 +54,7 @@ function AppContent() {
         <Route path="/measure/completed" element={<MeasureCompleted />} />
         <Route path="/challenge" element={<Challenge />} />
         <Route path="/challenge/selected" element={<ChallengeSelected />} />
+        <Route path="/" element={<ChallengeCompleted />} />
         <Route path="/my_journey" element={<MyJourney />} />
         <Route path="/my_journey/completed" element={<CompletedJourney />} />
         <Route path="/my_page" element={<MyPage />} />
