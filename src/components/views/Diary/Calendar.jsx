@@ -3,8 +3,10 @@ import { styled } from "styled-components";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import useCalendar from "../../../hooks/useCalendar";
 
-const Calendar = () => {
-  const { prevMonth, nextMonth, monthControl, yearControl, returnWeek, returnDay } = useCalendar();
+const Calendar = ({ colorData }) => {
+  const { prevMonth, nextMonth, monthControl, yearControl, returnWeek, returnDay } = useCalendar({
+    colorData,
+  });
 
   return (
     <Container>
@@ -29,7 +31,7 @@ export default Calendar;
 
 const Container = styled.div`
   & > .title {
-    margin: 3rem 0 1rem;
+    margin: 1rem 0;
   }
 
   & .pagination {
@@ -55,10 +57,11 @@ const Container = styled.div`
     text-align: center;
     margin: 1rem 0;
   }
+
   & .date {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 1rem;
+    grid-gap: 0.3rem 1rem;
     text-align: center;
   }
 
@@ -70,7 +73,7 @@ const Container = styled.div`
   }
 
   & .weekday {
-    padding: 0.8rem 1rem;
+    padding: 0.7rem 0.3rem;
     border-radius: 50%;
     background-color: transparent;
   }
