@@ -111,12 +111,15 @@ const reset = createGlobalStyle`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* overflow: hidden; */
+    overflow: hidden;
     background-color: #fff;
     box-shadow: 10px 9px 44px 1px rgba(181,181,181,0.68);
     -webkit-box-shadow: 10px 9px 44px 1px rgba(181,181,181,0.68);
     -moz-box-shadow: 10px 9px 44px 1px rgba(181,181,181,0.68);
   }
+
+
+
   ol,
   ul {
     list-style: none;
@@ -177,6 +180,7 @@ const reset = createGlobalStyle`
     --sub-green-color: #007D37;  
     --sub-yellow-color: #F6EFAD;  
   }
+
 
   @font-face {
     font-family: "Pretendard-Regular";
