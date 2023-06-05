@@ -16,7 +16,6 @@ import TabBar from "./components/common/TabBar/index";
 import Challenge from "./pages/Challenge";
 import ChallengeSelected from "./pages/Challenge/ChallengeSelected";
 import Main from "./pages/Main";
-import Slide from "./components/views/Splash/Slide";
 
 function App() {
   return (
@@ -32,7 +31,7 @@ export default App;
 
 function AppContent() {
   const location = useLocation();
-  const isMainPage = location.pathname === "/" || "/home";
+  const isMainPage = location.pathname === "/" || location.pathname === "/home";
   const isSplash = location.pathname === "/";
 
   return (
@@ -40,10 +39,9 @@ function AppContent() {
       <ResetStyles />
       {!isMainPage && <NavBar />}
       <Routes>
-        <Route path="/" element={<Slide />} />
         <Route path="/home" element={<Main />} />
         <Route path="/diary" element={<Diary />} />
-        <Route path="/diary/:id" element={<DiaryDetail />} />
+        <Route path="/diary/:id/:date" element={<DiaryDetail />} />
         <Route path="/diary/write/:date" element={<DiaryWrite />} />
         <Route path="/analysis" element={<Analysis />} />
         <Route path="/challenge" element={<Challenge />} />
