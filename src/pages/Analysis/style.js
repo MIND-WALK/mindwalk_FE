@@ -18,6 +18,7 @@ export const FaceWrapper = styled.div`
   video {
     width: 100% !important;
     height: 100% !important;
+    object-fit: cover;
   }
 
   canvas {
@@ -31,18 +32,20 @@ export const FaceWrapper = styled.div`
 
 export const NameText = styled.span`
   width: 100%;
+  height: 4.497751124437781vh;
+  max-height: 30px;
   display: flex;
   justify-content: center;
   font-weight: bold;
   font-size: 1.5rem;
-  margin-top: 1.875rem;
+  margin-top: 10px;
 `;
 
 export const ChartWrapper = styled.div`
   width: 82.4vw;
   max-width: 309px;
-  height: 25.337331334332834vh;
-  max-height: 200px;
+  height: 26.986506746626688vh;
+  max-height: 180px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -62,12 +65,7 @@ export const Bar = styled.div`
   height: 2px;
   max-height: 200px;
   background: rgb(186, 240, 202);
-  background: linear-gradient(
-    90deg,
-    rgba(186, 240, 202, 1) 0%,
-    rgba(190, 251, 175, 1) 50%,
-    rgba(112, 195, 149, 1) 100%
-  );
+  background: linear-gradient(to top, rgba(112, 195, 149, 1), rgba(186, 240, 202, 1));
   border-radius: 30px 30px 0 0;
 `;
 
@@ -97,6 +95,23 @@ export const NextButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 30px auto;
+  margin: 20px auto;
   border-radius: 40px;
+`;
+
+export const LoadingImg = styled.img`
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+`;
+
+export const ContentWrapper = styled.div`
+  width: 100%;
+  height: 35.98200899550225vh;
+  max-height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 `;

@@ -13,8 +13,11 @@ import {
   LabelWrapper,
   ChartLabel,
   NextButton,
+  LoadingImg,
+  ContentWrapper,
 } from "./style";
 import Animation from "./Animation";
+import loading from "../../assets/img/Analysis/loading.gif";
 
 // 비디오 사이즈 설정
 const constraints = {
@@ -37,6 +40,7 @@ const Analysis = () => {
     angry: 0,
     surprised: 0,
   });
+  const [emotion, setEmontion] = useState("");
 
   let neutral = 0;
   let happy = 0;
@@ -44,7 +48,7 @@ const Analysis = () => {
   let angry = 0;
   let surprised = 0;
   let count = 0;
-  const ChartData = [];
+  let ChartData = [];
 
   const onPlay = async () => {
     // 이미지 정보를 기반으로 canvas 요소 생성
@@ -112,6 +116,24 @@ const Analysis = () => {
             resizedDetections[0].expressions.disgusted * 100
           ).toFixed(2);
           surprised = (resizedDetections[0].expressions.surprised * 100).toFixed(2);
+          console.log(
+            Math.max(Number(neutral), Number(happy), Number(sad), Number(angry), Number(surprised)),
+          );
+          ChartData = [
+            Number(neutral),
+            Number(happy),
+            Number(sad),
+            Number(angry),
+            Number(surprised),
+          ];
+          const index = ChartData.indexOf(
+            Math.max(Number(neutral), Number(happy), Number(sad), Number(angry), Number(surprised)),
+          );
+          if (index === 0) setEmontion("neutral");
+          else if (index === 1) setEmontion("happy");
+          else if (index === 2) setEmontion("sad");
+          else if (index === 3) setEmontion("angry");
+          else if (index === 4) setEmontion("surprised");
           setCompleted(true);
         }
       });
@@ -178,56 +200,63 @@ const Analysis = () => {
       sadText.innerText = `${expressionsList.sad}%`;
       surprisedText.innerText = `${expressionsList.surprised}%`;
 
-      angryBar.style.height = `${expressionsList.angry * 1.8}px`;
-      neutralBar.style.height = `${expressionsList.neutral * 1.8}px`;
-      happyBar.style.height = `${expressionsList.happy * 1.8}px`;
-      sadBar.style.height = `${expressionsList.sad * 1.8}px`;
-      surprisedBar.style.height = `${expressionsList.surprised * 1.8}px`;
+      angryBar.style.height = `${expressionsList.angry * 1.5}px`;
+      neutralBar.style.height = `${expressionsList.neutral * 1.5}px`;
+      happyBar.style.height = `${expressionsList.happy * 1.5}px`;
+      sadBar.style.height = `${expressionsList.sad * 1.5}px`;
+      surprisedBar.style.height = `${expressionsList.surprised * 1.5}px`;
     }
   }, [expressionsList]);
+
+  const handleClickResult = () => {
+    console.log(emotion);
+  };
 
   return (
     <PageWrapper>
       <FaceWrapper ref={wrapRef}>
         <video ref={videoRef} autoPlay muted onPlay={onPlay} width={640} height={480} />
       </FaceWrapper>
-      <NameText>{completed ? "오늘 안혜지님의 감정은?" : "감정 분석 중입니다."}</NameText>
-      {completed ? (
-        <>
-          <ChartWrapper>
-            <BarChart>
-              <NumText id="neutral">{neutral}</NumText>
-              <Bar id="neutral-bar" />
-            </BarChart>
-            <BarChart>
-              <NumText id="happy">{happy}</NumText>
-              <Bar id="happy-bar" />
-            </BarChart>
-            <BarChart>
-              <NumText id="sad">{sad}</NumText>
-              <Bar id="sad-bar" />
-            </BarChart>
-            <BarChart>
-              <NumText id="angry">{angry}</NumText>
-              <Bar id="angry-bar" />
-            </BarChart>
-            <BarChart>
-              <NumText id="surprised">{surprised}</NumText>
-              <Bar id="surprised-bar" />
-            </BarChart>
-          </ChartWrapper>
-          <LabelWrapper>
-            <ChartLabel>평온</ChartLabel>
-            <ChartLabel>기쁨</ChartLabel>
-            <ChartLabel>슬픔</ChartLabel>
-            <ChartLabel>분노</ChartLabel>
-            <ChartLabel>흥분</ChartLabel>
-          </LabelWrapper>
-        </>
-      ) : (
-        <Animation />
-      )}
-      <NextButton>{completed ? "감정 분석 완료" : "감정 분석 중"}</NextButton>
+      <ContentWrapper>
+        {completed ? (
+          <>
+            <NameText>{"오늘 안혜지님의 감정은?"}</NameText>
+            <ChartWrapper>
+              <BarChart>
+                <NumText id="neutral">{neutral}</NumText>
+                <Bar id="neutral-bar" />
+              </BarChart>
+              <BarChart>
+                <NumText id="happy">{happy}</NumText>
+                <Bar id="happy-bar" />
+              </BarChart>
+              <BarChart>
+                <NumText id="sad">{sad}</NumText>
+                <Bar id="sad-bar" />
+              </BarChart>
+              <BarChart>
+                <NumText id="angry">{angry}</NumText>
+                <Bar id="angry-bar" />
+              </BarChart>
+              <BarChart>
+                <NumText id="surprised">{surprised}</NumText>
+                <Bar id="surprised-bar" />
+              </BarChart>
+            </ChartWrapper>
+            <LabelWrapper>
+              <ChartLabel>평온</ChartLabel>
+              <ChartLabel>기쁨</ChartLabel>
+              <ChartLabel>슬픔</ChartLabel>
+              <ChartLabel>분노</ChartLabel>
+              <ChartLabel>흥분</ChartLabel>
+            </LabelWrapper>
+          </>
+        ) : (
+          // <Animation />
+          <LoadingImg src={loading} alt="loading" />
+        )}
+      </ContentWrapper>
+      {completed ? <NextButton onClick={handleClickResult}>감정 분석 완료</NextButton> : <></>}
     </PageWrapper>
   );
 };
