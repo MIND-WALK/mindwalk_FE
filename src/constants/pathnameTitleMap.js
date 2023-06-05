@@ -1,4 +1,5 @@
 const PATHNAME_TITLE_MAP = {
+  self_diagnosis: "자가진단",
   my_journey: "나의 여정",
   diary: "감정일기",
   "my_journey/completed": "나의 여정",

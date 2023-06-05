@@ -45,6 +45,7 @@ function AppContent() {
       {!isMainPage && <NavBar />}
       <Routes>
         {/* <Route path="/" element={<Slide />} /> */}
+        <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Main />} />
         <Route path="/diary" element={<Diary />} />
         <Route path="/diary/:id" element={<DiaryDetail />} />
@@ -54,7 +55,7 @@ function AppContent() {
         <Route path="/measure/completed" element={<MeasureCompleted />} />
         <Route path="/challenge" element={<Challenge />} />
         <Route path="/challenge/selected" element={<ChallengeSelected />} />
-        <Route path="/" element={<ChallengeCompleted />} />
+        <Route path="/challenge/completed" element={<ChallengeCompleted />} />
         <Route path="/my_journey" element={<MyJourney />} />
         <Route path="/my_journey/completed" element={<CompletedJourney />} />
         <Route path="/my_page" element={<MyPage />} />
