@@ -15,7 +15,6 @@ import Analysis from "./pages/Analysis";
 import TabBar from "./components/common/TabBar/index";
 import Challenge from "./pages/Challenge";
 import ChallengeMap from "./pages/Challenge/ChallengeMap";
-import ChallengeSelected from "./pages/Challenge/ChallengeSelected";
 import Main from "./pages/Main";
 import MeasureCompleted from "./pages/Analysis/MeasureCompleted";
 import MeasureSelect from "./pages/Analysis/MeasureSelect";
@@ -52,7 +51,6 @@ function AppContent() {
         <Route path="/measure" element={<MeasureSelect />} />
         <Route path="/measure/completed" element={<MeasureCompleted />} />
         <Route path="/challenge" element={<Challenge />} />
-        <Route path="/challenge/selected" element={<ChallengeSelected />} />
         <Route path="/challenge/completed" element={<ChallengeCompleted />} />
         <Route path="/my_journey" element={<MyJourney />} />
         <Route path="/my_journey/completed" element={<CompletedJourney />} />
