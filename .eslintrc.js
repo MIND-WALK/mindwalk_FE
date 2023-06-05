@@ -17,6 +17,8 @@ module.exports = {
     "no-use-before-define": "off",
     "no-plusplus": "off",
     "import/prefer-default-export": "off",
+    "no-alert": "off",
+    "no-underscore-dangle": "off",
   },
   settings: {
     "import/no-extraneous-dependencies": [
