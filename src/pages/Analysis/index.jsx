@@ -2,6 +2,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { TinyFaceDetectorOptions } from "face-api.js";
 import * as faceapi from "face-api.js";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useNavigate } from "react-router";
+import axios from "axios";
 import {
   FaceWrapper,
   NameText,
@@ -13,8 +16,13 @@ import {
   LabelWrapper,
   ChartLabel,
   NextButton,
+  LoadingImg,
+  ContentWrapper,
 } from "./style";
 import Animation from "./Animation";
+import loading from "../../assets/img/Analysis/loading.gif";
+import userIdState from "../../recoil/userIdState";
+import emotionState from "../../recoil/emotionState";
 
 // 비디오 사이즈 설정
 const constraints = {
@@ -37,6 +45,13 @@ const Analysis = () => {
     angry: 0,
     surprised: 0,
   });
+  const [emotion, setEmontion] = useState("");
+  const userAuthState = useRecoilValue(userIdState);
+  const setEmotionState = useSetRecoilState(emotionState);
+
+  const navigate = useNavigate();
+
+  const url = process.env.REACT_APP_API_URL;
 
   let neutral = 0;
   let happy = 0;
@@ -44,7 +59,7 @@ const Analysis = () => {
   let angry = 0;
   let surprised = 0;
   let count = 0;
-  const ChartData = [];
+  let ChartData = [];
 
   const onPlay = async () => {
     // 이미지 정보를 기반으로 canvas 요소 생성
@@ -87,31 +102,46 @@ const Analysis = () => {
         drawBox.draw(canvas);
 
         setExpressions({
-          neutral: (resizedDetections[0].expressions.neutral * 100).toFixed(2),
-          happy: (resizedDetections[0].expressions.happy * 100).toFixed(2),
+          neutral: (resizedDetections[0].expressions.neutral * 100).toFixed(0),
+          happy: (resizedDetections[0].expressions.happy * 100).toFixed(0),
           sad: (
             resizedDetections[0].expressions.sad * 100 +
             resizedDetections[0].expressions.fearful * 100
-          ).toFixed(2),
+          ).toFixed(0),
           angry: (
             resizedDetections[0].expressions.angry * 100 +
             resizedDetections[0].expressions.disgusted * 100
-          ).toFixed(2),
-          surprised: (resizedDetections[0].expressions.surprised * 100).toFixed(2),
+          ).toFixed(0),
+          surprised: (resizedDetections[0].expressions.surprised * 100).toFixed(0),
         });
 
         if (count === 50) {
-          neutral = (resizedDetections[0].expressions.neutral * 100).toFixed(2);
-          happy = (resizedDetections[0].expressions.happy * 100).toFixed(2);
+          neutral = (resizedDetections[0].expressions.neutral * 100).toFixed(0);
+          happy = (resizedDetections[0].expressions.happy * 100).toFixed(0);
           sad = (
             resizedDetections[0].expressions.sad * 100 +
             resizedDetections[0].expressions.fearful * 100
-          ).toFixed(2);
+          ).toFixed(0);
           angry = (
             resizedDetections[0].expressions.angry * 100 +
             resizedDetections[0].expressions.disgusted * 100
-          ).toFixed(2);
-          surprised = (resizedDetections[0].expressions.surprised * 100).toFixed(2);
+          ).toFixed(0);
+          surprised = (resizedDetections[0].expressions.surprised * 100).toFixed(0);
+          ChartData = [
+            Number(neutral),
+            Number(happy),
+            Number(sad),
+            Number(angry),
+            Number(surprised),
+          ];
+          const index = ChartData.indexOf(
+            Math.max(Number(neutral), Number(happy), Number(sad), Number(angry), Number(surprised)),
+          );
+          if (index === 0) setEmontion("neutral");
+          else if (index === 1) setEmontion("happy");
+          else if (index === 2) setEmontion("sad");
+          else if (index === 3) setEmontion("angry");
+          else if (index === 4) setEmontion("surprised");
           setCompleted(true);
         }
       });
@@ -178,56 +208,77 @@ const Analysis = () => {
       sadText.innerText = `${expressionsList.sad}%`;
       surprisedText.innerText = `${expressionsList.surprised}%`;
 
-      angryBar.style.height = `${expressionsList.angry * 1.8}px`;
-      neutralBar.style.height = `${expressionsList.neutral * 1.8}px`;
-      happyBar.style.height = `${expressionsList.happy * 1.8}px`;
-      sadBar.style.height = `${expressionsList.sad * 1.8}px`;
-      surprisedBar.style.height = `${expressionsList.surprised * 1.8}px`;
+      angryBar.style.height = `${expressionsList.angry * 1.5}px`;
+      neutralBar.style.height = `${expressionsList.neutral * 1.5}px`;
+      happyBar.style.height = `${expressionsList.happy * 1.5}px`;
+      sadBar.style.height = `${expressionsList.sad * 1.5}px`;
+      surprisedBar.style.height = `${expressionsList.surprised * 1.5}px`;
     }
   }, [expressionsList]);
+
+  const handleClickResult = async () => {
+    const body = {
+      id: userAuthState,
+      emotion,
+    };
+    try {
+      const response = await axios.post(`${url}/emotion/${userAuthState}`, body);
+      if (response.status === 201) {
+        setEmotionState(emotion);
+        console.log(emotion);
+        navigate("/challenge");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("감정 결과 전송 실패.");
+    }
+  };
 
   return (
     <PageWrapper>
       <FaceWrapper ref={wrapRef}>
         <video ref={videoRef} autoPlay muted onPlay={onPlay} width={640} height={480} />
       </FaceWrapper>
-      <NameText>{completed ? "오늘 안혜지님의 감정은?" : "감정 분석 중입니다."}</NameText>
-      {completed ? (
-        <>
-          <ChartWrapper>
-            <BarChart>
-              <NumText id="neutral">{neutral}</NumText>
-              <Bar id="neutral-bar" />
-            </BarChart>
-            <BarChart>
-              <NumText id="happy">{happy}</NumText>
-              <Bar id="happy-bar" />
-            </BarChart>
-            <BarChart>
-              <NumText id="sad">{sad}</NumText>
-              <Bar id="sad-bar" />
-            </BarChart>
-            <BarChart>
-              <NumText id="angry">{angry}</NumText>
-              <Bar id="angry-bar" />
-            </BarChart>
-            <BarChart>
-              <NumText id="surprised">{surprised}</NumText>
-              <Bar id="surprised-bar" />
-            </BarChart>
-          </ChartWrapper>
-          <LabelWrapper>
-            <ChartLabel>평온</ChartLabel>
-            <ChartLabel>기쁨</ChartLabel>
-            <ChartLabel>슬픔</ChartLabel>
-            <ChartLabel>분노</ChartLabel>
-            <ChartLabel>흥분</ChartLabel>
-          </LabelWrapper>
-        </>
-      ) : (
-        <Animation />
-      )}
-      <NextButton>{completed ? "감정 분석 완료" : "감정 분석 중"}</NextButton>
+      <ContentWrapper>
+        {completed ? (
+          <>
+            <NameText>{`오늘 ${userAuthState}님의 감정은?`}</NameText>
+            <ChartWrapper>
+              <BarChart>
+                <NumText id="neutral">{neutral}</NumText>
+                <Bar id="neutral-bar" />
+              </BarChart>
+              <BarChart>
+                <NumText id="happy">{happy}</NumText>
+                <Bar id="happy-bar" />
+              </BarChart>
+              <BarChart>
+                <NumText id="sad">{sad}</NumText>
+                <Bar id="sad-bar" />
+              </BarChart>
+              <BarChart>
+                <NumText id="angry">{angry}</NumText>
+                <Bar id="angry-bar" />
+              </BarChart>
+              <BarChart>
+                <NumText id="surprised">{surprised}</NumText>
+                <Bar id="surprised-bar" />
+              </BarChart>
+            </ChartWrapper>
+            <LabelWrapper>
+              <ChartLabel>평온</ChartLabel>
+              <ChartLabel>기쁨</ChartLabel>
+              <ChartLabel>슬픔</ChartLabel>
+              <ChartLabel>분노</ChartLabel>
+              <ChartLabel>흥분</ChartLabel>
+            </LabelWrapper>
+          </>
+        ) : (
+          // <Animation />
+          <LoadingImg src={loading} alt="loading" />
+        )}
+      </ContentWrapper>
+      {completed ? <NextButton onClick={handleClickResult}>감정 분석 완료</NextButton> : <></>}
     </PageWrapper>
   );
 };
