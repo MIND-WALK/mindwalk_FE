@@ -46,7 +46,8 @@ const ChallengeList = ({ emotion }) => {
         <LocationContainer>
           <LocationIcon />
           <LocationText>
-            <CurrentLocation />
+            {/* <CurrentLocation /> */} {/* 현재위치 */}
+            <p>현재 위치 | 서울특별시 동대문구</p>
           </LocationText>
         </LocationContainer>
 
@@ -64,8 +65,6 @@ const ChallengeList = ({ emotion }) => {
                   <ChallengeTitle>{challenge.location}</ChallengeTitle>
 
                   <ChallengeDetails>
-                    {/*  <ChallengeSubtitle>소요 시간: 50분</ChallengeSubtitle>
-                    <ChallengeSubtitle>| 거리: 1.2km</ChallengeSubtitle> */}
                     <ChallengeDistanceTmap endLat={challenge.lat} endLong={challenge.long} />
                   </ChallengeDetails>
                 </ChallengeInfo>
@@ -140,31 +139,4 @@ const ChallengeTitle = styled.h3`
 const ChallengeDetails = styled.div`
   display: flex;
   flex-wrap: wrap;
-`;
-
-const ChallengeSubtitle = styled.p`
-  font-size: 1.3rem;
-  margin-right: 0.625rem;
-  letter-spacing: -0.03rem;
-`;
-
-const ChallengeButton = styled.button`
-  width: 30rem;
-  height: 4.5rem;
-  background: var(--sub-green-color);
-  border-radius: 4rem;
-  text-align: center;
-  position: fixed;
-  bottom: 7rem;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.4rem;
-  color: #fff;
-  cursor: pointer;
-  &:hover {
-    font-weight: bold;
-    background: var(--sub-yellow-color);
-    transition: 0.5s;
-    color: var(--sub-green-color);
-  }
 `;

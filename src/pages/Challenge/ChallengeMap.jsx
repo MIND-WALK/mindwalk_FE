@@ -110,13 +110,18 @@ const ChallengeMap = () => {
       <LocationContainer>
         <LocationIcon />
         <LocationText>
-          <CurrentLocation />
+          {/* <CurrentLocation /> */} {/* 실제 받아오는 현재위치 1 */}
+          <p>현재 위치 | 서울특별시 동대문구</p>
         </LocationText>
       </LocationContainer>
 
-      {currentLocationLat && currentLocationLong && (
+      {/* 실제 받아오는 현재위치 2 */}
+      {/*  {currentLocationLat && currentLocationLong && (
         <ChallengeInitTmap selectedPlace={selectedPlace} />
-      )}
+      )} */}
+
+      {/* 동대문기준 */}
+      <ChallengeInitTmap selectedPlace={selectedPlace} />
 
       <CompleteButton onClick={handleChallengeComplete}>도착 완료</CompleteButton>
 

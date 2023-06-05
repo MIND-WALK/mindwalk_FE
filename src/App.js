@@ -42,7 +42,6 @@ function AppContent() {
     <div className="App">
       <ResetStyles />
       {!isMainPage && <NavBar />}
-      <NavBar />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Main />} />

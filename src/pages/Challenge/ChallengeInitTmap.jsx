@@ -21,11 +21,14 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
 
   let map = [];
 
-  const startLat = currentLocationLat;
-  const startLong = currentLocationLong;
+  // 현재위치
+  /* const startLat = currentLocationLat;
+  const startLong = currentLocationLong; */
+
   // DDP
-  /* const startLat = 37.5668; */
-  /* const startLong = 127.0092; */
+  const startLat = 37.5668;
+  const startLong = 127.0092;
+
   /* const endLat = 37.6373;
   const endLong = 127.0247; */
 
@@ -39,7 +42,7 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
       center: new window.Tmapv2.LatLng(centerLat, centerLong),
       width: "100%",
       height: "320px",
-      zoom: 13,
+      zoom: 14,
       zoomControl: true,
       scrollwheel: true,
     });
@@ -187,7 +190,7 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
   return (
     <div>
       <MapWrap id="map_wrap" className="map_wrap3">
-        <MapDiv id="map_div"></MapDiv>
+        {resultdrawArr && <MapDiv id="map_div"></MapDiv>}
       </MapWrap>
       <div className="map_act_btn_wrap clear_box"></div>
 

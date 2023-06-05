@@ -6,21 +6,24 @@ import { useRecoilState } from "recoil";
 import { currentLocationLatState, currentLocationLongState } from "../../../recoil/challenge";
 
 const ChallengeDistanceTmap = ({ selectedPlace, endLat, endLong }) => {
-  const [resultdrawArr, setResultdrawArr] = useState([]);
-  const [resultText, setResultText] = useState("");
+  const [resultDistanceText, setResultDistanceText] = useState("");
+  const [resultTimeText, setResultTimeText] = useState("");
 
   const [currentLocationLong, setCurrentLocationLong] = useRecoilState(currentLocationLongState);
   const [currentLocationLat, setCurrentLocationLat] = useRecoilState(currentLocationLatState);
 
-  const startLat = currentLocationLat;
-  const startLong = currentLocationLong;
-
-  console.log(currentLocationLat);
-  console.log(currentLocationLong);
+  // 현재 위치
+  /*  const startLat = currentLocationLat;
+  const startLong = currentLocationLong; */
 
   // DDP
-  /* const startLat = 37.5668; */
-  /* const startLong = 127.0092; */
+  const startLat = 37.5668;
+  const startLong = 127.0092;
+
+  /* console.log(currentLocationLat);
+  console.log(currentLocationLong); */
+
+  let tDistance;
 
   const initTmap = async () => {
     const headers = {
@@ -47,16 +50,11 @@ const ChallengeDistanceTmap = ({ selectedPlace, endLat, endLong }) => {
 
       const resultData = response.data.features;
 
-      // 결과 출력
-      const tDistance = `거리 : ${(resultData[0].properties.totalDistance / 1000).toFixed(1)}km | `;
+      tDistance = `거리 : ${(resultData[0].properties.totalDistance / 1000).toFixed(1)}km | `;
       const tTime = `소요시간 : ${(resultData[0].properties.totalTime / 60).toFixed(0)}분`;
 
-      setResultText(tDistance + tTime);
-
-      const addComma = num => {
-        const regexp = /\B(?=(\d{3})+(?!\d))/g;
-        return num.toString().replace(regexp, ",");
-      };
+      setResultDistanceText(tDistance);
+      setResultTimeText(tTime);
     } catch (error) {
       console.log("Error:", error);
     }
@@ -67,24 +65,22 @@ const ChallengeDistanceTmap = ({ selectedPlace, endLat, endLong }) => {
   }, []);
 
   return (
-    <SelectedInfo>
+    <>
       <PlaceName>{selectedPlace}</PlaceName>
-      <TimeDistance>{resultText}</TimeDistance>
-    </SelectedInfo>
+      <ChallengeSubtitle>{resultDistanceText} </ChallengeSubtitle>
+      <ChallengeSubtitle>{resultTimeText}</ChallengeSubtitle>
+    </>
   );
 };
 
 export default ChallengeDistanceTmap;
 
-const SelectedInfo = styled.div``;
-
 const PlaceName = styled.p`
   font-size: 1.4rem;
   margin-bottom: 1rem;
-  margin-right: 2rem;
 `;
 
-const TimeDistance = styled.p`
+const ChallengeSubtitle = styled.p`
   font-size: 1.3rem;
-  color: #555;
+  letter-spacing: -0.03rem;
 `;
