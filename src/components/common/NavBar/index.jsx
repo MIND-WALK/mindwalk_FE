@@ -18,7 +18,6 @@ const NavBar = () => {
         <ArrowIcon>
           <IoIosArrowBack />
         </ArrowIcon>
-        <NavText></NavText>
       </Nav>
       <MenuTitle>{PATHNAME_TITLE_MAP[pathname]}</MenuTitle>
     </Navbarcontainer>
@@ -33,13 +32,12 @@ const Navbarcontainer = styled.div`
   display: flex;
   font-size: 1.6rem;
   align-items: center;
-  padding: 0 2rem;
+  margin: auto 2rem;
+  justify-content: space-between;
 `;
 
 const Nav = styled.div`
-  display: flex;
   cursor: pointer;
-  gap: 0.7rem;
 `;
 
 const ArrowIcon = styled.p`
@@ -47,8 +45,8 @@ const ArrowIcon = styled.p`
   padding-top: 0.2rem;
 `;
 
-const NavText = styled.p``;
 const MenuTitle = styled.p`
-  width: 80%;
-  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 `;
