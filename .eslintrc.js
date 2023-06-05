@@ -27,13 +27,6 @@ module.exports = {
     "import/prefer-default-export": "off",
     "no-alert": "off",
     "no-underscore-dangle": "off",
-
-    "prettier/prettier": [
-      "error",
-      {
-        endOfLine: "auto",
-      },
-    ],
   },
   settings: {
     "import/no-extraneous-dependencies": [

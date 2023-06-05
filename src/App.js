@@ -20,7 +20,6 @@ import MeasureCompleted from "./pages/Analysis/MeasureCompleted";
 import MeasureSelect from "./pages/Analysis/MeasureSelect";
 import ChallengeCompleted from "./pages/Challenge/ChallengeCompleted";
 
-
 function App() {
   return (
     <div className="App">
