@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { BsChevronRight } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
-const Level = () => {
+const Level = ({ level }) => {
   const navigate = useNavigate();
 
   const goToCompletedJourneyPage = () => navigate("/my_journey/completed");
@@ -12,14 +12,14 @@ const Level = () => {
     <Container>
       <LevelTop>
         <Title>현재 레벨</Title>
-        <button onClick={goToCompletedJourneyPage}>
+        <Button onClick={goToCompletedJourneyPage}>
           완수 여정 목록
           <BsChevronRight color="#7b7b7b" />
-        </button>
+        </Button>
       </LevelTop>
       <LevelBox>
         <LevelImage></LevelImage>
-        <LevelText>Lv. 0</LevelText>
+        <LevelText>Lv. {level}</LevelText>
       </LevelBox>
     </Container>
   );
@@ -74,4 +74,9 @@ const LevelText = styled.p`
   margin-top: 13px;
   font-size: 2rem;
   font-weight: bold;
+`;
+
+const Button = styled.button`
+  display: flex;
+  align-items: center;
 `;
