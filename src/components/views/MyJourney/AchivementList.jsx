@@ -7,21 +7,22 @@ const AchivementList = ({ questInfo }) => {
     <Container>
       <Title>달성 업적</Title>
       <AchivementListBox>
-        {questInfo.date.map((date, index) => {
-          if (index !== 0 && index % 10 === 0)
-            return (
-              <CompletedQuest key={date}>
-                <LevelImage>
-                  <img src="#" alt="" />
-                </LevelImage>
-                <TextBox>
-                  <DateText>{date}</DateText>
-                  <p>여정 {index * 10}개 달성</p>
-                </TextBox>
-              </CompletedQuest>
-            );
-          return <></>;
-        })}
+        {questInfo.date &&
+          questInfo.date.map((date, index) => {
+            if (index !== 0 && index % 10 === 0)
+              return (
+                <CompletedQuest key={date}>
+                  <LevelImage>
+                    <img src="#" alt="" />
+                  </LevelImage>
+                  <TextBox>
+                    <DateText>{date}</DateText>
+                    <p>여정 {index * 10}개 달성</p>
+                  </TextBox>
+                </CompletedQuest>
+              );
+            return <></>;
+          })}
       </AchivementListBox>
     </Container>
   );

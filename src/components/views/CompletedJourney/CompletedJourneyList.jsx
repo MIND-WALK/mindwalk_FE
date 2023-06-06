@@ -15,7 +15,7 @@ const CompletedJourneyList = ({ completedJourney }) => {
             <PlaceImage></PlaceImage>
             <TextBox>
               <DateText>
-                <p>{journey.date}</p>
+                <span>{journey.date}</span>
               </DateText>
               <p>{journey.name.name}</p>
             </TextBox>
