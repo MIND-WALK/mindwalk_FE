@@ -7,16 +7,16 @@ import AngryIcon from "../../common/CustomIcon/EmotionIcon/AngryIcon";
 import SurpriseIcon from "../../common/CustomIcon/EmotionIcon/SurpriseIcon";
 
 const emotions = [
-  { name: "happy", icon: <HappyIcon size="5.5rem" /> },
-  { name: "sad", icon: <SadIcon size="5.2rem" /> },
-  { name: "natural", icon: <NaturalIcon size="4.8rem" /> },
-  { name: "angry", icon: <AngryIcon size="4.5rem" /> },
-  { name: "surprise", icon: <SurpriseIcon size="5.3rem" /> },
+  { name: "happy", icon: <HappyIcon size="5.5rem" />, color: "#F2ACCE" },
+  { name: "sad", icon: <SadIcon size="5.2rem" />, color: "#8AB2E5" },
+  { name: "natural", icon: <NaturalIcon size="4.8rem" />, color: "#B3DAC1" },
+  { name: "angry", icon: <AngryIcon size="4.5rem" />, color: "#DC6750" },
+  { name: "surprise", icon: <SurpriseIcon size="5.3rem" />, color: "#FAEA94" },
 ];
 
 const EmotionBox = ({ selectedEmotion, handleEmotionSelection }) => {
-  const handleEmotionClick = emotion => {
-    handleEmotionSelection(emotion);
+  const handleEmotionClick = (emotion, color) => {
+    handleEmotionSelection(emotion, color);
   };
 
   return (
@@ -25,7 +25,7 @@ const EmotionBox = ({ selectedEmotion, handleEmotionSelection }) => {
         <ButtonWrapper
           key={emotion.name}
           className={selectedEmotion === emotion.name ? "selected" : ""}
-          onClick={() => handleEmotionClick(emotion.name)}
+          onClick={() => handleEmotionClick(emotion.name, emotion.color)}
         >
           {emotion.icon}
         </ButtonWrapper>
