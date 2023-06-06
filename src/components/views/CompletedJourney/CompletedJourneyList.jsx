@@ -4,20 +4,18 @@ import { Title } from "../MyJourney/Level";
 import { DateText, TextBox } from "../MyJourney/AchivementList";
 
 const CompletedJourneyList = ({ completedJourney }) => {
-  console.log(completedJourney);
-
   return (
     <>
       <Title>완수한 여정</Title>
       <JourneyList>
         {completedJourney.map(journey => (
-          <Journey key={journey.date}>
-            <PlaceImage></PlaceImage>
+          <Journey key={journey._id}>
+            <PlaceImage src={journey.img} />
             <TextBox>
               <DateText>
-                <span>{journey.date}</span>
+                <span>{journey.date.replace(/-/g, ".")}</span>
               </DateText>
-              <p>{journey.name.name}</p>
+              <p>{journey.name}</p>
             </TextBox>
           </Journey>
         ))}
@@ -30,7 +28,10 @@ export default CompletedJourneyList;
 
 const JourneyList = styled.ul`
   width: 100%;
+  height: 500px;
   margin-top: 3rem;
+  padding-bottom: 6rem;
+  overflow-y: auto;
 `;
 
 const Journey = styled.li`

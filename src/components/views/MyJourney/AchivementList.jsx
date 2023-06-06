@@ -3,26 +3,30 @@ import { styled } from "styled-components";
 import { Title } from "./Level";
 
 const AchivementList = ({ questInfo }) => {
+  console.log(questInfo);
+
   return (
     <Container>
       <Title>달성 업적</Title>
       <AchivementListBox>
         {questInfo.date &&
-          questInfo.date.map((date, index) => {
-            if (index !== 0 && index % 10 === 0)
-              return (
-                <CompletedQuest key={date}>
-                  <LevelImage>
-                    <img src="#" alt="" />
-                  </LevelImage>
-                  <TextBox>
-                    <DateText>{date}</DateText>
-                    <p>여정 {index * 10}개 달성</p>
-                  </TextBox>
-                </CompletedQuest>
-              );
-            return <></>;
-          })}
+          questInfo.date
+            .map((date, index) => {
+              if (index !== 0 && (index + 1) % 10 === 0)
+                return (
+                  <CompletedQuest key={date._id}>
+                    <LevelImage>
+                      <img src="#" alt="" />
+                    </LevelImage>
+                    <TextBox>
+                      <DateText>{date.replace(/-/g, ".")}</DateText>
+                      <p>여정 {index + 1}개 달성</p>
+                    </TextBox>
+                  </CompletedQuest>
+                );
+              return <></>;
+            })
+            .reverse()}
       </AchivementListBox>
     </Container>
   );
@@ -35,7 +39,7 @@ const Container = styled.section`
 `;
 
 const AchivementListBox = styled.ul`
-  height: 200px;
+  height: 150px;
   margin-top: 3rem;
   overflow-y: auto;
 `;
