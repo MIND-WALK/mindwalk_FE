@@ -12,14 +12,16 @@ import Faq from "./pages/MyPage/Faq";
 import Ask from "./pages/MyPage/Ask";
 import Login from "./pages/Login";
 import Analysis from "./pages/Analysis";
-import TabBar from "./components/common/TabBar/index";
+import TabBar from "./components/common/TabBar";
 import Challenge from "./pages/Challenge";
 import ChallengeMap from "./pages/Challenge/ChallengeMap";
 import Main from "./pages/Main";
 import MeasureCompleted from "./pages/Analysis/MeasureCompleted";
 import MeasureSelect from "./pages/Analysis/MeasureSelect";
 import ChallengeCompleted from "./pages/Challenge/ChallengeCompleted";
+import SelfDiagnosis from "./pages/SelfDiagnosis";
 import Splash from "./pages/Splash";
+
 
 function App() {
   return (
@@ -51,6 +53,7 @@ function AppContent() {
         <Route path="/diary/:id/:date" element={<DiaryDetail />} />
         <Route path="/diary/write/:date" element={<DiaryWrite />} />
         <Route path="/analysis" element={<Analysis />} />
+        <Route path="/self_diagnosis" element={<SelfDiagnosis />} />
         <Route path="/measure" element={<MeasureSelect />} />
         <Route path="/measure/completed" element={<MeasureCompleted />} />
         {/* <Route path="/challenge" element={<Challenge />} /> */}
