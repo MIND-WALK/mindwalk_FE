@@ -229,8 +229,7 @@ const Analysis = () => {
       const response = await axios.post(`api/emotion/${userAuthState}`, body);
       if (response.status === 201) {
         setEmotionState(emotion);
-        console.log(emotion);
-        navigate("/challenge");
+        navigate(`/challenge/${emotion}`);
       }
     } catch (error) {
       console.error(error);
