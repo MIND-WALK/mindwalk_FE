@@ -28,12 +28,16 @@ const TabBar = () => {
         <FiHome size={20} />
         <TabBarLabel>홈</TabBarLabel>
       </TabBarItem>
-      <TabBarItem onClick={() => handleTabClick(false ? "measure/completed" : "measure")}>
+      <TabBarItem
+        onClick={() => handleTabClick(measurementStatus ? "measure/completed" : "measure")}
+      >
         {/* measure */}
         <FiSmile size={20} />
         <TabBarLabel>측정</TabBarLabel>
       </TabBarItem>
-      <TabBarItem onClick={() => handleTabClick(true ? "challenge/completed" : "challenge")}>
+      <TabBarItem
+        onClick={() => handleTabClick(challengeStatus ? "challenge/completed" : "challenge")}
+      >
         {/* challenge */}
         <FiFlag size={20} />
         <TabBarLabel>도전</TabBarLabel>
