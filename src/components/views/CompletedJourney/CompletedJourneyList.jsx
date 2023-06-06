@@ -3,21 +3,22 @@ import { styled } from "styled-components";
 import { Title } from "../MyJourney/Level";
 import { DateText, TextBox } from "../MyJourney/AchivementList";
 
-const CompletedJourneyList = () => {
+const CompletedJourneyList = ({ completedJourney }) => {
   return (
     <>
       <Title>완수한 여정</Title>
       <JourneyList>
-        <Journey>
-          <PlaceImage></PlaceImage>
-          <TextBox>
-            <DateText>
-              <p>2023. 01. 31</p>
-              <p>소요 시간 100시간 | 거리 100km</p>
-            </DateText>
-            <p>도산공원</p>
-          </TextBox>
-        </Journey>
+        {completedJourney.map(journey => (
+          <Journey key={journey._id}>
+            <PlaceImage src={journey.img} />
+            <TextBox>
+              <DateText>
+                <span>{journey.date.replace(/-/g, ".")}</span>
+              </DateText>
+              <p>{journey.name}</p>
+            </TextBox>
+          </Journey>
+        ))}
       </JourneyList>
     </>
   );
@@ -27,7 +28,10 @@ export default CompletedJourneyList;
 
 const JourneyList = styled.ul`
   width: 100%;
+  height: 500px;
   margin-top: 3rem;
+  padding-bottom: 6rem;
+  overflow-y: auto;
 `;
 
 const Journey = styled.li`
