@@ -45,7 +45,7 @@ const Analysis = () => {
     angry: 0,
     surprised: 0,
   });
-  const [emotion, setEmontion] = useState("");
+  const [emotion, setEmotion] = useState("");
   const userAuthState = useRecoilValue(userIdState);
   const setEmotionState = useSetRecoilState(emotionState);
 
@@ -115,7 +115,7 @@ const Analysis = () => {
           surprised: (resizedDetections[0].expressions.surprised * 100).toFixed(0),
         });
 
-        if (count === 50) {
+        if (count === 30) {
           neutral = (resizedDetections[0].expressions.neutral * 100).toFixed(0);
           happy = (resizedDetections[0].expressions.happy * 100).toFixed(0);
           sad = (
@@ -137,12 +137,13 @@ const Analysis = () => {
           const index = ChartData.indexOf(
             Math.max(Number(neutral), Number(happy), Number(sad), Number(angry), Number(surprised)),
           );
-          if (index === 0) setEmontion("neutral");
-          else if (index === 1) setEmontion("happy");
-          else if (index === 2) setEmontion("sad");
-          else if (index === 3) setEmontion("angry");
-          else if (index === 4) setEmontion("surprised");
+          if (index === 0) setEmotion("neutral");
+          else if (index === 1) setEmotion("happy");
+          else if (index === 2) setEmotion("sad");
+          else if (index === 3) setEmotion("angry");
+          else if (index === 4) setEmotion("surprised");
           setCompleted(true);
+          videoRef.current.pause();
         }
       });
       count++;
