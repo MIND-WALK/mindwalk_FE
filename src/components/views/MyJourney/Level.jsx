@@ -2,6 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import { BsChevronRight } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
+import LEVEL from "../../../constants/level";
 
 const Level = ({ level }) => {
   const navigate = useNavigate();
@@ -18,7 +19,9 @@ const Level = ({ level }) => {
         </Button>
       </LevelTop>
       <LevelBox>
-        <LevelImage></LevelImage>
+        <LevelImage>
+          <img src={LEVEL[level - 1].img} alt="" />
+        </LevelImage>
         <LevelText>Lv. {level}</LevelText>
       </LevelBox>
     </Container>
@@ -65,8 +68,12 @@ const LevelImage = styled.div`
   height: 122px;
   background-color: white;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   img {
+    width: 50%;
   }
 `;
 

@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 import { Title } from "./Level";
+import LEVEL from "../../../constants/level";
 
 const AchivementList = ({ questInfo }) => {
   console.log(questInfo);
@@ -16,7 +17,7 @@ const AchivementList = ({ questInfo }) => {
                 return (
                   <CompletedQuest key={date._id}>
                     <LevelImage>
-                      <img src="#" alt="" />
+                      <img src={LEVEL[(index + 1) / 10].img} alt="" />
                     </LevelImage>
                     <TextBox>
                       <DateText>{date.replace(/-/g, ".")}</DateText>
@@ -59,6 +60,13 @@ const LevelImage = styled.div`
   height: 6rem;
   border: 1px solid #eaeaea;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 70%;
+  }
 `;
 
 export const TextBox = styled.div`
