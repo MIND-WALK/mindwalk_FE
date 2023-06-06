@@ -16,7 +16,7 @@ const images = [Angry, Happy, Natural, Sad, Surprise];
 
 const SelfDiagnosis = () => {
   const [userId, setUserId] = useRecoilState(userIdState);
-  const setEmotionState = useSetRecoilState(emotionState);
+
   const [selfEmotion, setSelfEmotion] = useState("");
   const navigate = useNavigate();
 
@@ -40,7 +40,7 @@ const SelfDiagnosis = () => {
     console.log(data);
     try {
       postSelfDiagnosis("test", data);
-      navigate("/challenge");
+      navigate(`/challenge/${emotion}`);
       // const response = await axios.post(`/api/emotion/${userIdState}`, body);
       // if (response.status === 201) {
       //   setEmotionState(selfEmotion);
