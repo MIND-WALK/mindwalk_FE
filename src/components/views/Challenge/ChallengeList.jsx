@@ -46,7 +46,8 @@ const ChallengeList = ({ emotion }) => {
         <LocationContainer>
           <LocationIcon />
           <LocationText>
-            {/* <CurrentLocation /> */} {/* 현재위치 */}
+            {/* <CurrentLocation />  */}
+            {/* 현재위치 */}
             <p>현재 위치 | 서울특별시 동대문구</p>
           </LocationText>
         </LocationContainer>
@@ -122,7 +123,7 @@ const ChallengeCard = styled.li`
 const ChallengeInfo = styled.div`
   flex: 1;
   color: #000;
-  background: rgba(77, 186, 109, 0.9);
+  background: rgba(255, 249, 166, 0.9);
   border-radius: 20px 0px 0px 0px;
   padding: 1.6rem 1rem 1.6rem 1.4rem;
   display: flex;

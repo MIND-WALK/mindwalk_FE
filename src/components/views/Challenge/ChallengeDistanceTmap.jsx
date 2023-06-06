@@ -23,8 +23,6 @@ const ChallengeDistanceTmap = ({ selectedPlace, endLat, endLong }) => {
   /* console.log(currentLocationLat);
   console.log(currentLocationLong); */
 
-  let tDistance;
-
   const initTmap = async () => {
     const headers = {
       appKey: `${process.env.REACT_APP_TMAP_API_KEY}`,
@@ -50,8 +48,8 @@ const ChallengeDistanceTmap = ({ selectedPlace, endLat, endLong }) => {
 
       const resultData = response.data.features;
 
-      tDistance = `거리 : ${(resultData[0].properties.totalDistance / 1000).toFixed(1)}km | `;
-      const tTime = `소요시간 : ${(resultData[0].properties.totalTime / 60).toFixed(0)}분`;
+      const tDistance = (resultData[0].properties.totalDistance / 1000).toFixed(1);
+      const tTime = (resultData[0].properties.totalTime / 60).toFixed(0);
 
       setResultDistanceText(tDistance);
       setResultTimeText(tTime);
@@ -67,8 +65,8 @@ const ChallengeDistanceTmap = ({ selectedPlace, endLat, endLong }) => {
   return (
     <>
       <PlaceName>{selectedPlace}</PlaceName>
-      <ChallengeSubtitle>{resultDistanceText} </ChallengeSubtitle>
-      <ChallengeSubtitle>{resultTimeText}</ChallengeSubtitle>
+      <ChallengeSubtitle>거리 : {resultDistanceText} km | </ChallengeSubtitle>
+      <ChallengeSubtitle>소요시간 : {resultTimeText}분</ChallengeSubtitle>
     </>
   );
 };

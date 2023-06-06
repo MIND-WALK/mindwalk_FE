@@ -9,15 +9,20 @@ import {
   locationLatState,
   locationLongState,
   locationNameState,
+  challengeRangeCheck,
 } from "../../recoil/challenge";
 
 const ChallengeInitTmap = ({ selectedPlace }) => {
   const [resultdrawArr, setResultdrawArr] = useState([]);
   const [endLong, setEndLong] = useRecoilState(locationLongState);
   const [endLat, setEndLat] = useRecoilState(locationLatState);
+  const [resultDistanceText, setResultDistanceText] = useState("");
+  const [resultTimeText, setResultTimeText] = useState("");
 
   const [currentLocationLong, setCurrentLocationLong] = useRecoilState(currentLocationLongState);
   const [currentLocationLat, setCurrentLocationLat] = useRecoilState(currentLocationLatState);
+
+  const [challengeCheck, setChallengeCheck] = useRecoilState(challengeRangeCheck);
 
   let map = [];
 
@@ -32,7 +37,7 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
   /* const endLat = 37.6373;
   const endLong = 127.0247; */
 
-  // console.log(endLat, endLong);
+  console.log(endLat, endLong);
 
   const centerLat = (startLat + endLat) / 2;
   const centerLong = (startLong + endLong) / 2;
@@ -42,7 +47,7 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
       center: new window.Tmapv2.LatLng(centerLat, centerLong),
       width: "100%",
       height: "320px",
-      zoom: 14,
+      zoom: 13,
       zoomControl: true,
       scrollwheel: true,
     });
@@ -89,10 +94,21 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
       const resultData = response.data.features;
 
       // 결과 출력
-      const tDistance = `거리 : ${(resultData[0].properties.totalDistance / 1000).toFixed(1)}km | `;
-      const tTime = `소요시간 : ${(resultData[0].properties.totalTime / 60).toFixed(0)}분`;
+      const tDistance = (resultData[0].properties.totalDistance / 1000).toFixed(1);
+      const tTime = (resultData[0].properties.totalTime / 60).toFixed(0);
 
-      document.getElementById("result").innerText = tDistance + tTime;
+      setResultDistanceText(tDistance);
+      setResultTimeText(tTime);
+
+      // ing
+      const tDistanceRange = tDistance <= 5 && tDistance >= 5;
+
+      // 도착지역 범위 반경5km
+      if (tDistanceRange <= startLat) {
+        setChallengeCheck(true);
+      } else {
+        setChallengeCheck(false);
+      }
 
       // 기존 그려진 라인 & 마커가 있다면 초기화
       if (resultdrawArr.length > 0) {
@@ -196,7 +212,10 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
 
       <SelectedInfo>
         <PlaceName>{selectedPlace}</PlaceName>
-        <TimeDistance id="result"></TimeDistance>
+        <TimeDistance id="result">
+          <span>거리 : {resultDistanceText} km | </span>
+          <span>소요시간 : {resultTimeText} 분</span>
+        </TimeDistance>
       </SelectedInfo>
     </div>
   );

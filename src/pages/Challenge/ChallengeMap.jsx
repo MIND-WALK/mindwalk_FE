@@ -8,6 +8,7 @@ import axios from "axios";
 import ChallengeInitTmap from "./ChallengeInitTmap";
 import ClickBottomModal from "../../components/common/Modal/ClickBottomModal";
 import {
+  challengeRangeCheck,
   currentLocationLatState,
   currentLocationLongState,
   locationLatState,
@@ -28,7 +29,7 @@ function getCurrentDate() {
 
 const ChallengeMap = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [challengeCheck, setChallengeCheck] = useState(false);
+  const [challengeCheck, setChallengeCheck] = useRecoilState(challengeRangeCheck);
 
   // 챌린지
   const [selectedPlace, setSelectedPlace] = useRecoilState(locationNameState);
@@ -93,6 +94,13 @@ const ChallengeMap = () => {
           alert("챌린지 실패 위치아님");
           setChallengeCheck(false);
         } */
+        if (challengeCheck) {
+          alert("챌린지 성공");
+          setChallengeCheck(true);
+        } else {
+          alert("챌린지 실패 위치아님");
+          setChallengeCheck(false);
+        }
       }
     } catch (error) {
       setChallengeCheck(false);
