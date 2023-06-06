@@ -1,21 +1,31 @@
 import React from "react";
 import { styled } from "styled-components";
 import { Title } from "./Level";
+import LEVEL from "../../../constants/level";
 
-const AchivementList = () => {
+const AchivementList = ({ questInfo }) => {
   return (
     <Container>
       <Title>달성 업적</Title>
       <AchivementListBox>
-        <CompletedQuest>
-          <LevelImage>
-            <img src="#" alt="" />
-          </LevelImage>
-          <TextBox>
-            <DateText>2023. 01. 31</DateText>
-            <p>여정 50개 달성</p>
-          </TextBox>
-        </CompletedQuest>
+        {questInfo.date &&
+          questInfo.date
+            .map((date, index) => {
+              if (index !== 0 && (index + 1) % 10 === 0)
+                return (
+                  <CompletedQuest key={date._id}>
+                    <LevelImage>
+                      <img src={LEVEL[(index + 1) / 10].img} alt="" />
+                    </LevelImage>
+                    <TextBox>
+                      <DateText>{date.replace(/-/g, ".")}</DateText>
+                      <p>여정 {index + 1}개 달성</p>
+                    </TextBox>
+                  </CompletedQuest>
+                );
+              return <></>;
+            })
+            .reverse()}
       </AchivementListBox>
     </Container>
   );
@@ -28,7 +38,7 @@ const Container = styled.section`
 `;
 
 const AchivementListBox = styled.ul`
-  height: 200px;
+  height: 150px;
   margin-top: 3rem;
   overflow-y: auto;
 `;
@@ -48,6 +58,13 @@ const LevelImage = styled.div`
   height: 6rem;
   border: 1px solid #eaeaea;
   border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 70%;
+  }
 `;
 
 export const TextBox = styled.div`

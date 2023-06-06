@@ -1,11 +1,6 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import HappyIcon from "../../common/CustomIcon/EmotionIcon/HappyIcon";
-import SadIcon from "../../common/CustomIcon/EmotionIcon/SadIcon";
-import SurpriseIcon from "../../common/CustomIcon/EmotionIcon/SurpriseIcon";
-import AngryIcon from "../../common/CustomIcon/EmotionIcon/AngryIcon";
-import NaturalIcon from "../../common/CustomIcon/EmotionIcon/NaturalIcon";
 import { useEmotion } from "../../../hooks/useEmotion";
 
 const ListDiary = ({ diary, date, color }) => {

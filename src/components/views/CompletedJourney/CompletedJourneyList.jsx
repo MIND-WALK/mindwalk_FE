@@ -1,23 +1,41 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
+import { useRecoilState } from "recoil";
+import axios from "axios";
 import { Title } from "../MyJourney/Level";
 import { DateText, TextBox } from "../MyJourney/AchivementList";
+import userIdState from "../../../recoil/userIdState";
 
 const CompletedJourneyList = () => {
+  const [completedJourney, setCompletedJourney] = useState([]);
+
+  const [userAuthState] = useRecoilState(userIdState);
+
+  useEffect(() => {
+    const getCompletedJourney = async () => {
+      const { data } = await axios.get(`http://54.180.88.103:4000/api/user/trip/${userAuthState}`);
+
+      setCompletedJourney(data);
+    };
+
+    getCompletedJourney();
+  }, []);
+
   return (
     <>
       <Title>완수한 여정</Title>
       <JourneyList>
-        <Journey>
-          <PlaceImage></PlaceImage>
-          <TextBox>
-            <DateText>
-              <p>2023. 01. 31</p>
-              <p>소요 시간 100시간 | 거리 100km</p>
-            </DateText>
-            <p>도산공원</p>
-          </TextBox>
-        </Journey>
+        {completedJourney.map(journey => (
+          <Journey key={journey._id}>
+            <PlaceImage src={journey.img} />
+            <TextBox>
+              <DateText>
+                <span>{journey.date.replace(/-/g, ".")}</span>
+              </DateText>
+              <p>{journey.name}</p>
+            </TextBox>
+          </Journey>
+        ))}
       </JourneyList>
     </>
   );
@@ -27,7 +45,10 @@ export default CompletedJourneyList;
 
 const JourneyList = styled.ul`
   width: 100%;
+  height: 500px;
   margin-top: 3rem;
+  padding-bottom: 6rem;
+  overflow-y: auto;
 `;
 
 const Journey = styled.li`

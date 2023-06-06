@@ -3,12 +3,14 @@ import { styled } from "styled-components";
 import Calendar from "../../components/views/Diary/Calendar";
 import ListDiary from "../../components/views/Diary/ListDiary";
 import { useDiaries } from "../../hooks/queries/useDiary";
+import Loading from "../../components/common/Loading";
 
 const Diary = () => {
   const { data, isLoading } = useDiaries("test");
 
+  useEffect(() => {}, []);
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (!data || data.length === 0) {

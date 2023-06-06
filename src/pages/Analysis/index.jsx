@@ -23,6 +23,7 @@ import Animation from "./Animation";
 import loading from "../../assets/img/Analysis/loading.gif";
 import userIdState from "../../recoil/userIdState";
 import emotionState from "../../recoil/emotionState";
+import ClickButtonBig from "../../components/common/Buttons/ClickButtonBig";
 
 // 비디오 사이즈 설정
 const constraints = {
@@ -45,7 +46,7 @@ const Analysis = () => {
     angry: 0,
     surprised: 0,
   });
-  const [emotion, setEmontion] = useState("");
+  const [emotion, setEmotion] = useState("");
   const userAuthState = useRecoilValue(userIdState);
   const setEmotionState = useSetRecoilState(emotionState);
 
@@ -115,7 +116,7 @@ const Analysis = () => {
           surprised: (resizedDetections[0].expressions.surprised * 100).toFixed(0),
         });
 
-        if (count === 50) {
+        if (count === 30) {
           neutral = (resizedDetections[0].expressions.neutral * 100).toFixed(0);
           happy = (resizedDetections[0].expressions.happy * 100).toFixed(0);
           sad = (
@@ -137,15 +138,18 @@ const Analysis = () => {
           const index = ChartData.indexOf(
             Math.max(Number(neutral), Number(happy), Number(sad), Number(angry), Number(surprised)),
           );
-          if (index === 0) setEmontion("neutral");
-          else if (index === 1) setEmontion("happy");
-          else if (index === 2) setEmontion("sad");
-          else if (index === 3) setEmontion("angry");
-          else if (index === 4) setEmontion("surprised");
+          if (index === 0) setEmotion("neutral");
+          else if (index === 1) setEmotion("happy");
+          else if (index === 2) setEmotion("sad");
+          else if (index === 3) setEmotion("angry");
+          else if (index === 4) setEmotion("surprised");
           setCompleted(true);
+          videoRef.current.pause();
         }
       });
-      count++;
+      if (resizedDetections !== []) {
+        count++;
+      }
     };
 
     const loop = () => {
@@ -225,8 +229,7 @@ const Analysis = () => {
       const response = await axios.post(`api/emotion/${userAuthState}`, body);
       if (response.status === 201) {
         setEmotionState(emotion);
-        console.log(emotion);
-        navigate("/challenge");
+        navigate(`/challenge/${emotion}`);
       }
     } catch (error) {
       console.error(error);
@@ -278,7 +281,11 @@ const Analysis = () => {
           <LoadingImg src={loading} alt="loading" />
         )}
       </ContentWrapper>
-      {completed ? <NextButton onClick={handleClickResult}>감정 분석 완료</NextButton> : <></>}
+      {completed ? (
+        <ClickButtonBig onClick={handleClickResult} buttonText={"감정 분석 완료"} />
+      ) : (
+        <></>
+      )}
     </PageWrapper>
   );
 };

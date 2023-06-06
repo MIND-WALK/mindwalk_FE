@@ -37,7 +37,7 @@ const Login = () => {
       if (response.status === 201) {
         setUserAuthState(id);
         alert("로그인 되었습니다.");
-        navigate("/");
+        navigate("/home");
       }
     } catch (error) {
       console.error(error);
@@ -56,11 +56,19 @@ const Login = () => {
           <Text>
             마인드 워크 방문을 환영합니다 <AiOutlineSmile />
           </Text>
-          <Input type="text" name="id" placeholder="Id" required onChange={handleChangeId} />
           <Input
             type="text"
+            name="id"
+            placeholder="Id"
+            autoComplete="off"
+            required
+            onChange={handleChangeId}
+          />
+          <Input
+            type="password"
             name="password"
             placeholder="Password"
+            autoComplete="off"
             required
             onChange={handleChangePassword}
           />
@@ -100,6 +108,8 @@ const Text = styled.p`
   justify-content: center;
   gap: 0.4rem;
   align-items: center;
+  padding: 1rem 0;
+  background: rgba(255, 255, 255, 0.6);
 `;
 const LoginBox = styled.form`
   width: 90%;
@@ -115,7 +125,7 @@ const Input = styled.input`
   margin: 1rem 0 1.4rem 0;
   color: var(--sub-green-color);
   font-size: 1.7rem;
-  text-indent: 1.4rem;
+  text-indent: 3.4rem;
   &::placeholder {
     color: var(--main-green-color);
   }
@@ -126,10 +136,11 @@ const SubmitButton = styled.button`
   border-radius: 4rem;
   margin: 1rem auto;
   text-align: center;
-  background: var(--main-green-color);
+  background: #fff062;
+  color: #074807;
   font-size: 1.8rem;
-  color: #fff;
   &:hover {
     background: var(--sub-green-color);
+    color: #fff;
   }
 `;

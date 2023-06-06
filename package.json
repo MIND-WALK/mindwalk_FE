@@ -56,5 +56,5 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.8.8"
   },
-  "proxy": "http://mind-walk.shop:4000"
+  "proxy": "http://54.180.88.103:4000"
 }

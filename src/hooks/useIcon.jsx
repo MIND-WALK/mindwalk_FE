@@ -99,7 +99,7 @@ const useIcon = ({ weatherData }) => {
           <br /> 시원하게 잠깐 나가실래요?
         </p>
       );
-      return { icon: <CloudyIcon size="10rem" />, backgroundColor, soildIcon, title };
+      return { icon: <CloudyIcon size="15rem" />, backgroundColor, soildIcon, title };
     default:
       return null;
   }

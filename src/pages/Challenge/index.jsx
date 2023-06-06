@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "styled-components";
+import { useParams } from "react-router-dom";
+
 import ChallengeList from "../../components/views/Challenge/ChallengeList";
-import ChallengeSelected from "./ChallengeSelected";
 
 const Challenge = () => {
+  const { emotion } = useParams();
+
   return (
     <Container>
-      <ChallengeList></ChallengeList>
+      <ChallengeList emotion={emotion}></ChallengeList>
     </Container>
   );
 };

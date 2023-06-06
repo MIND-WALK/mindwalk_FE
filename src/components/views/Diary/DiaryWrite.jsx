@@ -13,6 +13,7 @@ const DiaryWrite = () => {
   const [selectedColor, setSelectedColor] = useState(null);
   const [score, setScore] = useState(0);
   const [diary, setDiary] = useState("");
+  const [error, setError] = useState(false);
 
   const navigate = useNavigate();
   const { date } = useParams();
@@ -35,14 +36,17 @@ const DiaryWrite = () => {
   const handleEmotionSelection = (emotion, color) => {
     setSelectedEmotion(emotion);
     setSelectedColor(color);
+    setError(false); // 이모션 선택 에러 제거
   };
 
   const handleScoreChange = newScore => {
     setScore(newScore);
+    setError(false); // 만족도 선택 에러 제거
   };
 
   const handleDiaryChange = event => {
     setDiary(event.target.value);
+    setError(false); // 일기 작성 에러 제거
   };
 
   const handleSubmit = async event => {
@@ -65,7 +69,7 @@ const DiaryWrite = () => {
 
       navigate("/diary");
     } else {
-      console.log("Please fill in all fields.");
+      setError(true);
     }
   };
 
@@ -79,10 +83,12 @@ const DiaryWrite = () => {
           selectedEmotion={selectedEmotion}
           handleEmotionSelection={handleEmotionSelection}
         />
+        {error && !selectedEmotion && <ErrorText>이모션을 선택해주세요.</ErrorText>}
       </DiaryContent>
       <DiaryContent>
         <p className="diary-title">오늘 챌린지의 만족도는 어땠나요?</p>
         <Rating setScore={handleScoreChange} score={score} />
+        {error && !score && <ErrorText>만족도를 선택해주세요.</ErrorText>}
       </DiaryContent>
       <DiaryContent>
         <p className="diary-title">오늘 하루는 어땠나요?</p>
@@ -93,6 +99,7 @@ const DiaryWrite = () => {
           cols="30"
           rows="10"
         ></textarea>
+        {error && !diary && <ErrorText>일기를 작성해주세요.</ErrorText>}
       </DiaryContent>
       <ClickButtonBig
         onClick={handleSubmit}
@@ -115,17 +122,22 @@ const Container = styled.div`
     border-radius: 8;
     resize: none;
     width: 100%;
-    height: 13rem;
-    margin-bottom: 1rem;
+    height: 12rem;
     font-size: 1.6rem;
     font-family: "Pretendard-Regular", "sans-serif";
+    box-sizing: border-box;
+    padding: 1.5rem;
   }
 `;
 
 const DiaryContent = styled.div`
-  margin: 0.5rem 0;
-
   & .diary-title {
     margin: 1rem 0;
   }
+`;
+
+const ErrorText = styled.p`
+  color: red;
+  font-size: 1.4rem;
+  margin-top: 0.2rem;
 `;
