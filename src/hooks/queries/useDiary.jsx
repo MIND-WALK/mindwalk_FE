@@ -6,19 +6,22 @@ export const useDiaries = userId => {
 };
 
 export const useDiary = (userId, ms) => {
-  const diaryExists = checkDiaryExistence(ms);
+  const checkDiaryExistence = async () => {
+    try {
+      await getDiary(userId, ms);
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
+  const diaryExists = useQuery(["diaryExists", userId, ms], checkDiaryExistence);
 
   return useQuery(["diary", userId, ms], () => getDiary(userId, ms), {
-    enabled: !!diaryExists,
+    enabled: diaryExists.data === true,
   });
 };
-
-const checkDiaryExistence = async ms => {
-  const diaries = await getAllDiaries("test");
-  const matchingDiary = diaries.find(diary => diary.date === ms);
-  return matchingDiary || false;
-};
-
 export const useCreateDiary = userId => {
   const queryClient = useQueryClient();
   return useMutation(({ ...payloads }) => createDiary(userId, { ...payloads }), {
