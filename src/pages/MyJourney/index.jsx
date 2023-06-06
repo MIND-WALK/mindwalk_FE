@@ -19,7 +19,7 @@ const MyJourney = () => {
     const getQuestNum = async () => {
       try {
         const { data } = await axios.get(
-          `http://54.180.88.103:4000/api/user/trip/all/${userAuthState}`,
+          `/api/user/trip/all/${userAuthState}`,
         );
 
         setQuestInfo(data);
