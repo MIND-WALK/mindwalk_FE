@@ -19,6 +19,7 @@ import Main from "./pages/Main";
 import MeasureCompleted from "./pages/Analysis/MeasureCompleted";
 import MeasureSelect from "./pages/Analysis/MeasureSelect";
 import ChallengeCompleted from "./pages/Challenge/ChallengeCompleted";
+import Splash from "./pages/Splash";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function AppContent() {
       <ResetStyles />
       {!isMainPage && <NavBar />}
       <Routes>
+        <Route path="/" element={<Splash />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Main />} />
         <Route path="/diary" element={<Diary />} />
