@@ -5,7 +5,12 @@ import { useRecoilState } from "recoil";
 import { MdLocationOn } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { locationLatState, locationLongState, locationNameState } from "../../../recoil/challenge";
+import {
+  challengeImgState,
+  locationLatState,
+  locationLongState,
+  locationNameState,
+} from "../../../recoil/challenge";
 import CurrentLocation from "./CurrentLocation";
 import ChallengeDistanceTmap from "./ChallengeDistanceTmap";
 
@@ -16,16 +21,15 @@ const ChallengeList = ({ emotion }) => {
   const [locationLong, setLocationLong] = useRecoilState(locationLongState);
   const [locationLat, setLocationLat] = useRecoilState(locationLatState);
 
+  const [challengeImg, setChallengeImg] = useRecoilState(challengeImgState);
+
   const navigate = useNavigate();
 
-  /*   const handleChallengeSelect = challenge => {
-    setSelectedChallenge(challenge);
-    navigate("/challenge_map");
-  }; */
-  const handleClickChallenge = (location, lat, long) => {
+  const handleClickChallenge = (location, lat, long, img) => {
     setLocationName(location);
     setLocationLat(lat);
     setLocationLong(long);
+    setChallengeImg(img);
     navigate("/challenge_map");
   };
 
@@ -58,7 +62,12 @@ const ChallengeList = ({ emotion }) => {
               <ChallengeCard
                 key={i}
                 onClick={() =>
-                  handleClickChallenge(challenge.location, challenge.lat, challenge.long)
+                  handleClickChallenge(
+                    challenge.location,
+                    challenge.lat,
+                    challenge.long,
+                    challenge.img,
+                  )
                 }
                 img={challenge.img}
               >
