@@ -8,6 +8,7 @@ import axios from "axios";
 import ChallengeInitTmap from "./ChallengeInitTmap";
 import ClickBottomModal from "../../components/common/Modal/ClickBottomModal";
 import {
+  challengeImgState,
   challengeRangeCheck,
   currentLocationLatState,
   currentLocationLongState,
@@ -41,11 +42,11 @@ const ChallengeMap = () => {
   const [currentLocationLong, setCurrentLocationLong] = useRecoilState(currentLocationLongState);
   const [currentLocationLat, setCurrentLocationLat] = useRecoilState(currentLocationLatState);
 
+  const [challengeImg, setChallengeImg] = useRecoilState(challengeImgState);
+
   const navigate = useNavigate();
   const currentDate = getCurrentDate();
   const url = `${process.env.REACT_APP_API_URL}/user/challenge/${userAuthState}`;
-
-  // console.log(url);
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -58,49 +59,39 @@ const ChallengeMap = () => {
   };
   const handClickDiary = () => {
     setModalOpen(false);
-    navigate("/my_page");
+    navigate("/diary");
     document.documentElement.style.overflow = "auto";
   };
 
   // 챌린지 완료 처리 함수
   const handleChallengeComplete = async () => {
-    /*  */
+    // 현재위치
+    /* const lonlat = new window.Tmapv2.LatLng(currentLocationLat, currentLocationLong); */
+    // ddp
+    const lonlat = new window.Tmapv2.LatLng(37.5674, 127.0097);
+
+    const endLonLat = new window.Tmapv2.LatLng(selectedLocationLat, selectedLocationLong);
+
+    const locationDistance = lonlat.distanceTo(endLonLat);
+
     setModalOpen(true);
     document.documentElement.style.overflow = "hidden";
 
-    // 현재 GPS 값과 선택한 장소의 범위 반경을 비교하여 챌린지 성공 또는 실패 처리
-    // 성공: showModalSuccess();
-    // 실패: showModalFailure();
-
     const body = {
       name: selectedPlace,
-      /*   location: { lat: locationLat, long: locationLong }, */
+      img: challengeImg,
       check: challengeCheck,
       user: userAuthState,
       date: currentDate,
     };
-    // console.log(body);
-
-    // const rangeSuccess=selectedLocationLong ...//ing
 
     try {
-      const response = await axios.post(url, body);
-
-      if (response.status === 201) {
-        /*   if () {
-          alert("챌린지 성공");
-          setChallengeCheck(true);
-        } else {
-          alert("챌린지 실패 위치아님");
-          setChallengeCheck(false);
-        } */
-        if (challengeCheck) {
-          alert("챌린지 성공");
-          setChallengeCheck(true);
-        } else {
-          alert("챌린지 실패 위치아님");
-          setChallengeCheck(false);
-        }
+      if (locationDistance < 1000) {
+        await axios.post(url, body);
+        setChallengeCheck(true);
+        alert("챌린지 성공");
+      } else {
+        setChallengeCheck(false);
       }
     } catch (error) {
       setChallengeCheck(false);

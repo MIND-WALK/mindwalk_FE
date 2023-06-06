@@ -17,8 +17,8 @@ const ChallengeDistanceTmap = ({ selectedPlace, endLat, endLong }) => {
   const startLong = currentLocationLong; */
 
   // DDP
-  const startLat = 37.5668;
-  const startLong = 127.0092;
+  const startLat = 37.5674;
+  const startLong = 127.0097;
 
   /* console.log(currentLocationLat);
   console.log(currentLocationLong); */

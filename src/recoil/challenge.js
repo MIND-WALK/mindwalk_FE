@@ -27,3 +27,8 @@ export const challengeRangeCheck = atom({
   key: "challengeRangeCheck",
   default: "",
 });
+
+export const challengeImgState = atom({
+  key: "challengeImgState",
+  default: "",
+});
