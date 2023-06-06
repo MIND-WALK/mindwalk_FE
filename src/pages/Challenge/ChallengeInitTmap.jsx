@@ -31,13 +31,13 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
   const startLong = currentLocationLong; */
 
   // DDP
-  const startLat = 37.5668;
-  const startLong = 127.0092;
+  const startLat = 37.5674;
+  const startLong = 127.0097;
 
   /* const endLat = 37.6373;
   const endLong = 127.0247; */
 
-  console.log(endLat, endLong);
+  // console.log(endLat, endLong);
 
   const centerLat = (startLat + endLat) / 2;
   const centerLong = (startLong + endLong) / 2;
@@ -100,7 +100,10 @@ const ChallengeInitTmap = ({ selectedPlace }) => {
       setResultDistanceText(tDistance);
       setResultTimeText(tTime);
 
-      // ing
+      /// /
+      /*  const test = map.LatLng(startLat, startLong).distanceTo(endLat, endLong);
+      console.log(`test:`, test); */
+
       const tDistanceRange = tDistance <= 5 && tDistance >= 5;
 
       // 도착지역 범위 반경5km
