@@ -19,8 +19,8 @@ const Splash = () => {
     }
   };
 
-  const goToHome = () => {
-    navigate("/home");
+  const goToLogin = () => {
+    navigate("/login");
   };
 
   const slides = [
@@ -77,7 +77,11 @@ const Splash = () => {
           />
         ))}
       </DotContainer>
-      <ClickButtonBig onClick={goToHome} buttonClassName="home-button" buttonText="지금 시작하기" />
+      <ClickButtonBig
+        onClick={goToLogin}
+        buttonClassName="home-button"
+        buttonText="지금 시작하기"
+      />
     </Container>
   );
 };
