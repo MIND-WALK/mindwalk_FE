@@ -2,16 +2,12 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { MdLocationOn } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import ClickBottomModal from "../../components/common/Modal/ClickBottomModal";
+import CompleteModal from "../../components/common/Modal/CompleteModal";
 
-const ChallengeSelected = () => {
+const ChallengeCompleted = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleCloseModal = () => {
-    setModalOpen(false);
-    document.documentElement.style.overflow = "auto";
-  };
   const handleClickHome = () => {
     setModalOpen(false);
     navigate("/");
@@ -24,7 +20,8 @@ const ChallengeSelected = () => {
   };
 
   useEffect(() => {
-    handleCloseModal();
+    setModalOpen(true);
+    document.documentElement.style.overflow = "hidden";
   }, []);
 
   // 예시 데이터
@@ -36,10 +33,6 @@ const ChallengeSelected = () => {
   const handleChallengeComplete = () => {
     setModalOpen(true);
     document.documentElement.style.overflow = "hidden";
-
-    // 현재 GPS 값과 선택한 장소의 범위 반경을 비교하여 챌린지 성공 또는 실패 처리
-    // 성공: showModalSuccess();
-    // 실패: showModalFailure();
   };
 
   return (
@@ -57,19 +50,23 @@ const ChallengeSelected = () => {
       </SelectedInfo>
       <CompleteButton onClick={handleChallengeComplete}>도착 완료</CompleteButton>
 
-      <ClickBottomModal
-        modalText="챌린지 성공!"
-        buttonLeftText="홈으로 가기"
-        buttonRightText="감정일기 쓰기"
-        modalOpen={modalOpen}
-        buttonLeftOnClick={handleCloseModal}
-        buttonRightOnClick={handClickDiary}
-      />
+      {modalOpen && (
+        <CompleteModal
+          buttonLeftText="홈으로 가기"
+          buttonRightText="감정일기 쓰기"
+          modalOpen={modalOpen}
+          buttonLeftOnClick={handleClickHome}
+          buttonRightOnClick={handClickDiary}
+          completeTextTop="오늘 챌린지"
+          completeTextMiddle="이미 성공 완료!"
+          completeTextBottom="일기를 쓰러가거나 홈으로 가요."
+        />
+      )}
     </ChallengeBox>
   );
 };
 
-export default ChallengeSelected;
+export default ChallengeCompleted;
 
 const ChallengeBox = styled.div`
   display: flex;

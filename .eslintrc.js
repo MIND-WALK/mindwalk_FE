@@ -25,6 +25,8 @@ module.exports = {
       },
     ],
     "import/prefer-default-export": "off",
+    "no-alert": "off",
+    "no-underscore-dangle": "off",
   },
   settings: {
     "import/no-extraneous-dependencies": [
