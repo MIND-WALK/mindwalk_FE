@@ -6,23 +6,9 @@ import CompletedJourneyList from "../../components/views/CompletedJourney/Comple
 import userIdState from "../../recoil/userIdState";
 
 const CompletedJourney = () => {
-  const [completedJourney, setCompletedJourney] = useState([]);
-
-  const [userAuthState] = useRecoilState(userIdState);
-
-  useEffect(() => {
-    const getCompletedJourney = async () => {
-      const { data } = await axios.get(`http://54.180.88.103:4000/api/user/trip/${userAuthState}`);
-
-      setCompletedJourney(data);
-    };
-
-    getCompletedJourney();
-  }, []);
-
   return (
     <Container>
-      {completedJourney.length > 0 && <CompletedJourneyList completedJourney={completedJourney} />}
+      <CompletedJourneyList />
     </Container>
   );
 };
