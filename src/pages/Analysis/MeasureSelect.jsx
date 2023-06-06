@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { AiFillRobot } from "react-icons/ai";
 import { BsHandIndexThumbFill } from "react-icons/bs";
 import Slider from "../../components/common/Slider";
+import ClickBigButton from "../../components/views/MyPage/ClickBigButton";
 
 const MeasureSelect = () => {
   const navigate = useNavigate();
 
   const handleButtonClick = page => {
     navigate(`/${page}`);
+    console.log("click", page);
   };
 
   return (
@@ -19,16 +21,15 @@ const MeasureSelect = () => {
         <TextBottom>오늘 당신의 감정은 어떤가요?</TextBottom>
       </TextWrapper>
       <Slider />
-      <ButtonWrapper>
-        <Button onClick={() => handleButtonClick("analysis")}>
-          <AiIcon />
-          AI 측정
-        </Button>
-        <Button oonClick={() => handleButtonClick("measure")}>
-          <SelfIcon />
-          자가 측정
-        </Button>
-      </ButtonWrapper>
+
+      <ClickBigButtonContainer>
+        <ClickBigButton onClick={handleButtonClick("analysis")} icon={<AiIcon />} text=" AI 측정" />
+        <ClickBigButton
+          onClick={handleButtonClick("self_diagnosis")}
+          icon={<SelfIcon />}
+          text="자가 측정"
+        />
+      </ClickBigButtonContainer>
     </Container>
   );
 };
@@ -115,4 +116,17 @@ const TextBottom = styled.p`
   font-size: 1.5rem;
   font-weight: 600;
   color: #ccc;
+`;
+
+const ClickBigButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 65%;
+  width: 100%;
+  background-color: var(--sub-green-color);
+
+  gap: 1.6rem;
 `;

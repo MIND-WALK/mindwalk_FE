@@ -24,7 +24,7 @@ const TabBar = () => {
         <FiHome size={20} />
         <TabBarLabel>홈</TabBarLabel>
       </TabBarItem>
-      <TabBarItem onClick={() => handleTabClick("my_page")}>
+      <TabBarItem onClick={() => handleTabClick("measure")}>
         {/* measure */}
         <FiSmile size={20} />
         <TabBarLabel>측정</TabBarLabel>

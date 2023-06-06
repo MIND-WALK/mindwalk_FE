@@ -80,3 +80,30 @@ const SliderImage = styled.img`
   border-radius: 1rem;
   background-color: #fff;
 `;
+
+// import React, { useLayoutEffect, useRef, useEffect, useState } from "react";
+
+// function useInterval(callback, delay) {
+//     const savedCallback = useRef();
+//     useEffect(() => {
+//         savedCallback.current = callback;
+//     }, [callback]);
+
+//     useEffect(() => {
+//         function tick() {
+//             savedCallback.current();
+//         }
+//         if (delay !== null) {
+//             let id = setInterval(tick, delay);
+//             return () => clearInterval(id);
+//         }
+//     }, [delay]);
+// }
+
+// function Slider() {
+//   ...
+//   useInterval(() => {
+//         setCurrentIndex(currentIndex => currentIndex + 1);
+//     }, 2000)
+//   ...
+// }
