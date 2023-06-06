@@ -6,6 +6,7 @@ import RatedScore from "../../common/Rating/RatedScore";
 import { useDiary } from "../../../hooks/queries/useDiary";
 import { useEmotion } from "../../../hooks/useEmotion";
 import { deleteDiary } from "../../../apis/diary";
+import Loading from "../../common/Loading";
 
 const DiaryDetail = () => {
   const params = useParams();
@@ -16,7 +17,7 @@ const DiaryDetail = () => {
   const { data, isLoading } = useDiary(userId, date);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (!data || data.length === 0) {
