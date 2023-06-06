@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useRecoilState } from "recoil";
 import Level from "../../components/views/MyJourney/Level";
 import QuestTracker from "../../components/views/MyJourney/AchivementTracker";
 import CompletedList from "../../components/views/MyJourney/AchivementList";
 import LEVEL from "../../constants/level";
+import userIdState from "../../recoil/userIdState";
 
 const MyJourney = () => {
   const url = process.env.REACT_APP_API_URL;
@@ -11,12 +13,14 @@ const MyJourney = () => {
   const [questInfo, setQuestInfo] = useState({ check: 0, all: 0 });
   const [levelNum, setLevelNum] = useState();
 
+  const [userAuthState] = useRecoilState(userIdState);
+
   useEffect(() => {
     const getQuestNum = async () => {
       try {
-        const { data } = await axios.get(`http://54.180.88.103:4000/api/user/trip/all/test`);
-
-        console.log(data);
+        const { data } = await axios.get(
+          `http://54.180.88.103:4000/api/user/trip/all/${userAuthState}`,
+        );
 
         setQuestInfo(data);
       } catch (err) {

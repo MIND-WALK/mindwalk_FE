@@ -4,8 +4,6 @@ import { Title } from "./Level";
 import LEVEL from "../../../constants/level";
 
 const AchivementList = ({ questInfo }) => {
-  console.log(questInfo);
-
   return (
     <Container>
       <Title>달성 업적</Title>
