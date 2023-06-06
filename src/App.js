@@ -50,7 +50,7 @@ function AppContent() {
         <Route path="/analysis" element={<Analysis />} />
         <Route path="/measure" element={<MeasureSelect />} />
         <Route path="/measure/completed" element={<MeasureCompleted />} />
-        <Route path="/challenge" element={<Challenge />} />
+        {/* <Route path="/challenge" element={<Challenge />} /> */}
         <Route path="/challenge/completed" element={<ChallengeCompleted />} />
         <Route path="/my_journey" element={<MyJourney />} />
         <Route path="/my_journey/completed" element={<CompletedJourney />} />

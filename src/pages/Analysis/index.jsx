@@ -23,6 +23,7 @@ import Animation from "./Animation";
 import loading from "../../assets/img/Analysis/loading.gif";
 import userIdState from "../../recoil/userIdState";
 import emotionState from "../../recoil/emotionState";
+import ClickButtonBig from "../../components/common/Buttons/ClickButtonBig";
 
 // 비디오 사이즈 설정
 const constraints = {
@@ -146,7 +147,9 @@ const Analysis = () => {
           videoRef.current.pause();
         }
       });
-      count++;
+      if (resizedDetections !== []) {
+        count++;
+      }
     };
 
     const loop = () => {
@@ -226,8 +229,7 @@ const Analysis = () => {
       const response = await axios.post(`api/emotion/${userAuthState}`, body);
       if (response.status === 201) {
         setEmotionState(emotion);
-        console.log(emotion);
-        navigate("/challenge");
+        navigate(`/challenge/${emotion}`);
       }
     } catch (error) {
       console.error(error);
@@ -279,7 +281,11 @@ const Analysis = () => {
           <LoadingImg src={loading} alt="loading" />
         )}
       </ContentWrapper>
-      {completed ? <NextButton onClick={handleClickResult}>감정 분석 완료</NextButton> : <></>}
+      {completed ? (
+        <ClickButtonBig onClick={handleClickResult} buttonText={"감정 분석 완료"} />
+      ) : (
+        <></>
+      )}
     </PageWrapper>
   );
 };
