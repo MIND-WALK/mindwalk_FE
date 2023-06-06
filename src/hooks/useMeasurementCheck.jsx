@@ -1,12 +1,18 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import userIdState from "../recoil/userIdState";
 
 const useMeasurementCheck = () => {
   const [measurementStatus, setMeasurementStatus] = useState(false);
 
+  const [userAuthState] = useRecoilState(userIdState);
+
   useEffect(() => {
     const getMeasurementStatus = async () => {
-      const { data } = await axios.get(`http://54.180.88.103:4000/api/emotion/all/test`);
+      const { data } = await axios.get(
+        `http://54.180.88.103:4000/api/emotion/all/${userAuthState}`,
+      );
 
       const date = new Date();
       const year = date.getFullYear();
