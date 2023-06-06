@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { AiFillRobot } from "react-icons/ai";
 import { BsHandIndexThumbFill } from "react-icons/bs";
+import { IoIosArrowForward } from "react-icons/io";
 import Slider from "../../components/common/Slider";
-import ClickBigButton from "../../components/views/MyPage/ClickBigButton";
 
 const MeasureSelect = () => {
   const navigate = useNavigate();
@@ -16,20 +16,25 @@ const MeasureSelect = () => {
 
   return (
     <Container>
-      <TextWrapper>
-        <TextTop>오늘의 감정을 측정해보세요.</TextTop>
-        <TextBottom>오늘 당신의 감정은 어떤가요?</TextBottom>
-      </TextWrapper>
-      <Slider />
-
-      <ClickBigButtonContainer>
-        <ClickBigButton onClick={handleButtonClick("analysis")} icon={<AiIcon />} text=" AI 측정" />
-        <ClickBigButton
-          onClick={handleButtonClick("self_diagnosis")}
-          icon={<SelfIcon />}
-          text="자가 측정"
-        />
-      </ClickBigButtonContainer>
+      <div className="emotion-select-contaner">
+        <TextWrapper>
+          <TextTop>오늘의 감정을 측정해보세요.</TextTop>
+          <TextBottom>오늘 당신의 감정은 어떤가요?</TextBottom>
+        </TextWrapper>
+        <Slider />
+        <ButtonWrapper>
+          <Button onClick={() => handleButtonClick("analysis")}>
+            <AiIcon />
+            AI 측정
+            <IoIosArrowForward />
+          </Button>
+          <Button onClick={() => handleButtonClick("self_diagnosis")}>
+            <SelfIcon />
+            자가 측정
+            <IoIosArrowForward />
+          </Button>
+        </ButtonWrapper>
+      </div>
     </Container>
   );
 };
@@ -37,49 +42,48 @@ const MeasureSelect = () => {
 export default MeasureSelect;
 
 const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  height: 100%;
+  padding-top: 3rem;
+  background-color: var(--sub-green-color);
+  & .emotion-select-contaner {
+    margin: auto 2rem;
+  }
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  top: 65%;
   width: 100%;
-  height: 13%;
   background-color: var(--sub-green-color);
-`;
-
-const ButtonAnimation = keyframes`
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.1);
-  }
+  gap: 2rem;
+  padding-top: 5rem;
+  padding-bottom: 10rem;
 `;
 
 const Button = styled.button`
   margin: 1rem;
-  font-size: 2rem;
-  background-color: #fff;
+  width: 33.5rem;
+  height: 5.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3rem;
+  background: #fff;
   color: var(--sub-green-color);
-  border: none;
-  border-radius: 3rem;
-  width: 15rem;
-  height: 10rem;
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-  text-align: center;
+  border-radius: 4rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin: 0 auto;
   &:hover {
-    animation: ${ButtonAnimation} 0.2s forwards;
     background-color: var(--sub-yellow-color);
     color: var(--sub-green-color);
   }
+  color: var(--sub-green-color);
+  border: none;
+  cursor: pointer;
+  text-align: center;
 `;
 
 const AiIcon = styled(AiFillRobot)`
@@ -92,41 +96,17 @@ const SelfIcon = styled(BsHandIndexThumbFill)`
 `;
 
 const TextWrapper = styled.div`
-  position: fixed;
-  top: 10%;
-  width: 100%;
-  height: 90%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--sub-green-color);
+  text-align: center;
 `;
 
 const TextTop = styled.p`
   font-size: 2rem;
-  position: fixed;
-  top: 13%;
   font-weight: 700;
   color: #fff;
 `;
 
 const TextBottom = styled.p`
-  position: fixed;
-  top: 18%;
   font-size: 1.5rem;
-  font-weight: 600;
-  color: #ccc;
-`;
-
-const ClickBigButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 65%;
-  width: 100%;
-  background-color: var(--sub-green-color);
-
-  gap: 1.6rem;
+  font-weight: lighter;
+  color: #ffffff;
 `;

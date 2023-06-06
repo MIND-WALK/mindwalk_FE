@@ -38,8 +38,9 @@ const Slider = () => {
 export default Slider;
 
 const Container = styled.div`
-  position: fixed;
-  top: 21%;
+  /* position: fixed; */
+  /* top: 21%; */
+  position: relative;
   width: 100%;
   height: 25rem;
   overflow: hidden;
@@ -65,13 +66,14 @@ const slideAnimation = keyframes`
 `;
 
 const SliderImage = styled.img`
-  position: fixed;
-  top: 40%;
+  position: absolute;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 16rem;
   height: 20rem;
   object-fit: contain;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   animation: ${slideAnimation} 20s linear infinite;
   opacity: ${props => (Math.abs(props.position) === 0 ? 1 : 0.2)};
   z-index: ${props => (Math.abs(props.position) === 0 ? 1 : 0)};

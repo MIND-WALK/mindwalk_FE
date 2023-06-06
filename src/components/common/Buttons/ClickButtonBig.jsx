@@ -21,7 +21,8 @@ const Button = styled.button`
   bottom: 7rem;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 1.4rem;
+  font-size: 1.6rem;
+  font-weight: bold;
   color: #fff;
   cursor: pointer;
   &:hover {

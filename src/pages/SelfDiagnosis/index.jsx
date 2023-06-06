@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useRecoilState, useSetRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import Angry from "../../assets/emotion/card/angry-card.svg";
-import Happy from "../../assets/emotion/card/happy-card.svg";
-import Natural from "../../assets/emotion/card/natural-card.svg";
-import Sad from "../../assets/emotion/card/sad-card.svg";
-import Surprise from "../../assets/emotion/card/surprise-card.svg";
 import { postSelfDiagnosis } from "../../apis/selfdiagnosis";
+import AngryCard from "../../components/common/CustomIcon/EmotionCard/AngryCard";
+import HappyCard from "../../components/common/CustomIcon/EmotionCard/HappyCard";
+import NaturalCard from "../../components/common/CustomIcon/EmotionCard/NaturalCard";
+import SadCard from "../../components/common/CustomIcon/EmotionCard/SadCard";
+import SurpriseCard from "../../components/common/CustomIcon/EmotionCard/SurpriseCard";
 import userIdState from "../../recoil/userIdState";
 import emotionState from "../../recoil/emotionState";
+import ClickButtonBig from "../../components/common/Buttons/ClickButtonBig";
 
-const images = [Angry, Happy, Natural, Sad, Surprise];
+// const images = [Angry, Happy, Natural, Sad, Surprise];
 
 const SelfDiagnosis = () => {
   const [userId, setUserId] = useRecoilState(userIdState);
@@ -21,11 +21,11 @@ const SelfDiagnosis = () => {
   const navigate = useNavigate();
 
   const emotionLists = [
-    { emotion: "angry" },
-    { emotion: "happy" },
-    { emotion: "natural" },
-    { emotion: "sad" },
-    { emotion: "surprise" },
+    { emotion: "angry", icon: <AngryCard size="12rem" /> },
+    { emotion: "happy", icon: <HappyCard size="12rem" /> },
+    { emotion: "natural", icon: <NaturalCard size="12rem" /> },
+    { emotion: "sad", icon: <SadCard size="12rem" /> },
+    { emotion: "surprise", icon: <SurpriseCard size="12rem" /> },
   ];
 
   const handleEmotionClick = emotion => {
@@ -40,7 +40,7 @@ const SelfDiagnosis = () => {
     console.log(data);
     try {
       postSelfDiagnosis("test", data);
-      navigate(`/challenge/${emotion}`);
+      navigate(`/challenge/${selfEmotion}`);
       // const response = await axios.post(`/api/emotion/${userIdState}`, body);
       // if (response.status === 201) {
       //   setEmotionState(selfEmotion);
@@ -64,13 +64,13 @@ const SelfDiagnosis = () => {
           <EmotionButton
             onClick={() => handleEmotionClick(item.emotion)}
             key={index}
-            // selected={selfEmotion === item.emotion}
+            selected={selfEmotion === item.emotion}
           >
-            <EmotionImage src={images[index]} alt={item.emotion} />
+            <EmotionImage alt={item.emotion}>{item.icon}</EmotionImage>
           </EmotionButton>
         ))}
       </EmotionContainer>
-      <SubmitButton onClick={handleSubmit}>자가 진단 완료</SubmitButton>
+      <ClickButtonBig onClick={handleSubmit} buttonText="자가 진단 완료" disabled={!selfEmotion} />
     </DiagnosisContainer>
   );
 };
@@ -107,17 +107,18 @@ const EmotionButton = styled.button`
   border: none;
   cursor: pointer;
   transition: transform 0.2s;
-  ${props => props.selected && "transform: scale(1.1);"};
-  animation: ${props => props.selected && "shake 0.5s infinite"};
-
+  ${props =>
+    props.selected &&
+    "transform: scale(1.1); filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));"};
   &:hover {
     transform: scale(1.1);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   }
 `;
 
-const EmotionImage = styled.img`
+const EmotionImage = styled.div`
   width: 10rem;
-  height: 10rem;
+  height: 13rem;
 `;
 
 const SubmitButton = styled.div`

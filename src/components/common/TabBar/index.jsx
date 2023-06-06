@@ -60,8 +60,8 @@ const TabBarContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   height: 6rem;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  border-top-left-radius: 1.6rem;
+  border-top-right-radius: 1.6rem;
 `;
 
 const TabBarItem = styled.div`
