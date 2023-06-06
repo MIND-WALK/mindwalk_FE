@@ -1,12 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import userIdState from "../recoil/userIdState";
 
 const useChallengeCheck = () => {
   const [challengeStatus, setChallengeStatus] = useState(false);
 
+  const [userAuthState] = useRecoilState(userIdState);
+
   useEffect(() => {
     const getChallengeStatus = async () => {
-      const { data } = await axios.get(`http://54.180.88.103:4000/api/user/trip/test`);
+      const { data } = await axios.get(`http://54.180.88.103:4000/api/user/trip/${userAuthState}`);
 
       if (!data) {
         return;
@@ -20,6 +24,8 @@ const useChallengeCheck = () => {
       const today = `${year}-${month}-${day}`;
 
       const todayChallenge = data.filter(challenge => challenge.date === today);
+
+      console.log(todayChallenge);
 
       if (todayChallenge.length > 0) setChallengeStatus(true);
       else setChallengeStatus(false);
