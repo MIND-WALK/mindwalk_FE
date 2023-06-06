@@ -35,8 +35,9 @@ export default App;
 
 function AppContent() {
   const location = useLocation();
-  const isMainPage = location.pathname === "/" || location.pathname === "/home";
-  const isSplash = location.pathname === "/";
+  const isMainPage =
+    location.pathname === "/" || location.pathname === "/home" || location.pathname === "/login";
+  const isTabBarPage = location.pathname === "/" || location.pathname === "/login";
 
   return (
     <div className="App">
@@ -62,7 +63,7 @@ function AppContent() {
         <Route path="/challenge/:emotion" element={<Challenge />} />
         <Route path="/challenge_map" element={<ChallengeMap />} />
       </Routes>
-      {!isSplash && <TabBar />}
+      {!isTabBarPage && <TabBar />}
     </div>
   );
 }
