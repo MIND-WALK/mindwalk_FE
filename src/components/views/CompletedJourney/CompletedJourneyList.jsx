@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { useRecoilState } from "recoil";
 import axios from "axios";
+import { useLocation, useParams } from "react-router-dom";
 import { Title } from "../MyJourney/Level";
 import { DateText, TextBox } from "../MyJourney/AchivementList";
 import userIdState from "../../../recoil/userIdState";
 
-const CompletedJourneyList = () => {
+const CompletedJourneyList = ({ size }) => {
+  const { pathname } = useLocation();
+
   const [completedJourney, setCompletedJourney] = useState([]);
 
   const [userAuthState] = useRecoilState(userIdState);
@@ -22,7 +25,7 @@ const CompletedJourneyList = () => {
   }, []);
 
   return (
-    <>
+    <Container>
       <Title>완수한 여정</Title>
       <JourneyList>
         {completedJourney.map(journey => (
@@ -36,12 +39,20 @@ const CompletedJourneyList = () => {
             </TextBox>
           </Journey>
         ))}
+        {completedJourney.length === 0 && (
+          <EmptyArray small={pathname === "/home"}>아직 완수한 여정이 없어요.</EmptyArray>
+        )}
       </JourneyList>
-    </>
+    </Container>
   );
 };
 
 export default CompletedJourneyList;
+
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+`;
 
 const JourneyList = styled.ul`
   width: 100%;
@@ -66,4 +77,16 @@ const PlaceImage = styled.img`
   height: 6rem;
   background-color: pink;
   border-radius: 50%;
+`;
+
+const EmptyArray = styled.p`
+  font-size: 1.5rem;
+  width: 100%;
+  height: ${({ small }) => {
+    if (small) return "50px";
+    return "100%";
+  }};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

@@ -18,9 +18,7 @@ const MyJourney = () => {
   useEffect(() => {
     const getQuestNum = async () => {
       try {
-        const { data } = await axios.get(
-          `/api/user/trip/all/${userAuthState}`,
-        );
+        const { data } = await axios.get(`/api/user/trip/all/${userAuthState}`);
 
         setQuestInfo(data);
       } catch (err) {

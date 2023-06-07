@@ -16,5 +16,6 @@ const CompletedJourney = () => {
 export default CompletedJourney;
 
 const Container = styled.section`
+  width: 100%;
   padding: 20px;
 `;
