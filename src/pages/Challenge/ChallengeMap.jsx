@@ -89,7 +89,6 @@ const ChallengeMap = () => {
       if (locationDistance < 1000) {
         await axios.post(url, body);
         setChallengeCheck(true);
-        // alert("챌린지 성공");
       } else {
         setChallengeCheck(false);
       }
