@@ -22,7 +22,6 @@ import ChallengeCompleted from "./pages/Challenge/ChallengeCompleted";
 import SelfDiagnosis from "./pages/SelfDiagnosis";
 import Splash from "./pages/Splash";
 
-
 function App() {
   return (
     <div className="App">

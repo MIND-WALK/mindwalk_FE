@@ -3,6 +3,11 @@ import { styled } from "styled-components";
 import { BsChevronRight } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import LEVEL from "../../../constants/level";
+import Level1 from "../../common/CustomIcon/UserIcon/Level1";
+import Level2 from "../../common/CustomIcon/UserIcon/Level2";
+import Level3 from "../../common/CustomIcon/UserIcon/Level3";
+import Level4 from "../../common/CustomIcon/UserIcon/Level4";
+import Level5 from "../../common/CustomIcon/UserIcon/Level5";
 
 const Level = ({ level }) => {
   const navigate = useNavigate();
@@ -19,9 +24,7 @@ const Level = ({ level }) => {
         </Button>
       </LevelTop>
       <LevelBox>
-        <LevelImage>
-          <img src={LEVEL[level - 1].img} alt="" />
-        </LevelImage>
+        <LevelImage>{getLevelIcon(1, "10rem")}</LevelImage>
         <LevelText>Lv. {level}</LevelText>
       </LevelBox>
     </Container>
@@ -29,6 +32,23 @@ const Level = ({ level }) => {
 };
 
 export default Level;
+
+export const getLevelIcon = (levelNum, size) => {
+  switch (levelNum) {
+    case 1:
+      return <Level1 size={size} />;
+    case 2:
+      return <Level2 size={size} />;
+    case 3:
+      return <Level3 size={size} />;
+    case 4:
+      return <Level4 size={size} />;
+    case 5:
+      return <Level5 size={size} />;
+    default:
+      return <Level1 size={size} />;
+  }
+};
 
 const Container = styled.section`
   display: flex;
@@ -53,6 +73,7 @@ const LevelTop = styled.div`
 `;
 
 export const Title = styled.h3`
+  width: 100%;
   font-size: 1.4rem;
 `;
 

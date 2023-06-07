@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-import { Title } from "./Level";
+import { Title, getLevelIcon } from "./Level";
 import LEVEL from "../../../constants/level";
 
 const AchivementList = ({ questInfo }) => {
@@ -14,9 +14,7 @@ const AchivementList = ({ questInfo }) => {
               if (index !== 0 && (index + 1) % 10 === 0)
                 return (
                   <CompletedQuest key={date._id}>
-                    <LevelImage>
-                      <img src={LEVEL[(index + 1) / 10].img} alt="" />
-                    </LevelImage>
+                    <LevelImage>{getLevelIcon((index + 1) / 10, "5rem")}</LevelImage>
                     <TextBox>
                       <DateText>{date.replace(/-/g, ".")}</DateText>
                       <p>여정 {index + 1}개 달성</p>
@@ -61,10 +59,6 @@ const LevelImage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  img {
-    width: 70%;
-  }
 `;
 
 export const TextBox = styled.div`

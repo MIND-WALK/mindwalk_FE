@@ -1,13 +1,13 @@
 import React from "react";
 
-import lv0 from "../../../../assets/user/lv0.svg";
+import lv5 from "../../../../assets/user/lv5.svg";
 
-const Level0 = ({ size }) => {
+const Level5 = ({ size }) => {
   return (
     <button>
       <img
-        src={lv0}
-        alt="Level0"
+        src={lv5}
+        alt="Level5"
         style={{
           width: size,
           height: size,
@@ -18,4 +18,4 @@ const Level0 = ({ size }) => {
   );
 };
 
-export default Level0;
+export default Level5;
