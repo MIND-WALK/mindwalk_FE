@@ -54,7 +54,7 @@ const ChallengeMap = () => {
   };
   const handleClickHome = () => {
     setModalOpen(false);
-    navigate("/");
+    navigate("/home");
     document.documentElement.style.overflow = "auto";
   };
   const handClickDiary = () => {
@@ -89,7 +89,6 @@ const ChallengeMap = () => {
       if (locationDistance < 1000) {
         await axios.post(url, body);
         setChallengeCheck(true);
-        alert("챌린지 성공");
       } else {
         setChallengeCheck(false);
       }
