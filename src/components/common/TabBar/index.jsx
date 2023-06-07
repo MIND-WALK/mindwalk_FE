@@ -85,9 +85,11 @@ const TabBarItem = styled.div`
   color: #fff;
   cursor: pointer;
   width: 10rem;
+  height: 6rem;
 `;
 
 const TabBarLabel = styled.label`
-  font-size: 0.625rem;
+  font-size: 1.2rem;
   margin-top: 0.3125rem;
+  cursor: pointer;
 `;
