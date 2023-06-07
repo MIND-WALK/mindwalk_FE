@@ -5,6 +5,7 @@ import { AiFillRobot } from "react-icons/ai";
 import { BsHandIndexThumbFill } from "react-icons/bs";
 import { IoIosArrowForward } from "react-icons/io";
 import Slider from "../../components/common/Slider";
+import Slide from "../../components/common/Slide/index";
 
 const MeasureSelect = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const MeasureSelect = () => {
           <TextTop>오늘의 감정을 측정해보세요.</TextTop>
           <TextBottom>오늘 당신의 감정은 어떤가요?</TextBottom>
         </TextWrapper>
-        <Slider />
+        <Slide />
         <ButtonWrapper>
           <Button onClick={() => handleButtonClick("analysis")}>
             <AiIcon />
