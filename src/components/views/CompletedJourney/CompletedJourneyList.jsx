@@ -13,7 +13,7 @@ const CompletedJourneyList = () => {
 
   useEffect(() => {
     const getCompletedJourney = async () => {
-      const { data } = await axios.get(`http://54.180.88.103:4000/api/user/trip/${userAuthState}`);
+      const { data } = await axios.get(`/api/user/trip/${userAuthState}`);
 
       setCompletedJourney(data);
     };

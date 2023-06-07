@@ -10,9 +10,7 @@ const useMeasurementCheck = () => {
 
   useEffect(() => {
     const getMeasurementStatus = async () => {
-      const { data } = await axios.get(
-        `http://54.180.88.103:4000/api/emotion/all/${userAuthState}`,
-      );
+      const { data } = await axios.get(`/api/emotion/all/${userAuthState}`);
 
       const date = new Date();
       const year = date.getFullYear();
