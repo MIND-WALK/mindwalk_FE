@@ -17,7 +17,7 @@ const CompletedJourneyList = () => {
 
   useEffect(() => {
     const getCompletedJourney = async () => {
-      const { data } = await axios.get(`/api/user/trip/${userAuthState}`);
+      const { data } = await axios.get(`/api/user/trip/test`);
 
       setCompletedJourney(data);
     };

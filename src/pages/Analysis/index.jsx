@@ -228,7 +228,7 @@ const Analysis = () => {
     try {
       const response = await axios.post(`/api/emotion/${userAuthState}`, body);
       if (response.status === 201) {
-        setEmotionState(emotion);
+        setEmotionState({ emotion, time: new Date() });
         navigate(`/challenge/${emotion}`);
       }
     } catch (error) {
