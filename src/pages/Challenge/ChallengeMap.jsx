@@ -92,8 +92,6 @@ const ChallengeMap = () => {
       emotionTime: emotion.time,
     };
 
-    console.log(body);
-
     try {
       if (locationDistance < 1000) {
         await axios.post(url, body);
