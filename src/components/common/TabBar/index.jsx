@@ -36,16 +36,17 @@ const TabBar = () => {
       >
         {/* measure */}
         <FiSmile size={20} />
-        <TabBarLabel>측정</TabBarLabel>
+        <TabBarLabel>챌린지</TabBarLabel>
       </TabBarItem>
       <TabBarItem
-        onClick={() =>
-          handleTabClick(challengeStatus ? "challenge/completed" : `challenge/${userEmotionState}`)
+        onClick={
+          () => handleTabClick("my_journey")
+          // handleTabClick(challengeStatus ? "challenge/completed" : `challenge/${userEmotionState}`)
         }
       >
         {/* challenge */}
         <FiFlag size={20} />
-        <TabBarLabel>도전</TabBarLabel>
+        <TabBarLabel>나의여정</TabBarLabel>
       </TabBarItem>
       <TabBarItem onClick={() => handleTabClick("diary")}>
         {/* diary */}
@@ -85,9 +86,11 @@ const TabBarItem = styled.div`
   color: #fff;
   cursor: pointer;
   width: 10rem;
+  height: 6rem;
 `;
 
 const TabBarLabel = styled.label`
-  font-size: 0.625rem;
+  font-size: 1.2rem;
   margin-top: 0.3125rem;
+  cursor: pointer;
 `;
