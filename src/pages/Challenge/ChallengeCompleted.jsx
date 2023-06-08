@@ -10,12 +10,12 @@ const ChallengeCompleted = () => {
 
   const handleClickHome = () => {
     setModalOpen(false);
-    navigate("/");
+    navigate("/home");
     document.documentElement.style.overflow = "auto";
   };
   const handClickDiary = () => {
     setModalOpen(false);
-    navigate("/my_page");
+    navigate("/diary");
     document.documentElement.style.overflow = "auto";
   };
 

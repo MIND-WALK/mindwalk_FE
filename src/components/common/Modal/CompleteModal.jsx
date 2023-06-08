@@ -74,6 +74,7 @@ const ModalBackground = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 9999;
   &.modalBackgroundView {
     display: block;
   }
