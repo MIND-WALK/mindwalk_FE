@@ -22,7 +22,7 @@ const MeasureSelect = () => {
           <TextTop>오늘의 감정을 측정해보세요.</TextTop>
           <TextBottom>오늘 당신의 감정은 어떤가요?</TextBottom>
         </TextWrapper>
-        <Slide />
+        <Slider />
         <ButtonWrapper>
           <Button onClick={() => handleButtonClick("analysis")}>
             <AiIcon />
