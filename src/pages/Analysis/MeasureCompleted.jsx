@@ -5,6 +5,7 @@ import { AiFillRobot } from "react-icons/ai";
 import { BsHandIndexThumbFill } from "react-icons/bs";
 import Slider from "../../components/common/Slider";
 import CompleteModal from "../../components/common/Modal/CompleteModal";
+import HappyCard from "../../components/common/CustomIcon/EmotionCard/HappyCard";
 
 const MeasureCompleted = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -19,12 +20,12 @@ const MeasureCompleted = () => {
   };
   const handleClickHome = () => {
     setModalOpen(false);
-    navigate("/");
+    navigate("/home");
     document.documentElement.style.overflow = "auto";
   };
   const handleClickDiary = () => {
     setModalOpen(false);
-    navigate("/my_page");
+    navigate("/diary");
     document.documentElement.style.overflow = "auto";
   };
 
@@ -69,36 +70,48 @@ const MeasureCompleted = () => {
 export default MeasureCompleted;
 
 const Container = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  height: 100%;
+  padding-top: 3rem;
   background-color: var(--sub-green-color);
+  & .emotion-select-contaner {
+    margin: auto 2rem;
+  }
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: fixed;
-  top: 65%;
   width: 100%;
-  height: 13%;
   background-color: var(--sub-green-color);
+  gap: 2rem;
+  padding-top: 5rem;
+  padding-bottom: 10rem;
 `;
 
 const Button = styled.button`
   margin: 1rem;
-  font-size: 2rem;
-  background-color: #fff;
+  width: 33.5rem;
+  height: 5.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 3rem;
+  background: #fff;
+  color: var(--sub-green-color);
+  border-radius: 4rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin: 0 auto;
+  &:hover {
+    background-color: var(--sub-yellow-color);
+    color: var(--sub-green-color);
+  }
   color: var(--sub-green-color);
   border: none;
-  border-radius: 3rem;
-  width: 15rem;
-  height: 10rem;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-  text-alig8n: center;
+  text-align: center;
 `;
 
 const AiIcon = styled(AiFillRobot)`
@@ -111,11 +124,6 @@ const SelfIcon = styled(BsHandIndexThumbFill)`
 `;
 
 const TextWrapper = styled.div`
-  position: fixed;
-  top: 15%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
   text-align: center;
 `;
 
@@ -126,8 +134,7 @@ const TextTop = styled.p`
 `;
 
 const TextBottom = styled.p`
-  margin-top: 1rem;
   font-size: 1.5rem;
-  font-weight: 600;
-  color: #ccc;
+  font-weight: lighter;
+  color: #ffffff;
 `;

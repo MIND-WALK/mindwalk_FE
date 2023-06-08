@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import { postSelfDiagnosis } from "../../apis/selfdiagnosis";
+import axios from "axios";
 import AngryCard from "../../components/common/CustomIcon/EmotionCard/AngryCard";
 import HappyCard from "../../components/common/CustomIcon/EmotionCard/HappyCard";
 import NaturalCard from "../../components/common/CustomIcon/EmotionCard/NaturalCard";
@@ -12,20 +12,21 @@ import userIdState from "../../recoil/userIdState";
 import emotionState from "../../recoil/emotionState";
 import ClickButtonBig from "../../components/common/Buttons/ClickButtonBig";
 
-// const images = [Angry, Happy, Natural, Sad, Surprise];
+import { postSelfDiagnosis } from "../../apis/selfdiagnosis";
 
 const SelfDiagnosis = () => {
-  const [userId, setUserId] = useRecoilState(userIdState);
+  const navigate = useNavigate();
 
   const [selfEmotion, setSelfEmotion] = useState("");
-  const navigate = useNavigate();
+  const userAuthState = useRecoilValue(userIdState);
+  const setEmotionState = useSetRecoilState(emotionState);
 
   const emotionLists = [
     { emotion: "angry", icon: <AngryCard size="12rem" /> },
     { emotion: "happy", icon: <HappyCard size="12rem" /> },
-    { emotion: "natural", icon: <NaturalCard size="12rem" /> },
+    { emotion: "neutral", icon: <NaturalCard size="12rem" /> },
     { emotion: "sad", icon: <SadCard size="12rem" /> },
-    { emotion: "surprise", icon: <SurpriseCard size="12rem" /> },
+    { emotion: "surprised", icon: <SurpriseCard size="12rem" /> },
   ];
 
   const handleEmotionClick = emotion => {
@@ -33,20 +34,17 @@ const SelfDiagnosis = () => {
   };
 
   const handleSubmit = async () => {
-    const data = {
-      id: userId,
-      emotion: selfEmotion,
+    const body = {
+      id: userAuthState,
+      selfEmotion,
     };
-    console.log(data);
+    console.log(body);
     try {
-      postSelfDiagnosis("test", data);
-      navigate(`/challenge/${selfEmotion}`);
-      // const response = await axios.post(`/api/emotion/${userIdState}`, body);
-      // if (response.status === 201) {
-      //   setEmotionState(selfEmotion);
-      //   console.log(selfEmotion);
-      //   navigate("/challenge");
-      // }
+      const response = await axios.post(`/api/emotion/${userAuthState}`, body);
+      if (response.status === 201) {
+        postSelfDiagnosis(selfEmotion);
+        navigate(`/challenge/${selfEmotion}`);
+      }
     } catch (error) {
       console.error(error);
       alert("감정 결과 전송 실패.");
@@ -89,7 +87,7 @@ const MainTitle = styled.div`
   font-size: 1.8rem;
 `;
 const SubTitle = styled.div`
-  font-size: 1.4rem;
+  font-size: 1.4remZn;
 `;
 const EmotionContainer = styled.div`
   display: flex;
