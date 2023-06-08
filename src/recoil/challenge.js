@@ -32,3 +32,8 @@ export const challengeImgState = atom({
   key: "challengeImgState",
   default: "",
 });
+
+export const challengeDistanceState = atom({
+  key: "challengeDistanceState",
+  default: "",
+});

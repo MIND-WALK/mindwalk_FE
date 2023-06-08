@@ -5,7 +5,7 @@ const { persistAtom } = recoilPersist();
 
 const emotionState = atom({
   key: "emotion",
-  default: {emotion:"", time:""},
+  default: { emotion: "", time: "" },
   effects_UNSTABLE: [persistAtom],
 });
 
