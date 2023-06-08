@@ -21,6 +21,7 @@ import MeasureSelect from "./pages/Analysis/MeasureSelect";
 import ChallengeCompleted from "./pages/Challenge/ChallengeCompleted";
 import SelfDiagnosis from "./pages/SelfDiagnosis";
 import Splash from "./pages/Splash";
+import JourneyDetail from "./components/views/CompletedJourney/JourneyDetail";
 
 function App() {
   return (
@@ -59,6 +60,7 @@ function AppContent() {
         <Route path="/challenge/completed" element={<ChallengeCompleted />} />
         <Route path="/my_journey" element={<MyJourney />} />
         <Route path="/my_journey/completed" element={<CompletedJourney />} />
+        <Route path="/my_journey/completed/:id" element={<JourneyDetail />} />
         <Route path="/my_page" element={<MyPage />} />
         <Route path="/ask" element={<Ask />} />
         <Route path="/faq" element={<Faq />} />

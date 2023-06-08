@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { useRecoilState } from "recoil";
 import axios from "axios";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Title } from "../MyJourney/Level";
 import { DateText, TextBox } from "../MyJourney/AchivementList";
 import userIdState from "../../../recoil/userIdState";
 
-const CompletedJourneyList = ({ size }) => {
+const CompletedJourneyList = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const [completedJourney, setCompletedJourney] = useState([]);
 
@@ -29,7 +30,10 @@ const CompletedJourneyList = ({ size }) => {
       <Title>완수한 여정</Title>
       <JourneyList>
         {completedJourney.map(journey => (
-          <Journey key={journey._id}>
+          <Journey
+            key={journey._id}
+            onClick={() => navigate(`/my_journey/completed/${journey._id}`)}
+          >
             <PlaceImage src={journey.img} />
             <TextBox>
               <DateText>
@@ -66,7 +70,7 @@ const Journey = styled.li`
   width: 100%;
   display: flex;
   align-items: center;
-
+  cursor: pointer;
   + li {
     margin-top: 2rem;
   }
