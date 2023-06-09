@@ -5,7 +5,13 @@ const { persistAtom } = recoilPersist();
 
 const emotionState = atom({
   key: "emotion",
-  default: "",
+  default: { emotion: "", time: "" },
+  effects_UNSTABLE: [persistAtom],
+});
+
+export const measurementCheckState = atom({
+  key: "measurementCheckState",
+  default: false,
   effects_UNSTABLE: [persistAtom],
 });
 

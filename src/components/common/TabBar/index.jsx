@@ -5,14 +5,18 @@ import { styled } from "styled-components";
 import { useRecoilState } from "recoil";
 import useMeasurementCheck from "../../../hooks/useMeasurementCheck";
 import useChallengeCheck from "../../../hooks/useChallengeCheck";
-import emotionState from "../../../recoil/emotionState";
+import emotionState, { measurementCheckState } from "../../../recoil/emotionState";
+import { challengeCheckState } from "../../../recoil/challenge";
 
 const TabBar = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState("my_journey");
-  const [measurementStatus] = useMeasurementCheck();
-  const [challengeStatus] = useChallengeCheck();
   const [userEmotionState] = useRecoilState(emotionState);
+  const [measurementRecoilState] = useRecoilState(measurementCheckState);
+  const [challengeRecoilState] = useRecoilState(challengeCheckState);
+
+  useMeasurementCheck();
+  useChallengeCheck();
 
   const handleTabClick = page => {
     if (currentPage === page) {
@@ -24,6 +28,16 @@ const TabBar = () => {
     }
   };
 
+  const handleChallengeClick = () => {
+    if (!measurementRecoilState && !challengeRecoilState) {
+      handleTabClick("measure");
+    } else if (measurementRecoilState && !challengeRecoilState) {
+      handleTabClick(`challenge/${userEmotionState.emotion}`);
+    } else if (measurementRecoilState && challengeRecoilState) {
+      handleTabClick("challenge/completed");
+    }
+  };
+
   return (
     <TabBarContainer>
       <TabBarItem onClick={() => handleTabClick("home")}>
@@ -31,21 +45,20 @@ const TabBar = () => {
         <FiHome size={20} />
         <TabBarLabel>홈</TabBarLabel>
       </TabBarItem>
-      <TabBarItem
-        onClick={() => handleTabClick(measurementStatus ? "measure/completed" : "measure")}
-      >
+      <TabBarItem onClick={handleChallengeClick}>
         {/* measure */}
         <FiSmile size={20} />
-        <TabBarLabel>측정</TabBarLabel>
+        <TabBarLabel>챌린지</TabBarLabel>
       </TabBarItem>
       <TabBarItem
-        onClick={() =>
-          handleTabClick(challengeStatus ? "challenge/completed" : `challenge/${userEmotionState}`)
+        onClick={
+          () => handleTabClick("my_journey")
+          // handleTabClick(challengeStatus ? "challenge/completed" : `challenge/${userEmotionState}`)
         }
       >
         {/* challenge */}
         <FiFlag size={20} />
-        <TabBarLabel>도전</TabBarLabel>
+        <TabBarLabel>나의 여정</TabBarLabel>
       </TabBarItem>
       <TabBarItem onClick={() => handleTabClick("diary")}>
         {/* diary */}
@@ -85,9 +98,11 @@ const TabBarItem = styled.div`
   color: #fff;
   cursor: pointer;
   width: 10rem;
+  height: 6rem;
 `;
 
 const TabBarLabel = styled.label`
-  font-size: 0.625rem;
+  font-size: 1.2rem;
   margin-top: 0.3125rem;
+  cursor: pointer;
 `;

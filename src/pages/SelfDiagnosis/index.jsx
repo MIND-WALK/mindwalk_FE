@@ -1,24 +1,26 @@
 import React, { useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
-import { postSelfDiagnosis } from "../../apis/selfdiagnosis";
+import axios from "axios";
 import AngryCard from "../../components/common/CustomIcon/EmotionCard/AngryCard";
 import HappyCard from "../../components/common/CustomIcon/EmotionCard/HappyCard";
 import NeutralCard from "../../components/common/CustomIcon/EmotionCard/NeutralCard";
 import SadCard from "../../components/common/CustomIcon/EmotionCard/SadCard";
 import SurprisedCard from "../../components/common/CustomIcon/EmotionCard/SurprisedCard";
 import userIdState from "../../recoil/userIdState";
-import emotionState from "../../recoil/emotionState";
+import emotionState, { measurementCheckState } from "../../recoil/emotionState";
 import ClickButtonBig from "../../components/common/Buttons/ClickButtonBig";
 
-// const images = [Angry, Happy, Natural, Sad, Surprise];
+import { postSelfDiagnosis } from "../../apis/selfdiagnosis";
 
 const SelfDiagnosis = () => {
-  const [userId, setUserId] = useRecoilState(userIdState);
+  const navigate = useNavigate();
 
   const [selfEmotion, setSelfEmotion] = useState("");
-  const navigate = useNavigate();
+  const userAuthState = useRecoilValue(userIdState);
+  const setEmotionState = useSetRecoilState(emotionState);
+  const setMeasurementCheckState = useSetRecoilState(measurementCheckState);
 
   const emotionLists = [
     { emotion: "angry", icon: <AngryCard size="12rem" /> },
@@ -33,20 +35,18 @@ const SelfDiagnosis = () => {
   };
 
   const handleSubmit = async () => {
-    const data = {
-      id: userId,
+    const body = {
+      id: userAuthState,
       emotion: selfEmotion,
     };
-    console.log(data);
+    console.log(body);
     try {
-      postSelfDiagnosis("test", data);
-      navigate(`/challenge/${selfEmotion}`);
-      // const response = await axios.post(`/api/emotion/${userIdState}`, body);
-      // if (response.status === 201) {
-      //   setEmotionState(selfEmotion);
-      //   console.log(selfEmotion);
-      //   navigate("/challenge");
-      // }
+      const response = await axios.post(`/api/emotion/${userAuthState}`, body);
+      if (response.status === 201) {
+        postSelfDiagnosis(selfEmotion);
+        setMeasurementCheckState(true);
+        navigate(`/challenge/${selfEmotion}`);
+      }
     } catch (error) {
       console.error(error);
       alert("감정 결과 전송 실패.");
@@ -89,7 +89,7 @@ const MainTitle = styled.div`
   font-size: 1.8rem;
 `;
 const SubTitle = styled.div`
-  font-size: 1.4rem;
+  font-size: 1.4remZn;
 `;
 const EmotionContainer = styled.div`
   display: flex;

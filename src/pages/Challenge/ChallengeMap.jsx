@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { MdLocationOn } from "react-icons/md";
 import axios from "axios";
 import ChallengeInitTmap from "./ChallengeInitTmap";
 import ClickBottomModal from "../../components/common/Modal/ClickBottomModal";
 import {
+  challengeCheckState,
+  challengeDistanceState,
   challengeImgState,
   challengeRangeCheck,
   currentLocationLatState,
@@ -18,6 +19,7 @@ import {
 } from "../../recoil/challenge";
 import userIdState from "../../recoil/userIdState";
 import CurrentLocation from "../../components/views/Challenge/CurrentLocation";
+import emotionState from "../../recoil/emotionState";
 
 function getCurrentDate() {
   const date = new Date();
@@ -31,6 +33,8 @@ function getCurrentDate() {
 const ChallengeMap = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [challengeCheck, setChallengeCheck] = useRecoilState(challengeRangeCheck);
+  const [emotion, setEmotion] = useRecoilState(emotionState);
+  const [resultDistanceText, setResultDistanceText] = useRecoilState(challengeDistanceState);
 
   // 챌린지
   const [selectedPlace, setSelectedPlace] = useRecoilState(locationNameState);
@@ -44,6 +48,8 @@ const ChallengeMap = () => {
 
   const [challengeImg, setChallengeImg] = useRecoilState(challengeImgState);
 
+  const setChallengeCheckState = useSetRecoilState(challengeCheckState);
+
   const navigate = useNavigate();
   const currentDate = getCurrentDate();
   const url = `${process.env.REACT_APP_API_URL}/user/challenge/${userAuthState}`;
@@ -54,7 +60,7 @@ const ChallengeMap = () => {
   };
   const handleClickHome = () => {
     setModalOpen(false);
-    navigate("/");
+    navigate("/home");
     document.documentElement.style.overflow = "auto";
   };
   const handClickDiary = () => {
@@ -83,13 +89,16 @@ const ChallengeMap = () => {
       check: challengeCheck,
       user: userAuthState,
       date: currentDate,
+      distance: resultDistanceText,
+      emotion: emotion.emotion,
+      emotionTime: emotion.time,
     };
 
     try {
       if (locationDistance < 1000) {
+        setChallengeCheckState(true);
         await axios.post(url, body);
         setChallengeCheck(true);
-        alert("챌린지 성공");
       } else {
         setChallengeCheck(false);
       }

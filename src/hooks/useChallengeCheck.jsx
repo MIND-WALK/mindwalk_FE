@@ -1,20 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import userIdState from "../recoil/userIdState";
+import { challengeCheckState } from "../recoil/challenge";
 
 const useChallengeCheck = () => {
-  const [challengeStatus, setChallengeStatus] = useState(false);
+  const setChallengeCheckState = useSetRecoilState(challengeCheckState);
 
   const [userAuthState] = useRecoilState(userIdState);
 
   useEffect(() => {
     const getChallengeStatus = async () => {
       const { data } = await axios.get(`/api/user/trip/${userAuthState}`);
-
-      if (!data) {
-        return;
-      }
 
       const date = new Date();
       const year = date.getFullYear();
@@ -25,16 +22,12 @@ const useChallengeCheck = () => {
 
       const todayChallenge = data.filter(challenge => challenge.date === today);
 
-      console.log(todayChallenge);
-
-      if (todayChallenge.length > 0) setChallengeStatus(true);
-      else setChallengeStatus(false);
+      if (todayChallenge.length > 0) setChallengeCheckState(true);
+      else setChallengeCheckState(false);
     };
 
     getChallengeStatus();
   }, []);
-
-  return [challengeStatus];
 };
 
 export default useChallengeCheck;

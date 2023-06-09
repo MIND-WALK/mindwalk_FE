@@ -70,6 +70,7 @@ const Input = styled.input`
   width: 100%;
   outline: none;
   margin: 1rem 0 1.4rem 0;
+  text-indent: 0.6rem;
 `;
 const TextArea = styled.textarea`
   box-sizing: border-box;
@@ -80,6 +81,8 @@ const TextArea = styled.textarea`
   resize: none;
   outline: none;
   margin: 1rem 0 1.4rem 0;
+  text-indent: 0.6rem;
+  padding-top: 0.6rem;
 `;
 const SubmitButton = styled.input`
   box-sizing: border-box;
