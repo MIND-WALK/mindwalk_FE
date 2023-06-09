@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import userIdState from "../recoil/userIdState";
+import { measurementCheckState } from "../recoil/emotionState";
 
 const useMeasurementCheck = () => {
-  const [measurementStatus, setMeasurementStatus] = useState(false);
+  const setMeasurementCheckState = useSetRecoilState(measurementCheckState);
 
   const [userAuthState] = useRecoilState(userIdState);
 
@@ -25,14 +26,12 @@ const useMeasurementCheck = () => {
         return formatted.toLocaleString().includes(today);
       });
 
-      if (todayMeasurement.length > 0) setMeasurementStatus(true);
-      else setMeasurementStatus(false);
+      if (todayMeasurement.length > 0) setMeasurementCheckState(true);
+      else setMeasurementCheckState(false);
     };
 
     getMeasurementStatus();
   }, []);
-
-  return [measurementStatus];
 };
 
 export default useMeasurementCheck;

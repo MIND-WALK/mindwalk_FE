@@ -9,4 +9,10 @@ const emotionState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
+export const measurementCheckState = atom({
+  key: "measurementCheckState",
+  default: false,
+  effects_UNSTABLE: [persistAtom],
+});
+
 export default emotionState;

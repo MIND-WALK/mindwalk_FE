@@ -22,7 +22,7 @@ import {
 import Animation from "./Animation";
 import loading from "../../assets/img/Analysis/loading.gif";
 import userIdState from "../../recoil/userIdState";
-import emotionState from "../../recoil/emotionState";
+import emotionState, { measurementCheckState } from "../../recoil/emotionState";
 import ClickButtonBig from "../../components/common/Buttons/ClickButtonBig";
 
 // 비디오 사이즈 설정
@@ -49,6 +49,7 @@ const Analysis = () => {
   const [emotion, setEmotion] = useState("");
   const userAuthState = useRecoilValue(userIdState);
   const setEmotionState = useSetRecoilState(emotionState);
+  const setMeasurementCheckState = useSetRecoilState(measurementCheckState);
 
   const navigate = useNavigate();
 
@@ -229,6 +230,7 @@ const Analysis = () => {
       const response = await axios.post(`/api/emotion/${userAuthState}`, body);
       if (response.status === 201) {
         setEmotionState({ emotion, time: new Date() });
+        setMeasurementCheckState(true);
         navigate(`/challenge/${emotion}`);
       }
     } catch (error) {
