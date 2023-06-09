@@ -36,7 +36,7 @@ const SelfDiagnosis = () => {
   const handleSubmit = async () => {
     const body = {
       id: userAuthState,
-      selfEmotion,
+      emotion: selfEmotion,
     };
     console.log(body);
     try {
