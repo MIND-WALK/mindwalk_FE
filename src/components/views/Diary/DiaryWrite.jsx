@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import Rating from "../../common/Rating/Rating";
 import DiaryDate from "./DiaryDate";
 import EmotionBox from "./EmtionBox";
 import ClickButtonBig from "../../common/Buttons/ClickButtonBig";
-import { createDiary, updateDiary } from "../../../apis/diary";
-import { useDiary } from "../../../hooks/queries/useDiary";
+import { updateDiary } from "../../../apis/diary";
+import { useCreateDiary, useDiary, useUpdateDiary } from "../../../hooks/queries/useDiary";
+import userIdState from "../../../recoil/userIdState";
 
 const DiaryWrite = () => {
+  const [userAuthState] = useRecoilState(userIdState);
   const [selectedEmotion, setSelectedEmotion] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [score, setScore] = useState(0);
@@ -18,10 +21,11 @@ const DiaryWrite = () => {
   const navigate = useNavigate();
   const { date } = useParams();
 
-  const userId = "test";
-
-  const { data: diaryData, isLoading } = useDiary(userId, date);
+  const { data: diaryData, isLoading } = useDiary(userAuthState, date);
   const logId = diaryData ? diaryData._id : null;
+
+  const createDiaryMutation = useCreateDiary(userAuthState);
+  const updateDiaryMutation = useUpdateDiary(userAuthState);
 
   useEffect(() => {
     if (!isLoading && diaryData) {
@@ -36,17 +40,17 @@ const DiaryWrite = () => {
   const handleEmotionSelection = (emotion, color) => {
     setSelectedEmotion(emotion);
     setSelectedColor(color);
-    setError(false); // 이모션 선택 에러 제거
+    setError(false);
   };
 
   const handleScoreChange = newScore => {
     setScore(newScore);
-    setError(false); // 만족도 선택 에러 제거
+    setError(false);
   };
 
   const handleDiaryChange = event => {
     setDiary(event.target.value);
-    setError(false); // 일기 작성 에러 제거
+    setError(false);
   };
 
   const handleSubmit = async event => {
@@ -62,11 +66,10 @@ const DiaryWrite = () => {
       };
 
       if (logId) {
-        updateDiary("test", date, data);
+        updateDiary(userAuthState, date, data);
       } else {
-        createDiary("test", data);
+        await createDiaryMutation.mutateAsync({ ...data });
       }
-
       navigate("/diary");
     } else {
       setError(true);

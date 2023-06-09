@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import userIdState from "../../../recoil/userIdState";
-import SurpriseIcon from "../../common/CustomIcon/EmotionIcon/SurpriseIcon";
+import SurprisedIcon from "../../common/CustomIcon/EmotionIcon/SurprisedIcon";
 import SadIcon from "../../common/CustomIcon/EmotionIcon/SadIcon";
-import NaturalIcon from "../../common/CustomIcon/EmotionIcon/NaturalIcon";
+import NeutralCard from "../../common/CustomIcon/EmotionIcon/NeutralIcon";
 import HappyIcon from "../../common/CustomIcon/EmotionIcon/HappyIcon";
 import AngryIcon from "../../common/CustomIcon/EmotionIcon/AngryIcon";
 
@@ -46,11 +46,11 @@ const JourneyDetail = () => {
   const getEmotion = eng => {
     switch (eng) {
       case "surprised":
-        return { name: "흥분", icon: <SurpriseIcon size="6.7rem" /> };
+        return { name: "흥분", icon: <SurprisedIcon size="6.7rem" /> };
       case "sad":
         return { name: "슬픔", icon: <SadIcon size="6.7rem" /> };
       case "neutral":
-        return { name: "평온", icon: <NaturalIcon size="5.7rem" /> };
+        return { name: "평온", icon: <NeutralCard size="5.7rem" /> };
       case "happy":
         return { name: "기쁨", icon: <HappyIcon size="6.7rem" /> };
       case "angry":

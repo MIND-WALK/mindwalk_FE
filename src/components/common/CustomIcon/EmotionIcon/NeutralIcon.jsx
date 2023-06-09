@@ -1,13 +1,13 @@
 import React from "react";
 
-import Natural from "../../../../assets/emotion/icon/natural-icon.svg";
+import Neutral from "../../../../assets/emotion/icon/neutral-icon.svg";
 
-const NaturalIcon = ({ size }) => {
+const NeutralIcon = ({ size }) => {
   return (
     <button>
       <img
-        src={Natural}
-        alt="NaturalIcon"
+        src={Neutral}
+        alt="NeutralIcon"
         style={{
           width: size,
           height: size,
@@ -18,4 +18,4 @@ const NaturalIcon = ({ size }) => {
   );
 };
 
-export default NaturalIcon;
+export default NeutralIcon;

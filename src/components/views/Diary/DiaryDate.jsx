@@ -7,15 +7,15 @@ const DiaryDate = ({ date }) => {
   const year = formattedDate.getFullYear();
   const month = formattedDate.getMonth() + 1;
   const day = formattedDate.getDate();
-  const dayOfWeek = formattedDate.toLocaleDateString("ko-KR", { weekday: "long" }); // 요일
+  const dayOfWeek = formattedDate.toLocaleDateString("ko-KR", { weekday: "long" });
 
   const formattedDateString = `${year}년 ${month}월 ${day}일`;
   const formattedDay = dayOfWeek;
 
   return (
     <Container>
-      <div>{formattedDateString}</div>
-      <div>{formattedDay}</div>
+      <h1>{formattedDateString}</h1>
+      <h2>{formattedDay}</h2>
     </Container>
   );
 };

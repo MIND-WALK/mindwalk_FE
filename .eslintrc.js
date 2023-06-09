@@ -27,6 +27,7 @@ module.exports = {
     "import/prefer-default-export": "off",
     "no-alert": "off",
     "no-underscore-dangle": "off",
+    "react/react-in-jsx-scope": "off",
   },
   settings: {
     "import/no-extraneous-dependencies": [
