@@ -39,7 +39,6 @@ const SelfDiagnosis = () => {
       id: userAuthState,
       emotion: selfEmotion,
     };
-    console.log(body);
     try {
       const response = await axios.post(`/api/emotion/${userAuthState}`, body);
       if (response.status === 201) {
