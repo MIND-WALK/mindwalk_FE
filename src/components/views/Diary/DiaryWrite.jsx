@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import Rating from "../../common/Rating/Rating";
 import DiaryDate from "./DiaryDate";
-import EmotionBox from "./EmtionBox";
+import EmotionBox from "./EmotionBox";
 import ClickButtonBig from "../../common/Buttons/ClickButtonBig";
 import { updateDiary } from "../../../apis/diary";
 import { useCreateDiary, useDiary, useUpdateDiary } from "../../../hooks/queries/useDiary";

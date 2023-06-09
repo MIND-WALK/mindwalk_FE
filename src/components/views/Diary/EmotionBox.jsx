@@ -11,7 +11,7 @@ const emotions = [
   { name: "sad", icon: <SadIcon size="5.2rem" />, color: "#8AB2E5" },
   { name: "neutral", icon: <NeutralIcon size="4.8rem" />, color: "#B3DAC1" },
   { name: "angry", icon: <AngryIcon size="4.5rem" />, color: "#DC6750" },
-  { name: "surprise", icon: <SurprisedIcon size="5.3rem" />, color: "#FAEA94" },
+  { name: "surprised", icon: <SurprisedIcon size="5.3rem" />, color: "#FAEA94" },
 ];
 
 const EmotionBox = ({ selectedEmotion, handleEmotionSelection }) => {
