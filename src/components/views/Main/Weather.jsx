@@ -5,6 +5,7 @@ import useIcon from "../../../hooks/useIcon";
 import usePosition from "../../../hooks/usePosition";
 import { useWeather } from "../../../hooks/queries/useWeather";
 import { useLocation } from "../../../hooks/queries/useLocation";
+import Loading from "../../common/Loading";
 
 const Weather = ({ setCold, userName }) => {
   const { position, getPosition } = usePosition();
@@ -41,7 +42,7 @@ const Weather = ({ setCold, userName }) => {
   }, [weatherData, setCold]);
 
   if (weatherLoading || locationLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (weatherError || locationError) {
@@ -77,7 +78,7 @@ export default Weather;
 
 const Container = styled.div`
   width: 100%;
-  height: 35vh;
+  height: 36rem;
   font-size: 1.6rem;
 
   & > .inner {
