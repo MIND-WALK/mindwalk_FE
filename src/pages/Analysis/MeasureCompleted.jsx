@@ -3,7 +3,6 @@ import styled, { keyframes } from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { AiFillRobot } from "react-icons/ai";
 import { BsHandIndexThumbFill } from "react-icons/bs";
-import { IoIosArrowForward } from "react-icons/io";
 import Slide from "../../components/common/Slide";
 import CompleteModal from "../../components/common/Modal/CompleteModal";
 import HappyCard from "../../components/common/CustomIcon/EmotionCard/HappyCard";
@@ -46,12 +45,10 @@ const MeasureCompleted = () => {
         <Button onClick={() => handleButtonClick("analysis")}>
           <AiIcon />
           AI 측정
-          <IoIosArrowForward />
         </Button>
         <Button onClick={() => handleButtonClick("analysis")}>
           <SelfIcon />
           자가 측정
-          <IoIosArrowForward />
         </Button>
       </ButtonWrapper>
       {modalOpen && (
