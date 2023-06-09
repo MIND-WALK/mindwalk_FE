@@ -23,19 +23,24 @@ const JourneyDetail = () => {
 
       const filteredData = data.filter(detail => detail._id === id);
 
+      console.log(filteredData);
       setJourney(filteredData[0]);
     };
 
     getCompletedJourney();
   }, []);
 
-  const getDate = milliSecond => {
-    const days = Math.floor(milliSecond / (1000 * 60 * 60 * 24)); // 일
-    const hour = String(Math.floor((milliSecond / (1000 * 60 * 60)) % 24)); // 시
-    const minutes = String(Math.floor((milliSecond / (1000 * 60)) % 60)); // 분
-    const second = String(Math.floor((milliSecond / 1000) % 60)); // 초
+  const getDate = (emotionTime, createdAt) => {
+    const start = new Date(emotionTime);
+    const end = new Date(createdAt);
+    const time = end - start;
 
-    return `${hour}시간 ${minutes}분`;
+    const days = Math.floor(time / (1000 * 60 * 60 * 24)); // 일
+    const hour = String(Math.floor((time / (1000 * 60 * 60)) % 24)); // 시
+    const minutes = String(Math.floor((time / (1000 * 60)) % 60)); // 분
+    const second = String(Math.floor((time / 1000) % 60)); // 초
+
+    return `${hour}시간 ${minutes}분 ${second}초`;
   };
 
   const getEmotion = eng => {
@@ -66,7 +71,7 @@ const JourneyDetail = () => {
           <DateText>{journey.date.replace(/-/g, ".")}</DateText>
           <BoldText>{journey.name}</BoldText>
           <TimeAndDistance>
-            소요 시간 {getDate(journey.emotionTime)} | 거리 {journey.distance}
+            소요 시간 {getDate(journey.emotionTime, journey.createdAt)} | 거리 {journey.distance}km
           </TimeAndDistance>
           <BoldText>오늘의 감정</BoldText>
           <Address>{getEmotion(journey.emotion).name}</Address>
