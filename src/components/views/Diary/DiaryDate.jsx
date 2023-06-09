@@ -26,11 +26,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1rem 0;
-  & :first-of-type {
+  margin-bottom: 1rem;
+  & > h1 {
     font-size: 1.8rem;
   }
-  & :last-of-type {
+  & > h2 {
     font-size: 1.6rem;
     font-weight: light;
     color: #5f5f5f;
