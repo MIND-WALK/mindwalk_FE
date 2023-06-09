@@ -9,7 +9,7 @@ import NaturalCard from "../../components/common/CustomIcon/EmotionCard/NaturalC
 import SadCard from "../../components/common/CustomIcon/EmotionCard/SadCard";
 import SurpriseCard from "../../components/common/CustomIcon/EmotionCard/SurpriseCard";
 import userIdState from "../../recoil/userIdState";
-import emotionState from "../../recoil/emotionState";
+import emotionState, { measurementCheckState } from "../../recoil/emotionState";
 import ClickButtonBig from "../../components/common/Buttons/ClickButtonBig";
 
 import { postSelfDiagnosis } from "../../apis/selfdiagnosis";
@@ -20,6 +20,7 @@ const SelfDiagnosis = () => {
   const [selfEmotion, setSelfEmotion] = useState("");
   const userAuthState = useRecoilValue(userIdState);
   const setEmotionState = useSetRecoilState(emotionState);
+  const setMeasurementCheckState = useSetRecoilState(measurementCheckState);
 
   const emotionLists = [
     { emotion: "angry", icon: <AngryCard size="12rem" /> },
@@ -43,6 +44,7 @@ const SelfDiagnosis = () => {
       const response = await axios.post(`/api/emotion/${userAuthState}`, body);
       if (response.status === 201) {
         postSelfDiagnosis(selfEmotion);
+        setMeasurementCheckState(true);
         navigate(`/challenge/${selfEmotion}`);
       }
     } catch (error) {

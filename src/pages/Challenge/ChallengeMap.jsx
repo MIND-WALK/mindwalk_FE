@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
-
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { MdLocationOn } from "react-icons/md";
 import axios from "axios";
 import ChallengeInitTmap from "./ChallengeInitTmap";
 import ClickBottomModal from "../../components/common/Modal/ClickBottomModal";
 import {
+  challengeCheckState,
   challengeDistanceState,
   challengeImgState,
   challengeRangeCheck,
@@ -47,6 +47,8 @@ const ChallengeMap = () => {
   const [currentLocationLat, setCurrentLocationLat] = useRecoilState(currentLocationLatState);
 
   const [challengeImg, setChallengeImg] = useRecoilState(challengeImgState);
+
+  const setChallengeCheckState = useSetRecoilState(challengeCheckState);
 
   const navigate = useNavigate();
   const currentDate = getCurrentDate();
@@ -94,6 +96,7 @@ const ChallengeMap = () => {
 
     try {
       if (locationDistance < 1000) {
+        setChallengeCheckState(true);
         await axios.post(url, body);
         setChallengeCheck(true);
       } else {

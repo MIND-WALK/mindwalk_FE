@@ -5,14 +5,18 @@ import { styled } from "styled-components";
 import { useRecoilState } from "recoil";
 import useMeasurementCheck from "../../../hooks/useMeasurementCheck";
 import useChallengeCheck from "../../../hooks/useChallengeCheck";
-import emotionState from "../../../recoil/emotionState";
+import emotionState, { measurementCheckState } from "../../../recoil/emotionState";
+import { challengeCheckState } from "../../../recoil/challenge";
 
 const TabBar = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState("my_journey");
-  const [measurementStatus] = useMeasurementCheck();
-  const [challengeStatus] = useChallengeCheck();
   const [userEmotionState] = useRecoilState(emotionState);
+  const [measurementRecoilState] = useRecoilState(measurementCheckState);
+  const [challengeRecoilState] = useRecoilState(challengeCheckState);
+
+  useMeasurementCheck();
+  useChallengeCheck();
 
   const handleTabClick = page => {
     if (currentPage === page) {
@@ -25,11 +29,11 @@ const TabBar = () => {
   };
 
   const handleChallengeClick = () => {
-    if (!measurementStatus && !challengeStatus) {
+    if (!measurementRecoilState && !challengeRecoilState) {
       handleTabClick("measure");
-    } else if (measurementStatus && !challengeStatus) {
+    } else if (measurementRecoilState && !challengeRecoilState) {
       handleTabClick(`challenge/${userEmotionState.emotion}`);
-    } else if (measurementStatus && challengeStatus) {
+    } else if (measurementRecoilState && challengeRecoilState) {
       handleTabClick("challenge/completed");
     }
   };
