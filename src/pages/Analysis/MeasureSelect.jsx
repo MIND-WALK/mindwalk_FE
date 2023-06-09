@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { AiFillRobot } from "react-icons/ai";
 import { BsHandIndexThumbFill } from "react-icons/bs";
 import { IoIosArrowForward } from "react-icons/io";
-import Slider from "../../components/common/Slider";
 import Slide from "../../components/common/Slide/index";
 
 const MeasureSelect = () => {
