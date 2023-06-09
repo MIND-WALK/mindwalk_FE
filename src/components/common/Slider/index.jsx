@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import Angry from "../../../assets/emotion/card/angry-card.svg";
 import Happy from "../../../assets/emotion/card/happy-card.svg";
-import Natural from "../../../assets/emotion/card/natural-card.svg";
+import Neutral from "../../../assets/emotion/card/neutral-card.svg";
 import Sad from "../../../assets/emotion/card/sad-card.svg";
-import Surprise from "../../../assets/emotion/card/surprise-card.svg";
+import Surprised from "../../../assets/emotion/card/surprised-card.svg";
 
-const images = [Angry, Happy, Natural, Sad, Surprise];
+const images = [Angry, Happy, Neutral, Sad, Surprised];
 
 const Slider = () => {
   const [currentIndex, setCurrentIndex] = useState(0);

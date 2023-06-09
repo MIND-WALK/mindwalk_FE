@@ -5,9 +5,9 @@ import { styled } from "styled-components";
 import { postSelfDiagnosis } from "../../apis/selfdiagnosis";
 import AngryCard from "../../components/common/CustomIcon/EmotionCard/AngryCard";
 import HappyCard from "../../components/common/CustomIcon/EmotionCard/HappyCard";
-import NaturalCard from "../../components/common/CustomIcon/EmotionCard/NaturalCard";
+import NeutralCard from "../../components/common/CustomIcon/EmotionCard/NeutralCard";
 import SadCard from "../../components/common/CustomIcon/EmotionCard/SadCard";
-import SurpriseCard from "../../components/common/CustomIcon/EmotionCard/SurpriseCard";
+import SurprisedCard from "../../components/common/CustomIcon/EmotionCard/SurprisedCard";
 import userIdState from "../../recoil/userIdState";
 import emotionState from "../../recoil/emotionState";
 import ClickButtonBig from "../../components/common/Buttons/ClickButtonBig";
@@ -23,9 +23,9 @@ const SelfDiagnosis = () => {
   const emotionLists = [
     { emotion: "angry", icon: <AngryCard size="12rem" /> },
     { emotion: "happy", icon: <HappyCard size="12rem" /> },
-    { emotion: "natural", icon: <NaturalCard size="12rem" /> },
+    { emotion: "neutral", icon: <NeutralCard size="12rem" /> },
     { emotion: "sad", icon: <SadCard size="12rem" /> },
-    { emotion: "surprise", icon: <SurpriseCard size="12rem" /> },
+    { emotion: "surprised", icon: <SurprisedCard size="12rem" /> },
   ];
 
   const handleEmotionClick = emotion => {
