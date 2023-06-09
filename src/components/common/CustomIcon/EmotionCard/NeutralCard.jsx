@@ -1,13 +1,13 @@
 import React from "react";
 
-import Natural from "../../../../assets/emotion/card/natural-card.svg";
+import Neutral from "../../../../assets/emotion/card/neutral-card.svg";
 
-const NaturalCard = ({ size }) => {
+const NeutralCard = ({ size }) => {
   return (
     <button>
       <img
-        src={Natural}
-        alt="NaturalCard"
+        src={Neutral}
+        alt="NeutralCard"
         style={{
           width: size,
           height: size,
@@ -18,4 +18,4 @@ const NaturalCard = ({ size }) => {
   );
 };
 
-export default NaturalCard;
+export default NeutralCard;

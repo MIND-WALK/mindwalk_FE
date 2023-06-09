@@ -1,13 +1,13 @@
 import React from "react";
 
-import Surprise from "../../../../assets/emotion/card/surprise-card.svg";
+import Surprised from "../../../../assets/emotion/icon/surprised-icon.svg";
 
-const SurpriseCard = ({ size }) => {
+const SurprisedIcon = ({ size }) => {
   return (
     <button>
       <img
-        src={Surprise}
-        alt="SurpriseCard"
+        src={Surprised}
+        alt="SurprisedIcon"
         style={{
           width: size,
           height: size,
@@ -18,4 +18,4 @@ const SurpriseCard = ({ size }) => {
   );
 };
 
-export default SurpriseCard;
+export default SurprisedIcon;
