@@ -13,7 +13,6 @@ const Main = () => {
   return (
     <Wrapper className="App" cold={cold !== undefined ? cold.toString() : undefined}>
       <Weather setCold={setCold} userName={userAuthState} />
-      <CompletedJourney />
     </Wrapper>
   );
 };
