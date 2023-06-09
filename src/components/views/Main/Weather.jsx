@@ -6,6 +6,7 @@ import usePosition from "../../../hooks/usePosition";
 import { useWeather } from "../../../hooks/queries/useWeather";
 import { useLocation } from "../../../hooks/queries/useLocation";
 import Loading from "../../common/Loading";
+import CompletedJourney from "../../../pages/CompletedJourney";
 
 const Weather = ({ setCold, userName }) => {
   const { position, getPosition } = usePosition();
@@ -69,7 +70,8 @@ const Weather = ({ setCold, userName }) => {
         <div className="location-box">
           <IoLocationSharp size="2rem" /> {locationData}
         </div>
-      </div>
+      </div>{" "}
+      <CompletedJourney />
     </Container>
   );
 };
@@ -78,11 +80,12 @@ export default Weather;
 
 const Container = styled.div`
   width: 100%;
-  height: 36rem;
+  height: 35rem;
   font-size: 1.6rem;
 
   & > .inner {
     margin: 2rem;
+    margin-bottom: 0;
 
     & > .user-box {
       display: flex;
