@@ -10,13 +10,14 @@ import {
   locationLongState,
   locationNameState,
   challengeRangeCheck,
+  challengeDistanceState,
 } from "../../recoil/challenge";
 
 const ChallengeInitTmap = ({ selectedPlace }) => {
   const [resultdrawArr, setResultdrawArr] = useState([]);
   const [endLong, setEndLong] = useRecoilState(locationLongState);
   const [endLat, setEndLat] = useRecoilState(locationLatState);
-  const [resultDistanceText, setResultDistanceText] = useState("");
+  const [resultDistanceText, setResultDistanceText] = useRecoilState(challengeDistanceState);
   const [resultTimeText, setResultTimeText] = useState("");
 
   const [currentLocationLong, setCurrentLocationLong] = useRecoilState(currentLocationLongState);

@@ -1,6 +1,7 @@
 const PATHNAME_TITLE_MAP = {
   self_diagnosis: "자가진단",
   measure: "오늘 감정 측정",
+  "measure/completed": "오늘 감정 측정",
   my_journey: "나의 여정",
   diary: "감정일기",
   "my_journey/completed": "나의 여정",
@@ -14,6 +15,7 @@ const PATHNAME_TITLE_MAP = {
   "challenge/angry": "오늘 챌린지",
   "challenge/surprised": "오늘 챌린지",
   challenge_map: "오늘 챌린지",
+  "challenge/completed": "오늘 챌린지",
 };
 
 export default PATHNAME_TITLE_MAP;

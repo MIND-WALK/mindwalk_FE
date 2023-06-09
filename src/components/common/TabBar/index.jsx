@@ -54,7 +54,7 @@ const TabBar = () => {
       >
         {/* challenge */}
         <FiFlag size={20} />
-        <TabBarLabel>나의여정</TabBarLabel>
+        <TabBarLabel>나의 여정</TabBarLabel>
       </TabBarItem>
       <TabBarItem onClick={() => handleTabClick("diary")}>
         {/* diary */}

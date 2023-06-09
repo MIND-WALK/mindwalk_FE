@@ -8,6 +8,7 @@ import axios from "axios";
 import ChallengeInitTmap from "./ChallengeInitTmap";
 import ClickBottomModal from "../../components/common/Modal/ClickBottomModal";
 import {
+  challengeDistanceState,
   challengeImgState,
   challengeRangeCheck,
   currentLocationLatState,
@@ -18,6 +19,7 @@ import {
 } from "../../recoil/challenge";
 import userIdState from "../../recoil/userIdState";
 import CurrentLocation from "../../components/views/Challenge/CurrentLocation";
+import emotionState from "../../recoil/emotionState";
 
 function getCurrentDate() {
   const date = new Date();
@@ -31,6 +33,8 @@ function getCurrentDate() {
 const ChallengeMap = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [challengeCheck, setChallengeCheck] = useRecoilState(challengeRangeCheck);
+  const [emotion, setEmotion] = useRecoilState(emotionState);
+  const [resultDistanceText, setResultDistanceText] = useRecoilState(challengeDistanceState);
 
   // 챌린지
   const [selectedPlace, setSelectedPlace] = useRecoilState(locationNameState);
@@ -83,6 +87,9 @@ const ChallengeMap = () => {
       check: challengeCheck,
       user: userAuthState,
       date: currentDate,
+      distance: resultDistanceText,
+      emotion: emotion.emotion,
+      emotionTime: emotion.time,
     };
 
     try {
