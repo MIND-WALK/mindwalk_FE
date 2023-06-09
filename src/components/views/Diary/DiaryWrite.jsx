@@ -125,11 +125,11 @@ const Container = styled.div`
     border-radius: 8;
     resize: none;
     width: 100%;
-    height: 12rem;
+    height: 11rem;
     font-size: 1.6rem;
     font-family: "Pretendard-Regular", "sans-serif";
     box-sizing: border-box;
-    padding: 1.5rem;
+    padding: 1rem;
   }
 `;
 
