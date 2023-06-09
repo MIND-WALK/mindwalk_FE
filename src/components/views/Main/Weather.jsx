@@ -70,7 +70,7 @@ const Weather = ({ setCold, userName }) => {
         <div className="location-box">
           <IoLocationSharp size="2rem" /> {locationData}
         </div>
-      </div>{" "}
+      </div>
       <CompletedJourney />
     </Container>
   );
@@ -113,7 +113,7 @@ const Container = styled.div`
       font-size: 2rem;
       font-weight: bold;
       text-align: center;
-      margin: 2rem 0;
+      margin-bottom: 3rem;
     }
   }
 `;
