@@ -19,7 +19,7 @@ const JourneyDetail = () => {
 
   useEffect(() => {
     const getCompletedJourney = async () => {
-      const { data } = await axios.get(`/api/user/trip/test`);
+      const { data } = await axios.get(`/api/user/trip/${userAuthState}`);
 
       const filteredData = data.filter(detail => detail._id === id);
 
