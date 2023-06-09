@@ -229,7 +229,7 @@ const Analysis = () => {
     try {
       const response = await axios.post(`/api/emotion/${userAuthState}`, body);
       if (response.status === 201) {
-        setEmotionState({ emotion, time: new Date() });
+        setEmotionState({ emotion, time: new Date().toLocaleString() });
         setMeasurementCheckState(true);
         navigate(`/challenge/${emotion}`);
       }
