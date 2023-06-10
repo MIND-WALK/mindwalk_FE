@@ -58,9 +58,9 @@ const ChallengeMap = () => {
     setModalOpen(false);
     document.documentElement.style.overflow = "auto";
   };
-  const handleClickHome = () => {
+  const handleClickJourney = () => {
     setModalOpen(false);
-    navigate("/home");
+    navigate("/my_journey");
     document.documentElement.style.overflow = "auto";
   };
   const handClickDiary = () => {
@@ -136,10 +136,10 @@ const ChallengeMap = () => {
       {challengeCheck ? (
         <ClickBottomModal
           modalText="챌린지 성공!"
-          buttonLeftText="홈으로 가기"
+          buttonLeftText="여정으로 가기"
           buttonRightText="감정일기 쓰기"
           modalOpen={modalOpen}
-          buttonLeftOnClick={handleClickHome}
+          buttonLeftOnClick={handleClickJourney}
           buttonRightOnClick={handClickDiary}
         />
       ) : (
