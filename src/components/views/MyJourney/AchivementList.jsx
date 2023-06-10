@@ -14,7 +14,7 @@ const AchivementList = ({ questInfo }) => {
               if (index !== 0 && (index + 1) % 10 === 0)
                 return (
                   <CompletedQuest key={index}>
-                    <LevelImage>{getLevelIcon((index + 1) / 10, "6rem")}</LevelImage>
+                    <LevelImage>{getLevelIcon((index + 1) / 10 + 1, "6rem")}</LevelImage>
                     <TextBox>
                       <DateText>{date.replace(/-/g, ".")}</DateText>
                       <p>여정 {index + 1}개 달성</p>
