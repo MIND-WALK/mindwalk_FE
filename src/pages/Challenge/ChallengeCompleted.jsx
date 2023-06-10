@@ -25,7 +25,7 @@ const ChallengeCompleted = () => {
   }, []);
 
   // 예시 데이터
-  const selectedPlace = "선택한 장소 이름";
+  const selectedPlace = "선택 장소";
   const estimatedTime = "소요시간";
   const distance = "거리";
 
@@ -37,11 +37,11 @@ const ChallengeCompleted = () => {
 
   return (
     <ChallengeBox>
-      <Title>{`${selectedPlace}으로 바람 쐬러 가요~!`}</Title>
+      <Title>{`${selectedPlace} 바람 쐬러 가요~!`}</Title>
       <MapIcon className="icon-map" />
       <LocationContainer>
         <LocationIcon />
-        <LocationText> 현재 위치 | 00구 00동</LocationText>
+        <LocationText> 현재 위치 | </LocationText>
       </LocationContainer>
       <MapBox>{/* 지도 API로 구현 */}</MapBox>
       <SelectedInfo>
@@ -59,7 +59,8 @@ const ChallengeCompleted = () => {
           buttonRightOnClick={handClickDiary}
           completeTextTop="오늘 챌린지"
           completeTextMiddle="이미 성공 완료!"
-          completeTextBottom="일기를 쓰러가거나 홈으로 가요."
+          completeTextBottom1="소중한 한걸음이 모여 언젠가는 "
+          completeTextBottom2="새싹이 움터 나무가 될 거에요."
         />
       )}
     </ChallengeBox>

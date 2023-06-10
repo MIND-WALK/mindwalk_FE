@@ -196,7 +196,7 @@ const CompleteButton = styled.button`
   border-radius: 4rem;
   text-align: center;
   position: fixed;
-  bottom: 7rem;
+  bottom: 8.2rem;
   left: 50%;
   transform: translateX(-50%);
   font-size: 1.4rem;

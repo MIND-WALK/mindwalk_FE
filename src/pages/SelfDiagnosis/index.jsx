@@ -97,6 +97,7 @@ const EmotionContainer = styled.div`
   align-items: center;
   gap: 2.5rem;
   margin: auto;
+  padding-right: 1rem;
 `;
 
 const EmotionButton = styled.button`
