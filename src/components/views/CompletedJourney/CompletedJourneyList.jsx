@@ -28,21 +28,23 @@ const CompletedJourneyList = () => {
   return (
     <Container>
       <Title>완수한 여정</Title>
-      <JourneyList>
-        {completedJourney.map(journey => (
-          <Journey
-            key={journey._id}
-            onClick={() => navigate(`/my_journey/completed/${journey._id}`)}
-          >
-            <PlaceImage src={journey.img} />
-            <TextBox>
-              <DateText>
-                <span>{journey.date.replace(/-/g, ".")}</span>
-              </DateText>
-              <p>{journey.name}</p>
-            </TextBox>
-          </Journey>
-        ))}
+      <JourneyList small={pathname === "/home" ? "small" : undefined}>
+        {completedJourney
+          .map(journey => (
+            <Journey
+              key={journey._id}
+              onClick={() => navigate(`/my_journey/completed/${journey._id}`)}
+            >
+              <PlaceImage src={journey.img} />
+              <TextBox>
+                <DateText>
+                  <span>{journey.date.replace(/-/g, ".")}</span>
+                </DateText>
+                <p>{journey.name}</p>
+              </TextBox>
+            </Journey>
+          ))
+          .reverse()}
         {completedJourney.length === 0 && (
           <EmptyArray small={pathname === "/home" ? "small" : undefined}>
             아직 완수한 여정이 없어요.
@@ -58,11 +60,15 @@ export default CompletedJourneyList;
 const Container = styled.div`
   width: 100%;
   height: 100%;
+  padding-bottom: 6rem;
 `;
 
 const JourneyList = styled.ul`
   width: 100%;
-  height: 500px;
+  height: ${({ small }) => {
+    if (small) return "200px";
+    return "500px";
+  }};
   margin-top: 3rem;
   padding-bottom: 6rem;
   overflow-y: auto;
