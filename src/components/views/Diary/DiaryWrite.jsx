@@ -123,6 +123,7 @@ const Container = styled.div`
 
   & textarea {
     border-radius: 8;
+    border: 1px solid #000;
     resize: none;
     width: 100%;
     height: 11rem;
