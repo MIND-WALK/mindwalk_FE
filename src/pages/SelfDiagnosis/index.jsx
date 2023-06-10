@@ -23,8 +23,8 @@ const SelfDiagnosis = () => {
   const setMeasurementCheckState = useSetRecoilState(measurementCheckState);
 
   const emotionLists = [
-    { emotion: "angry", icon: <AngryCard size="12rem" /> },
-    { emotion: "happy", icon: <HappyCard size="12rem" /> },
+    { emotion: "angry", icon: <AngryCard size="23rem" /> },
+    { emotion: "happy", icon: <HappyCard size="23rem" /> },
     { emotion: "neutral", icon: <NeutralCard size="12rem" /> },
     { emotion: "sad", icon: <SadCard size="12rem" /> },
     { emotion: "surprised", icon: <SurprisedCard size="12rem" /> },
@@ -43,7 +43,7 @@ const SelfDiagnosis = () => {
       const response = await axios.post(`/api/emotion/${userAuthState}`, body);
       if (response.status === 201) {
         postSelfDiagnosis(selfEmotion);
-        setEmotionState({ emotion: selfEmotion, time: new Date().toLocaleString() });
+        setEmotionState({ emotion: selfEmotion, time: new Date() });
         setMeasurementCheckState(true);
         navigate(`/challenge/${selfEmotion}`);
       }
