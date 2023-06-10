@@ -8,6 +8,7 @@ import { useDeleteDiary, useDiary } from "../../../hooks/queries/useDiary";
 import { useEmotion } from "../../../hooks/useEmotion";
 import Loading from "../../common/Loading";
 import userIdState from "../../../recoil/userIdState";
+import NoDiaryDetail from "./NoDiaryDetail";
 
 const DiaryDetail = () => {
   const [userAuthState] = useRecoilState(userIdState);
@@ -23,7 +24,7 @@ const DiaryDetail = () => {
   }
 
   if (!data || data.length === 0) {
-    return <p>데이터가 없습니다.</p>;
+    return <NoDiaryDetail />;
   }
 
   const { diary, color, score } = data;
