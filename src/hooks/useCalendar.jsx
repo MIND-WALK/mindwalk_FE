@@ -133,7 +133,7 @@ const useCalendar = ({ colorData }) => {
             today.date === dayNumber;
           const isSunday = currentDate.getDay() === 0;
           const isSaturday = currentDate.getDay() === 6;
-          const dayStyle = {
+          let dayStyle = {
             backgroundColor: "transparent",
           };
 
@@ -147,11 +147,16 @@ const useCalendar = ({ colorData }) => {
           });
 
           if (matchingDates.length > 0) {
-            dayStyle.backgroundColor = matchingDates[0].color;
+            dayStyle = {
+              backgroundColor: matchingDates[0].color,
+            };
           }
 
           if (isToday) {
-            dayStyle.backgroundColor = colorData.color;
+            dayStyle = {
+              ...dayStyle,
+              backgroundColor: matchingDates.length > 0 ? matchingDates[0].color : colorData.color,
+            };
           }
 
           dayArr.push(
@@ -171,16 +176,7 @@ const useCalendar = ({ colorData }) => {
     }
 
     return dayArr;
-  }, [
-    selectedYear,
-    selectedMonth,
-    dateTotalCount,
-    handleSelectDay,
-    today,
-    week,
-    colorData,
-    colorData.color,
-  ]);
+  }, [selectedYear, selectedMonth, dateTotalCount, handleSelectDay, today, week, colorData]);
 
   return {
     today,
