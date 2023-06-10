@@ -53,7 +53,7 @@ const SelfDiagnosis = () => {
   return (
     <DiagnosisContainer>
       <TitleContainer>
-        <MainTitle>오늘 박나나님의 감정은 어떤가요?</MainTitle>
+        <MainTitle>오늘 {userAuthState}님의 감정은 어떤가요?</MainTitle>
         <SubTitle>당신의 기분을 가장 잘 나타내는 것으로 1개만 골라주세요.</SubTitle>
       </TitleContainer>
       <EmotionContainer>
