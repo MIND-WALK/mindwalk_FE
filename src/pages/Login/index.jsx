@@ -6,11 +6,13 @@ import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import loginBg from "../../assets/img/Login/loginBg.png";
 import userIdState from "../../recoil/userIdState";
+import userLevelCheckState from "../../recoil/userLevelCheckState";
 
 const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [userAuthState, setUserAuthState] = useRecoilState(userIdState);
+  const [userLevel, setUserLevel] = useRecoilState(userLevelCheckState);
 
   const navigate = useNavigate();
   const url = process.env.REACT_APP_API_URL;
@@ -37,6 +39,7 @@ const Login = () => {
         setUserAuthState(id);
         alert("로그인 되었습니다.");
         navigate("/home");
+        setUserLevel(response.data.check); // 설정하기
       }
     } catch (error) {
       console.error(error);
