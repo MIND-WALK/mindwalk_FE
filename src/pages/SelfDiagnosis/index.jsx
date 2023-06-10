@@ -42,7 +42,6 @@ const SelfDiagnosis = () => {
     try {
       const response = await axios.post(`/api/emotion/${userAuthState}`, body);
       if (response.status === 201) {
-        postSelfDiagnosis(selfEmotion);
         setEmotionState({ emotion: selfEmotion, time: new Date() });
         setMeasurementCheckState(true);
         navigate(`/challenge/${selfEmotion}`);
