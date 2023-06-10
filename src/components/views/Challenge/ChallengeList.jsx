@@ -52,7 +52,7 @@ const ChallengeList = ({ emotion }) => {
           <LocationText>
             {/* <CurrentLocation />  */}
             {/* 현재위치 */}
-            <p>현재 위치 | 서울특별시 동대문구</p>
+            <p>현재 위치 | 서울특별시 중구 을지로</p>
           </LocationText>
         </LocationContainer>
 
