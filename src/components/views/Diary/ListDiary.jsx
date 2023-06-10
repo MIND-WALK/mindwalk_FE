@@ -44,6 +44,8 @@ const Container = styled.div`
     grid-gap: 0.5rem;
     align-items: center;
     border-radius: 0.8rem;
+    cursor: pointer;
+
     .color-box {
       text-align: center;
     }
