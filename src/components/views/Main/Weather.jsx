@@ -23,8 +23,10 @@ const Weather = ({ setCold, userName }) => {
     fetchPosition();
   }, []);
 
-  const lat = position?.coords?.latitude;
-  const lon = position?.coords?.longitude;
+  // const lat = position?.coords?.latitude;
+  // const lon = position?.coords?.longitude;
+  const lat = 37.5674;
+  const lon = 127.0097;
 
   const {
     data: weatherData,
@@ -68,7 +70,8 @@ const Weather = ({ setCold, userName }) => {
         <div className="weather-box">{icon}</div>
         <div className="title-box">{title}</div>
         <div className="location-box">
-          <IoLocationSharp size="2rem" /> {locationData}
+          {/* <IoLocationSharp size="2rem" /> {locationData} */}
+          <IoLocationSharp size="2rem" /> 서울특별시 중구 을지로
         </div>
       </div>
       <CompletedJourney />
@@ -107,6 +110,7 @@ const Container = styled.div`
     & > .weather-box {
       display: flex;
       justify-content: center;
+      margin-bottom: 1rem;
     }
 
     & > .title-box {
