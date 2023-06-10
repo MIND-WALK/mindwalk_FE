@@ -24,7 +24,7 @@ const Level = ({ level }) => {
         </Button>
       </LevelTop>
       <LevelBox>
-        <LevelImage>{getLevelIcon(1, "10rem")}</LevelImage>
+        <LevelImage>{getLevelIcon(level, "10rem")}</LevelImage>
         <LevelText>Lv. {level}</LevelText>
       </LevelBox>
     </Container>

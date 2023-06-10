@@ -4,6 +4,13 @@ import { MdOutlineEmojiEvents, MdWebAsset } from "react-icons/md";
 import LEVEL from "../../../constants/level";
 
 const AchivementTracker = ({ questInfo, nextLevel }) => {
+  const getRemainJourney = level => {
+    if (level >= 5) return 0;
+    return LEVEL[nextLevel].condition - questInfo.check < 0
+      ? 0
+      : LEVEL[nextLevel].condition - questInfo.check;
+  };
+
   return (
     <Container>
       <CountBox>
@@ -18,7 +25,7 @@ const AchivementTracker = ({ questInfo, nextLevel }) => {
         <MdWebAsset size="2.4rem" />
         <div>
           <p>다음 레벨까지 남은 여정</p>
-          <Count>{LEVEL[nextLevel].condition - questInfo.check}개</Count>
+          <Count>{getRemainJourney(nextLevel)}개</Count>
         </div>
       </CountBox>
     </Container>
