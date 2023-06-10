@@ -44,7 +44,9 @@ const CompletedJourneyList = () => {
           </Journey>
         ))}
         {completedJourney.length === 0 && (
-          <EmptyArray small={pathname === "/home"}>아직 완수한 여정이 없어요.</EmptyArray>
+          <EmptyArray small={pathname === "/home" ? "small" : undefined}>
+            아직 완수한 여정이 없어요.
+          </EmptyArray>
         )}
       </JourneyList>
     </Container>
