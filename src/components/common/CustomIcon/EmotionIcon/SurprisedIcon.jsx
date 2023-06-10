@@ -1,13 +1,13 @@
 import React from "react";
 
-import Natural from "../../../../assets/emotion/icon/natural-icon.svg";
+import Surprised from "../../../../assets/emotion/icon/surprised-icon.svg";
 
-const NaturalIcon = ({ size }) => {
+const SurprisedIcon = ({ size }) => {
   return (
     <button>
       <img
-        src={Natural}
-        alt="NaturalIcon"
+        src={Surprised}
+        alt="SurprisedIcon"
         style={{
           width: size,
           height: size,
@@ -18,4 +18,4 @@ const NaturalIcon = ({ size }) => {
   );
 };
 
-export default NaturalIcon;
+export default SurprisedIcon;

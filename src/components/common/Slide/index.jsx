@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-import AngryCard from "../../../assets/emotion/card/angry-card.svg";
-import HappyCard from "../../../assets/emotion/card/happy-card.svg";
-import NaturalCard from "../../../assets/emotion/card/natural-card.svg";
-import SadCard from "../../../assets/emotion/card/sad-card.svg";
-import SurpriseCard from "../../../assets/emotion/card/surprise-card.svg";
 import useSlide from "../../../hooks/useSlide";
+import AngryCard from "../CustomIcon/EmotionCard/AngryCard";
+import HappyCard from "../CustomIcon/EmotionCard/HappyCard";
+import SadCard from "../CustomIcon/EmotionCard/SadCard";
+import NeutralCard from "../CustomIcon/EmotionCard/NeutralCard";
+import SurprisedCard from "../CustomIcon/EmotionCard/SurprisedCard";
 
 const Slide = () => {
   const images = [
-    { emotion: "angry", icon: <AngryCard size="12rem" /> },
-    { emotion: "happy", icon: <HappyCard size="12rem" /> },
-    { emotion: "neutral", icon: <NaturalCard size="12rem" /> },
-    { emotion: "sad", icon: <SadCard size="12rem" /> },
-    { emotion: "surprised", icon: <SurpriseCard size="12rem" /> },
+    { emotion: "angry", icon: <AngryCard height="23rem" /> },
+    { emotion: "happy", icon: <HappyCard height="23rem" /> },
+    { emotion: "neutral", icon: <NeutralCard height="23rem" /> },
+    { emotion: "sad", icon: <SadCard height="23rem" /> },
+    { emotion: "surprised", icon: <SurprisedCard height="23rem" /> },
   ];
 
   const slideIndex = useSlide(images.length);
@@ -35,7 +35,10 @@ const SliderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 300px;
+  width: 100%;
+  height: 25rem;
+  padding-top: 3rem;
+  cursor: none;
 `;
 
 const SliderItem = styled.div`
@@ -48,6 +51,6 @@ const SliderImage = styled.div`
 
   svg {
     width: 100%;
-    height: auto;
+    height: 30rem;
   }
 `;

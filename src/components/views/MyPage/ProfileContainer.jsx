@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 import { useRecoilState } from "recoil";
 
 import userIdState from "../../../recoil/userIdState";
-import levelImg from "../../../assets/img/Level/level1.png";
+import Level1 from "../../common/CustomIcon/UserIcon/Level1";
 
 const ProfileContainer = () => {
   const [userAuthState, setUserAuthState] = useRecoilState(userIdState);
@@ -11,7 +11,9 @@ const ProfileContainer = () => {
   return (
     <ProfileBox>
       <ProfileContentConainer>
-        <ProfileImg style={{ background: `url(${levelImg}) no-repeat center/cover` }}></ProfileImg>
+        <ProfileImg>
+          <Level1 size="10rem" />
+        </ProfileImg>
         <Text>{userAuthState} 님 환영합니다!</Text>
       </ProfileContentConainer>
     </ProfileBox>
@@ -38,7 +40,10 @@ const ProfileImg = styled.div`
   width: 12.2rem;
   height: 12.2rem;
   margin: 0 auto 2rem auto;
-  border: 1px solid #787878;
+  background-color: #fbf8db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 const Text = styled.p`
   font-size: 1.8rem;

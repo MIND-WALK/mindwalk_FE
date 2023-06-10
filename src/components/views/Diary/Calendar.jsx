@@ -63,6 +63,7 @@ const Container = styled.div`
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 0.3rem 1rem;
     text-align: center;
+    cursor: pointer;
   }
 
   & .sunday {
