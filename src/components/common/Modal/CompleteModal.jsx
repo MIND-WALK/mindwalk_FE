@@ -12,15 +12,17 @@ const CompleteModal = ({
   modalOpen,
   completeTextTop,
   completeTextMiddle,
-  completeTextBottom,
+  completeTextBottom1,
+  completeTextBottom2,
 }) => {
   return (
     <>
       <TextContainer>
+        <SmileIcon />
         <TextTop>{completeTextTop}</TextTop>
         <TextMiddle>{completeTextMiddle}</TextMiddle>
-        <SmileIcon />
-        <TextBottom>{completeTextBottom}</TextBottom>
+        <TextBottom1>{completeTextBottom1}</TextBottom1>
+        <TextBottom2>{completeTextBottom2}</TextBottom2>
       </TextContainer>
       <ModalContainer className={modalOpen && "modalView"}>
         <Text>{modalText}</Text>
@@ -87,7 +89,7 @@ const TextContainer = styled.div`
   text-align: center;
   position: fixed;
   z-index: 99999;
-  top: 15rem;
+  top: 11rem;
   transition: 0.2s;
   &.modalView {
     bottom: 15rem;
@@ -98,6 +100,7 @@ const TextTop = styled.p`
   font-size: 2.5rem;
   font-weight: 500;
   color: #fff;
+  margin-top: 1rem;
 `;
 const TextMiddle = styled.p`
   font-size: 1.85rem;
@@ -105,11 +108,16 @@ const TextMiddle = styled.p`
   color: #fff;
   margin-top: 1rem;
 `;
-const TextBottom = styled.p`
+const TextBottom1 = styled.p`
   font-size: 1.5rem;
   font-weight: 500;
   color: #fff;
   margin-top: 3rem;
+`;
+const TextBottom2 = styled.p`
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #fff;
 `;
 
 const SmileIcon = styled(AiOutlineSmile)`
