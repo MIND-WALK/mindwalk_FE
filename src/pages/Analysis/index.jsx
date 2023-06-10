@@ -24,6 +24,7 @@ import loading from "../../assets/img/Analysis/loading.gif";
 import userIdState from "../../recoil/userIdState";
 import emotionState, { measurementCheckState } from "../../recoil/emotionState";
 import ClickButtonBig from "../../components/common/Buttons/ClickButtonBig";
+import Loading from "../../components/common/Loading";
 
 // 비디오 사이즈 설정
 const constraints = {
@@ -47,6 +48,7 @@ const Analysis = () => {
     surprised: 0,
   });
   const [emotion, setEmotion] = useState("");
+  const [videoState, setVideoState] = useState(false);
   const userAuthState = useRecoilValue(userIdState);
   const setEmotionState = useSetRecoilState(emotionState);
   const setMeasurementCheckState = useSetRecoilState(measurementCheckState);
@@ -183,6 +185,7 @@ const Analysis = () => {
 
   // 영상 권한 요청
   const startVideo = () => {
+    setVideoState(true);
     navigator.mediaDevices
       .getUserMedia(constraints)
       // eslint-disable-next-line no-return-assign
@@ -241,52 +244,58 @@ const Analysis = () => {
 
   return (
     <PageWrapper>
-      <FaceWrapper ref={wrapRef}>
-        <video ref={videoRef} autoPlay muted onPlay={onPlay} width={640} height={480} />
-      </FaceWrapper>
-      <ContentWrapper>
-        {completed ? (
-          <>
-            <NameText>{`오늘 ${userAuthState}님의 감정은?`}</NameText>
-            <ChartWrapper>
-              <BarChart>
-                <NumText id="neutral">{neutral}</NumText>
-                <Bar id="neutral-bar" />
-              </BarChart>
-              <BarChart>
-                <NumText id="happy">{happy}</NumText>
-                <Bar id="happy-bar" />
-              </BarChart>
-              <BarChart>
-                <NumText id="sad">{sad}</NumText>
-                <Bar id="sad-bar" />
-              </BarChart>
-              <BarChart>
-                <NumText id="angry">{angry}</NumText>
-                <Bar id="angry-bar" />
-              </BarChart>
-              <BarChart>
-                <NumText id="surprised">{surprised}</NumText>
-                <Bar id="surprised-bar" />
-              </BarChart>
-            </ChartWrapper>
-            <LabelWrapper>
-              <ChartLabel>평온</ChartLabel>
-              <ChartLabel>기쁨</ChartLabel>
-              <ChartLabel>슬픔</ChartLabel>
-              <ChartLabel>분노</ChartLabel>
-              <ChartLabel>흥분</ChartLabel>
-            </LabelWrapper>
-          </>
-        ) : (
-          // <Animation />
-          <LoadingImg src={loading} alt="loading" />
-        )}
-      </ContentWrapper>
-      {completed ? (
-        <ClickButtonBig onClick={handleClickResult} buttonText={"감정 분석 완료"} />
+      {!videoState ? (
+        <Loading />
       ) : (
-        <></>
+        <>
+          <FaceWrapper ref={wrapRef}>
+            <video ref={videoRef} autoPlay muted onPlay={onPlay} width={640} height={480} />
+          </FaceWrapper>
+          <ContentWrapper>
+            {completed ? (
+              <>
+                <NameText>{`오늘 ${userAuthState}님의 감정은?`}</NameText>
+                <ChartWrapper>
+                  <BarChart>
+                    <NumText id="neutral">{neutral}</NumText>
+                    <Bar id="neutral-bar" />
+                  </BarChart>
+                  <BarChart>
+                    <NumText id="happy">{happy}</NumText>
+                    <Bar id="happy-bar" />
+                  </BarChart>
+                  <BarChart>
+                    <NumText id="sad">{sad}</NumText>
+                    <Bar id="sad-bar" />
+                  </BarChart>
+                  <BarChart>
+                    <NumText id="angry">{angry}</NumText>
+                    <Bar id="angry-bar" />
+                  </BarChart>
+                  <BarChart>
+                    <NumText id="surprised">{surprised}</NumText>
+                    <Bar id="surprised-bar" />
+                  </BarChart>
+                </ChartWrapper>
+                <LabelWrapper>
+                  <ChartLabel>평온</ChartLabel>
+                  <ChartLabel>기쁨</ChartLabel>
+                  <ChartLabel>슬픔</ChartLabel>
+                  <ChartLabel>분노</ChartLabel>
+                  <ChartLabel>흥분</ChartLabel>
+                </LabelWrapper>
+              </>
+            ) : (
+              // <Animation />
+              <LoadingImg src={loading} alt="loading" />
+            )}
+          </ContentWrapper>
+          {completed ? (
+            <ClickButtonBig onClick={handleClickResult} buttonText={"감정 분석 완료"} />
+          ) : (
+            <></>
+          )}
+        </>
       )}
     </PageWrapper>
   );
