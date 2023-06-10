@@ -45,7 +45,7 @@ const SelfDiagnosis = () => {
         navigate(`/challenge/${selfEmotion}`);
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       alert("감정 결과 전송 실패.");
     }
   };
@@ -100,7 +100,7 @@ const EmotionContainer = styled.div`
   padding-right: 1rem;
 `;
 
-const EmotionButton = styled.button`
+const EmotionButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,18 +125,4 @@ const EmotionButton = styled.button`
 const EmotionImage = styled.div`
   width: 10rem;
   height: 13rem;
-`;
-
-const SubmitButton = styled.div`
-  width: 19.5rem;
-  height: 4.5rem;
-  text-align: center;
-  color: #fff;
-  font-weight: 700;
-  font-size: 1.4rem;
-  line-height: 4.5rem;
-  background: var(--sub-green-color);
-  border-radius: 4rem;
-  margin: 0 auto;
-  margin-top: 3rem;
 `;

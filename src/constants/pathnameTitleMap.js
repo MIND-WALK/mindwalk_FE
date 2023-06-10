@@ -1,5 +1,6 @@
 const PATHNAME_TITLE_MAP = {
-  self_diagnosis: "자가진단",
+  analysis: "AI 감정 측정",
+  self_diagnosis: "자가 감정 측정",
   measure: "오늘 감정 측정",
   "measure/completed": "오늘 감정 측정",
   my_journey: "나의 여정",
