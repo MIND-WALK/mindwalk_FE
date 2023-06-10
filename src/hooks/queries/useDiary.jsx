@@ -1,8 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { createDiary, getAllDiaries, getDiary, updateDiary } from "../../apis/diary";
+import { createDiary, deleteDiary, getAllDiaries, getDiary, updateDiary } from "../../apis/diary";
 
 export const useDiaries = userId => {
-  return useQuery(["diaries", userId], () => getAllDiaries(userId));
+  return useQuery(["diary", userId], () => getAllDiaries(userId));
 };
 
 export const useDiary = (userId, ms) => {
@@ -26,8 +26,9 @@ export const useCreateDiary = userId => {
   const queryClient = useQueryClient();
 
   return useMutation(data => createDiary(userId, data), {
-    onSuccess: () => {
-      queryClient.invalidateQueries("diary");
+    onSuccess: (_, { _id }) => {
+      queryClient.invalidateQueries({ queryKey: ["diary"] });
+      queryClient.invalidateQueries({ queryKey: ["diary", _id] });
     },
   });
 };
@@ -35,7 +36,18 @@ export const useCreateDiary = userId => {
 export const useUpdateDiary = userId => {
   const queryClient = useQueryClient();
 
-  return useMutation((date, data) => updateDiary(userId, date, data), {
+  return useMutation(({ date, data }) => updateDiary(userId, date, data), {
+    onSuccess: (_, { _id }) => {
+      queryClient.invalidateQueries({ queryKey: ["diary"] });
+      queryClient.invalidateQueries({ queryKey: ["diary", _id] });
+    },
+  });
+};
+
+export const useDeleteDiary = userId => {
+  const queryClient = useQueryClient();
+
+  return useMutation(ms => deleteDiary(userId, ms), {
     onSuccess: () => {
       queryClient.invalidateQueries("diary");
     },

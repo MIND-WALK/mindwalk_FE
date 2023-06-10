@@ -6,7 +6,6 @@ import Rating from "../../common/Rating/Rating";
 import DiaryDate from "./DiaryDate";
 import EmotionBox from "./EmotionBox";
 import ClickButtonBig from "../../common/Buttons/ClickButtonBig";
-import { updateDiary } from "../../../apis/diary";
 import { useCreateDiary, useDiary, useUpdateDiary } from "../../../hooks/queries/useDiary";
 import userIdState from "../../../recoil/userIdState";
 
@@ -24,8 +23,8 @@ const DiaryWrite = () => {
   const { data: diaryData, isLoading } = useDiary(userAuthState, date);
   const logId = diaryData ? diaryData._id : null;
 
-  const createDiaryMutation = useCreateDiary(userAuthState);
-  const updateDiaryMutation = useUpdateDiary(userAuthState);
+  const { mutate: createDiaryMutation } = useCreateDiary(userAuthState);
+  const { mutate: updateDiaryMutation } = useUpdateDiary(userAuthState);
 
   useEffect(() => {
     if (!isLoading && diaryData) {
@@ -66,9 +65,9 @@ const DiaryWrite = () => {
       };
 
       if (logId) {
-        updateDiary(userAuthState, date, data);
+        updateDiaryMutation({ date, data });
       } else {
-        await createDiaryMutation.mutateAsync({ ...data });
+        createDiaryMutation({ ...data });
       }
       navigate("/diary");
     } else {

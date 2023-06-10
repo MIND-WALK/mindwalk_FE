@@ -4,9 +4,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import DiaryDate from "./DiaryDate";
 import RatedScore from "../../common/Rating/RatedScore";
-import { useDiary } from "../../../hooks/queries/useDiary";
+import { useDeleteDiary, useDiary } from "../../../hooks/queries/useDiary";
 import { useEmotion } from "../../../hooks/useEmotion";
-import { deleteDiary } from "../../../apis/diary";
 import Loading from "../../common/Loading";
 import userIdState from "../../../recoil/userIdState";
 
@@ -17,6 +16,7 @@ const DiaryDetail = () => {
 
   const navigate = useNavigate();
   const { data, isLoading } = useDiary(userAuthState, date);
+  const { mutate: deleteDiaryMutation } = useDeleteDiary(userAuthState);
 
   if (isLoading) {
     return <Loading />;
@@ -32,9 +32,9 @@ const DiaryDetail = () => {
     navigate(`/diary/write/${date}`);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     alert("일기를 삭제하시겠습니까?");
-    deleteDiary(userAuthState, date);
+    deleteDiaryMutation(date);
     navigate("/diary");
   };
 
