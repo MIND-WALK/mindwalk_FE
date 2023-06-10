@@ -180,7 +180,9 @@ const reset = createGlobalStyle`
     --sub-green-color: #007D37;  
     --sub-yellow-color: #F6EFAD;  
   }
-
+  textarea {
+    border: none;
+  }
 
   @font-face {
     font-family: "Pretendard-Regular";
