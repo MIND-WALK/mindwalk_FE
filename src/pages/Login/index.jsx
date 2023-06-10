@@ -4,14 +4,15 @@ import { AiOutlineSmile } from "react-icons/ai";
 import axios from "axios";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
-import loginLogo from "../../assets/img/loginLogo.png";
-import loginBg from "../../assets/img/loginBg.png";
+import loginBg from "../../assets/img/Login/loginBg.png";
 import userIdState from "../../recoil/userIdState";
+import userLevelCheckState from "../../recoil/userLevelCheckState";
 
 const Login = () => {
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [userAuthState, setUserAuthState] = useRecoilState(userIdState);
+  const [userLevel, setUserLevel] = useRecoilState(userLevelCheckState);
 
   const navigate = useNavigate();
   const url = process.env.REACT_APP_API_URL;
@@ -38,6 +39,7 @@ const Login = () => {
         setUserAuthState(id);
         alert("로그인 되었습니다.");
         navigate("/home");
+        setUserLevel(response.data.check); // 설정하기
       }
     } catch (error) {
       console.error(error);
@@ -48,9 +50,9 @@ const Login = () => {
   return (
     <LoginContainer>
       <LoginWrap>
-        <Logo>
+        {/* <Logo>
           <img src={loginLogo} alt="마인드 워크 로고" />
-        </Logo>
+        </Logo> */}
 
         <LoginBox onSubmit={handleSubmit}>
           <Text>
@@ -84,15 +86,16 @@ export default Login;
 const LoginContainer = styled.div`
   position: relative;
   background: url(${loginBg}) no-repeat;
-  background-size: cover;
+  background-size: 102%;
   width: 375px;
   height: 667px;
 `;
 const LoginWrap = styled.div`
   position: absolute;
-  top: 50%;
+  top: 69%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 33rem;
 `;
 const Logo = styled.h2`
   & > img {
