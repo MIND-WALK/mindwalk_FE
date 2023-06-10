@@ -25,12 +25,12 @@ const MeasureSelect = () => {
         <ButtonWrapper>
           <Button onClick={() => handleButtonClick("analysis")}>
             <AiIcon />
-            AI 측정
+            AI 감정 측정
             <IoIosArrowForward />
           </Button>
           <Button onClick={() => handleButtonClick("self_diagnosis")}>
             <SelfIcon />
-            자가 측정
+            자가 감정 측정
             <IoIosArrowForward />
           </Button>
         </ButtonWrapper>
