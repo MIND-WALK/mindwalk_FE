@@ -12,8 +12,6 @@ import userIdState from "../../recoil/userIdState";
 import emotionState, { measurementCheckState } from "../../recoil/emotionState";
 import ClickButtonBig from "../../components/common/Buttons/ClickButtonBig";
 
-import { postSelfDiagnosis } from "../../apis/selfdiagnosis";
-
 const SelfDiagnosis = () => {
   const navigate = useNavigate();
 
@@ -23,11 +21,11 @@ const SelfDiagnosis = () => {
   const setMeasurementCheckState = useSetRecoilState(measurementCheckState);
 
   const emotionLists = [
-    { emotion: "angry", icon: <AngryCard size="12rem" /> },
-    { emotion: "happy", icon: <HappyCard size="12rem" /> },
-    { emotion: "neutral", icon: <NeutralCard size="12rem" /> },
-    { emotion: "sad", icon: <SadCard size="12rem" /> },
-    { emotion: "surprised", icon: <SurprisedCard size="12rem" /> },
+    { emotion: "angry", icon: <AngryCard height="14rem" /> },
+    { emotion: "happy", icon: <HappyCard height="14rem" /> },
+    { emotion: "neutral", icon: <NeutralCard height="14rem" /> },
+    { emotion: "sad", icon: <SadCard height="14rem" /> },
+    { emotion: "surprised", icon: <SurprisedCard height="14rem" /> },
   ];
 
   const handleEmotionClick = emotion => {
@@ -42,8 +40,7 @@ const SelfDiagnosis = () => {
     try {
       const response = await axios.post(`/api/emotion/${userAuthState}`, body);
       if (response.status === 201) {
-        postSelfDiagnosis(selfEmotion);
-        setEmotionState({ emotion: selfEmotion, time: new Date().toLocaleString() });
+        setEmotionState({ emotion: selfEmotion, time: new Date() });
         setMeasurementCheckState(true);
         navigate(`/challenge/${selfEmotion}`);
       }
@@ -57,7 +54,7 @@ const SelfDiagnosis = () => {
     <DiagnosisContainer>
       <TitleContainer>
         <MainTitle>오늘 박나나님의 감정은 어떤가요?</MainTitle>
-        <SubTitle>당신의 기분을 가장 잘 나타내는 것으로 1개만 골라주세요</SubTitle>
+        <SubTitle>당신의 기분을 가장 잘 나타내는 것으로 1개만 골라주세요.</SubTitle>
       </TitleContainer>
       <EmotionContainer>
         {emotionLists.map((item, index) => (
@@ -89,14 +86,17 @@ const MainTitle = styled.div`
   font-size: 1.8rem;
 `;
 const SubTitle = styled.div`
-  font-size: 1.4remZn;
+  font-size: 1.4rem;
 `;
 const EmotionContainer = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
+  margin: auto;
 `;
 
 const EmotionButton = styled.button`
@@ -106,13 +106,18 @@ const EmotionButton = styled.button`
   background: transparent;
   border: none;
   cursor: pointer;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  /* #007D37 */
   transition: transform 0.2s;
   ${props =>
     props.selected &&
-    "transform: scale(1.1); filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));"};
+    "transform: scale(1.1); filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.365) );"};
   &:hover {
     transform: scale(1.1);
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  }
+  &:first-child {
+    gap: 0;
   }
 `;
 
