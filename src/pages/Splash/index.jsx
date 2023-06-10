@@ -57,10 +57,9 @@ const Splash = () => {
     },
   ];
 
-  const slideCount = slides.length;
   return (
     <Container>
-      <SplashContainer ref={slideContainerRef} activeIndex={activeIndex} slideCount={slideCount}>
+      <SplashContainer ref={slideContainerRef}>
         {slides.map(item => (
           <SlideItem key={item.id}>
             <img src={item.img} alt="slide" />
@@ -72,7 +71,7 @@ const Splash = () => {
         {slides.map((slide, index) => (
           <Dot
             key={slide.id}
-            active={index === activeIndex}
+            activeindex={index === activeIndex ? "true" : "false"}
             onClick={() => handleDotClick(index)}
           />
         ))}
@@ -136,10 +135,11 @@ const DotContainer = styled.div`
 `;
 
 const Dot = styled.div`
-  width: 10px;
-  height: 10px;
+  width: 1rem;
+  height: 1rem;
   margin: 0 5px;
   border-radius: 50%;
-  background-color: ${({ active }) => (active ? "var(--main-green-color)" : "#ccc")};
+  background-color: ${({ activeindex }) =>
+    activeindex === "true" ? "var(--main-green-color)" : "#ccc"};
   cursor: pointer;
 `;

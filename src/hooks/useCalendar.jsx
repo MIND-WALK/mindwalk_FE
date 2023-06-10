@@ -1,9 +1,13 @@
 /* eslint-disable no-restricted-globals */
 import React, { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import { getAllDiaries, getDiary } from "../apis/diary";
+import userIdState from "../recoil/userIdState";
 
 const useCalendar = ({ colorData }) => {
+  const [userAuthState] = useRecoilState(userIdState);
+
   const today = {
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
@@ -20,7 +24,7 @@ const useCalendar = ({ colorData }) => {
   const navigate = useNavigate();
 
   const checkDiaryExistence = async ms => {
-    const diaries = await getAllDiaries("test");
+    const diaries = await getAllDiaries(userAuthState);
     const matchingDiary = diaries.find(diary => diary.date === ms);
     return matchingDiary || null;
   };
@@ -143,8 +147,7 @@ const useCalendar = ({ colorData }) => {
           });
 
           if (matchingDates.length > 0) {
-            // If there are matching dates in colorData, set the background color
-            dayStyle.backgroundColor = matchingDates[0].color; // Assuming you want to use the color of the first matching date
+            dayStyle.backgroundColor = matchingDates[0].color;
           }
 
           if (isToday) {

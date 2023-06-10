@@ -2,15 +2,14 @@ import React from "react";
 
 import Happy from "../../../../assets/emotion/card/happy-card.svg";
 
-const HappyCard = ({ size }) => {
+const HappyCard = ({ height }) => {
   return (
     <button>
       <img
         src={Happy}
         alt="HappyCard"
         style={{
-          width: size,
-          height: size,
+          height,
           background: "transparent",
         }}
       />

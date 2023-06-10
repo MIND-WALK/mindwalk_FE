@@ -4,9 +4,9 @@ import { useParams } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { styled } from "styled-components";
 import userIdState from "../../../recoil/userIdState";
-import SurpriseIcon from "../../common/CustomIcon/EmotionIcon/SurpriseIcon";
+import SurprisedIcon from "../../common/CustomIcon/EmotionIcon/SurprisedIcon";
 import SadIcon from "../../common/CustomIcon/EmotionIcon/SadIcon";
-import NaturalIcon from "../../common/CustomIcon/EmotionIcon/NaturalIcon";
+import NeutralCard from "../../common/CustomIcon/EmotionIcon/NeutralIcon";
 import HappyIcon from "../../common/CustomIcon/EmotionIcon/HappyIcon";
 import AngryIcon from "../../common/CustomIcon/EmotionIcon/AngryIcon";
 
@@ -23,29 +23,34 @@ const JourneyDetail = () => {
 
       const filteredData = data.filter(detail => detail._id === id);
 
+      console.log(filteredData);
       setJourney(filteredData[0]);
     };
 
     getCompletedJourney();
   }, []);
 
-  const getDate = milliSecond => {
-    const days = Math.floor(milliSecond / (1000 * 60 * 60 * 24)); // 일
-    const hour = String(Math.floor((milliSecond / (1000 * 60 * 60)) % 24)); // 시
-    const minutes = String(Math.floor((milliSecond / (1000 * 60)) % 60)); // 분
-    const second = String(Math.floor((milliSecond / 1000) % 60)); // 초
+  const getDate = (emotionTime, createdAt) => {
+    const start = new Date(emotionTime);
+    const end = new Date(createdAt);
+    const time = end - start;
 
-    return `${hour}시간 ${minutes}분`;
+    const days = Math.floor(time / (1000 * 60 * 60 * 24)); // 일
+    const hour = String(Math.floor((time / (1000 * 60 * 60)) % 24)); // 시
+    const minutes = String(Math.floor((time / (1000 * 60)) % 60)); // 분
+    const second = String(Math.floor((time / 1000) % 60)); // 초
+
+    return `${hour}시간 ${minutes}분 ${second}초`;
   };
 
   const getEmotion = eng => {
     switch (eng) {
       case "surprised":
-        return { name: "흥분", icon: <SurpriseIcon size="6.7rem" /> };
+        return { name: "흥분", icon: <SurprisedIcon size="6.7rem" /> };
       case "sad":
         return { name: "슬픔", icon: <SadIcon size="6.7rem" /> };
       case "neutral":
-        return { name: "평온", icon: <NaturalIcon size="5.7rem" /> };
+        return { name: "평온", icon: <NeutralCard size="5.7rem" /> };
       case "happy":
         return { name: "기쁨", icon: <HappyIcon size="6.7rem" /> };
       case "angry":
@@ -66,7 +71,7 @@ const JourneyDetail = () => {
           <DateText>{journey.date.replace(/-/g, ".")}</DateText>
           <BoldText>{journey.name}</BoldText>
           <TimeAndDistance>
-            소요 시간 {getDate(journey.emotionTime)} | 거리 {journey.distance}
+            소요 시간 {getDate(journey.emotionTime, journey.createdAt)} | 거리 {journey.distance}km
           </TimeAndDistance>
           <BoldText>오늘의 감정</BoldText>
           <Address>{getEmotion(journey.emotion).name}</Address>

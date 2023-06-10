@@ -5,6 +5,8 @@ import useIcon from "../../../hooks/useIcon";
 import usePosition from "../../../hooks/usePosition";
 import { useWeather } from "../../../hooks/queries/useWeather";
 import { useLocation } from "../../../hooks/queries/useLocation";
+import Loading from "../../common/Loading";
+import CompletedJourney from "../../../pages/CompletedJourney";
 
 const Weather = ({ setCold, userName }) => {
   const { position, getPosition } = usePosition();
@@ -41,7 +43,7 @@ const Weather = ({ setCold, userName }) => {
   }, [weatherData, setCold]);
 
   if (weatherLoading || locationLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (weatherError || locationError) {
@@ -69,6 +71,7 @@ const Weather = ({ setCold, userName }) => {
           <IoLocationSharp size="2rem" /> {locationData}
         </div>
       </div>
+      <CompletedJourney />
     </Container>
   );
 };
@@ -77,11 +80,12 @@ export default Weather;
 
 const Container = styled.div`
   width: 100%;
-  height: 35vh;
+  height: 35rem;
   font-size: 1.6rem;
 
   & > .inner {
     margin: 2rem;
+    margin-bottom: 0;
 
     & > .user-box {
       display: flex;
@@ -109,7 +113,7 @@ const Container = styled.div`
       font-size: 2rem;
       font-weight: bold;
       text-align: center;
-      margin: 2rem 0;
+      margin-bottom: 3rem;
     }
   }
 `;

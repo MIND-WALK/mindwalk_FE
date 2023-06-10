@@ -20,7 +20,7 @@ const Level = ({ level }) => {
         <Title>현재 레벨</Title>
         <Button onClick={goToCompletedJourneyPage}>
           완수 여정 목록
-          <BsChevronRight color="#7b7b7b" />
+          <BsChevronRight color="#fffef8" />
         </Button>
       </LevelTop>
       <LevelBox>
@@ -68,7 +68,7 @@ const LevelTop = styled.div`
 
   button {
     font-size: 12px;
-    color: #eee;
+    color: #fffef8;
   }
 `;
 
@@ -87,7 +87,7 @@ const LevelBox = styled.div`
 const LevelImage = styled.div`
   width: 122px;
   height: 122px;
-  background-color: white;
+  background-color: #fbf8db;
   border-radius: 50%;
   display: flex;
   align-items: center;

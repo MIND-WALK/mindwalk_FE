@@ -1,20 +1,24 @@
 import React, { useEffect } from "react";
 import { styled } from "styled-components";
+import { useRecoilState } from "recoil";
 import Calendar from "../../components/views/Diary/Calendar";
 import ListDiary from "../../components/views/Diary/ListDiary";
 import { useDiaries } from "../../hooks/queries/useDiary";
 import Loading from "../../components/common/Loading";
+import userIdState from "../../recoil/userIdState";
+import NoDiary from "../../components/views/Diary/NoDiary";
 
 const Diary = () => {
-  const { data, isLoading } = useDiaries("test");
+  const [userAuthState] = useRecoilState(userIdState);
 
-  useEffect(() => {}, []);
+  const { data, isLoading } = useDiaries(userAuthState);
+
   if (isLoading) {
     return <Loading />;
   }
 
   if (!data || data.length === 0) {
-    return <p>작성한 일기가 없습니다. 오늘의 감정일기를 작성해보세요!</p>;
+    return <NoDiary />;
   }
 
   const colorData = data.map(item => {
@@ -50,7 +54,7 @@ const Container = styled.div`
   margin: auto 2rem;
 
   & .diary-box {
-    height: 23rem;
+    height: 21rem;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none;
