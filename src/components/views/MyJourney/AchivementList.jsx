@@ -13,15 +13,15 @@ const AchivementList = ({ questInfo }) => {
             .map((date, index) => {
               if (index !== 0 && (index + 1) % 10 === 0)
                 return (
-                  <CompletedQuest key={date._id}>
-                    <LevelImage>{getLevelIcon((index + 1) / 10, "5rem")}</LevelImage>
+                  <CompletedQuest key={index}>
+                    <LevelImage>{getLevelIcon((index + 1) / 10, "6rem")}</LevelImage>
                     <TextBox>
                       <DateText>{date.replace(/-/g, ".")}</DateText>
                       <p>여정 {index + 1}개 달성</p>
                     </TextBox>
                   </CompletedQuest>
                 );
-              return <></>;
+              return undefined;
             })
             .reverse()}
       </AchivementListBox>
@@ -54,7 +54,6 @@ const LevelImage = styled.div`
   background-color: white;
   width: 6rem;
   height: 6rem;
-  border: 1px solid #eaeaea;
   border-radius: 50%;
   display: flex;
   align-items: center;
