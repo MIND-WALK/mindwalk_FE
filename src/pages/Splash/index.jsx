@@ -92,6 +92,7 @@ const Container = styled.div`
   font-size: 1.8rem;
   text-align: center;
   margin-top: 10rem;
+  overflow: hidden;
 
   @keyframes spinning {
     from {
