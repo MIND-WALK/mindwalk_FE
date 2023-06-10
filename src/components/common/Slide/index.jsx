@@ -9,11 +9,11 @@ import SurprisedCard from "../CustomIcon/EmotionCard/SurprisedCard";
 
 const Slide = () => {
   const images = [
-    { emotion: "angry", icon: <AngryCard size="23rem" /> },
-    { emotion: "happy", icon: <HappyCard size="23rem" /> },
-    { emotion: "neutral", icon: <NeutralCard size="23rem" /> },
-    { emotion: "sad", icon: <SadCard size="23rem" /> },
-    { emotion: "surprised", icon: <SurprisedCard size="23rem" /> },
+    { emotion: "angry", icon: <AngryCard height="23rem" /> },
+    { emotion: "happy", icon: <HappyCard height="23rem" /> },
+    { emotion: "neutral", icon: <NeutralCard height="23rem" /> },
+    { emotion: "sad", icon: <SadCard height="23rem" /> },
+    { emotion: "surprised", icon: <SurprisedCard height="23rem" /> },
   ];
 
   const slideIndex = useSlide(images.length);

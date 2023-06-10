@@ -2,15 +2,14 @@ import React from "react";
 
 import Neutral from "../../../../assets/emotion/card/neutral-card.svg";
 
-const NeutralCard = ({ size }) => {
+const NeutralCard = ({ height }) => {
   return (
     <button>
       <img
         src={Neutral}
         alt="NeutralCard"
         style={{
-          width: size,
-          height: size,
+          height,
           background: "transparent",
         }}
       />

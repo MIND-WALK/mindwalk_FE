@@ -2,15 +2,14 @@ import React from "react";
 
 import Surprised from "../../../../assets/emotion/card/surprised-card.svg";
 
-const SurprisedCard = ({ size }) => {
+const SurprisedCard = ({ height }) => {
   return (
     <button>
       <img
         src={Surprised}
         alt="SurprisedCard"
         style={{
-          width: size,
-          height: size,
+          height,
           background: "transparent",
         }}
       />
