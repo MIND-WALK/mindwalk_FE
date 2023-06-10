@@ -30,8 +30,10 @@ const MyJourney = () => {
   }, []);
 
   useEffect(() => {
-    const { level } = LEVEL.find(ele => ele.condition > questInfo.check);
-    setLevelNum(level - 1);
+    if (questInfo.check < 40) {
+      const { level } = LEVEL.find(ele => ele.condition > questInfo.check);
+      setLevelNum(level - 1);
+    } else setLevelNum(5);
   }, [questInfo]);
 
   return (

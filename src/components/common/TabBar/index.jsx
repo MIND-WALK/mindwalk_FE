@@ -10,7 +10,7 @@ import { challengeCheckState } from "../../../recoil/challenge";
 
 const TabBar = () => {
   const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState("my_journey");
+
   const [userEmotionState] = useRecoilState(emotionState);
   const [measurementRecoilState] = useRecoilState(measurementCheckState);
   const [challengeRecoilState] = useRecoilState(challengeCheckState);
@@ -19,13 +19,7 @@ const TabBar = () => {
   useChallengeCheck();
 
   const handleTabClick = page => {
-    if (currentPage === page) {
-      // 클릭한 탭이 이미 현재 페이지라면 페이지 상단으로 스크롤
-      window.scrollTo(0, 0);
-    } else {
-      setCurrentPage(page);
-      navigate(`/${page}`);
-    }
+    navigate(`/${page}`);
   };
 
   const handleChallengeClick = () => {
