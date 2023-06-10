@@ -8,9 +8,9 @@ const ChallengeCompleted = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleClickHome = () => {
+  const handleClickJourney = () => {
     setModalOpen(false);
-    navigate("/home");
+    navigate("/my_journey");
     document.documentElement.style.overflow = "auto";
   };
   const handClickDiary = () => {
@@ -52,10 +52,10 @@ const ChallengeCompleted = () => {
 
       {modalOpen && (
         <CompleteModal
-          buttonLeftText="홈으로 가기"
+          buttonLeftText="여정으로 가기"
           buttonRightText="감정일기 쓰기"
           modalOpen={modalOpen}
-          buttonLeftOnClick={handleClickHome}
+          buttonLeftOnClick={handleClickJourney}
           buttonRightOnClick={handClickDiary}
           completeTextTop="오늘 챌린지"
           completeTextMiddle="이미 성공 완료!"
