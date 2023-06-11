@@ -37,7 +37,6 @@ const Login = () => {
 
       if (response.status === 201) {
         setUserAuthState(id);
-        alert("로그인 되었습니다.");
         navigate("/home");
         setUserLevel(response.data.check); // 설정하기
       }

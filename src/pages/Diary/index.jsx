@@ -30,18 +30,20 @@ const Diary = () => {
       <Calendar colorData={colorData} />
       <p className="diary-title">나의 기록</p>
       <div className="diary-box">
-        {data.map(item => (
-          <React.Fragment key={item._id}>
-            <ListDiary
-              color={item.color}
-              date={item.date}
-              diary={item.diary}
-              img={item.img}
-              score={item.score}
-              id={item._id}
-            />
-          </React.Fragment>
-        ))}
+        {data
+          .map(item => (
+            <React.Fragment key={item._id}>
+              <ListDiary
+                color={item.color}
+                date={item.date}
+                diary={item.diary}
+                img={item.img}
+                score={item.score}
+                id={item._id}
+              />
+            </React.Fragment>
+          ))
+          .reverse()}
       </div>
     </Container>
   );
