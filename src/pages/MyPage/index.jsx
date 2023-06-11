@@ -28,7 +28,6 @@ const MyPage = () => {
     setModalOpen(false);
     document.documentElement.style.overflow = "auto";
     setUserAuthState("");
-    alert("로그아웃 되었습니다.");
     navigate("/login");
   };
 
